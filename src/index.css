@@ -176,3 +176,18 @@ section {
     display: block;
   }
 }
+
+/* Footer */
+.footer {
+  background-color: #1e272e;
+  border: 2px white solid;
+  color: #ffffff;
+  padding-left: 10px;
+  width: 100%;
+  height: 30px;
+  background-color: #1e272e;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  text-align: center;
+}
