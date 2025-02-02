@@ -19,9 +19,22 @@ function ContactMeForm() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert("Form submitted! (You can integrate Formspree here)");
+    const response = await fetch("https://formspree.io/f/mdkazlkg", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
+
+    if (response.ok) {
+      alert("Message sent successfully!");
+      setFormData({ name: "", email: "", message: "" });
+    } else {
+      alert("Failed to send message. Try again later.");
+    }
   };
 
   const contactInfo = [
