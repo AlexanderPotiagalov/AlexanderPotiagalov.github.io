@@ -5,7 +5,7 @@ function Experience() {
     {
       title: "JavaScript Developer",
       duration: "Nov 2024 – Present",
-      frontImage: "./src/assets/javascript.png",
+      frontImage: "/javascript.png",
       backDescription: `
         <ul>
           <li>Designed a full-stack e-commerce and messaging platform.</li>
@@ -19,7 +19,7 @@ function Experience() {
     {
       title: "Backend Software Developer",
       duration: "Sep 2024 – Present",
-      frontImage: "./src/assets/c-sharp.png",
+      frontImage: "/c-sharp.png",
       backDescription: `
         <ul>
           <li>Designed scalable inventory and object interaction systems in Unity.</li>
@@ -33,7 +33,7 @@ function Experience() {
     {
       title: "Volunteer at StormHacks",
       duration: "Oct 2024",
-      frontImage: "./src/assets/sfu_surge_logo.jpg",
+      frontImage: "/sfu_surge_logo.jpg",
       backDescription: `
         <ul>
           <li>Assisted 100+ participants with technical troubleshooting.</li>
@@ -46,7 +46,7 @@ function Experience() {
     {
       title: "President",
       duration: "Sep 2021 – June 2023",
-      frontImage: "./src/assets/mayor.png",
+      frontImage: "/mayor.png",
       backDescription: `
         <ul>
           <li>Organized coding competitions and gaming events for 20+ participants.</li>

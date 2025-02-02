@@ -374,3 +374,111 @@ section {
     border-color: transparent;
   }
 }
+
+/* Experience Section */
+.experience-container {
+  padding: 20px;
+  background-color: #1e272e;
+  border: 2px white solid;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 1200px;
+  margin: 20px auto;
+}
+
+.experience-heading {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #ffffff;
+  text-align: center;
+  margin-bottom: 20px;
+  text-shadow: 7px 7px 5px rgba(130, 123, 123, 0.5);
+}
+
+.experience-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  text-align: center;
+}
+
+/* Flip Card */
+.flip-card {
+  perspective: 1000px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 350px;
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease-in-out;
+  border-radius: 10px;
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.front-icon-img {
+  width: 60px;
+  height: auto;
+  margin-bottom: 10px;
+  border-radius: 8px;
+}
+
+/* Front and Back Sides */
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  box-shadow: inset 0 0 0 2px white;
+  text-align: center;
+  color: #fff;
+}
+
+/* Front Side */
+.flip-card-front {
+  z-index: 2;
+}
+
+/* Back Side */
+.flip-card-back {
+  transform: rotateY(180deg);
+}
+
+.experience-title {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.experience-company,
+.experience-description,
+.experience-duration,
+.experience-back-description {
+  font-size: 1rem;
+}
+
+.flip-card-back ul {
+  list-style: disc;
+  padding: 10px 20px;
+  text-align: left;
+  margin: 0;
+}
+
+.flip-card-back li {
+  margin: 10px;
+  font-size: 1rem;
+}
+
+.flip-card-front .front-icon {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
