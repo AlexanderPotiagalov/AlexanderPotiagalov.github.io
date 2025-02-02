@@ -191,3 +191,186 @@ section {
   align-items: center;
   text-align: center;
 }
+
+/* Profile Content */
+.portfolio-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 70px;
+  padding: 30px 20px;
+  background-color: #1e272e;
+  border: 2px white solid;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 1200px;
+  margin: 20px auto;
+  border-radius: 10px;
+  margin-top: 100px;
+  flex-wrap: wrap;
+}
+
+.portfolio-picture {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background-color: #1e272e;
+}
+
+.portfolio-heading {
+  color: white;
+  font-weight: bold;
+  font-size: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 20px auto;
+  text-shadow: 7px 7px 5px rgba(130, 123, 123, 0.5);
+  border-right: 2px solid #fff;
+  white-space: nowrap;
+  display: inline-block;
+  animation: blink 2s step-end infinite;
+  max-width: 100%;
+}
+
+.portfolio-heading-info {
+  font-size: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: right;
+  justify-content: center;
+}
+
+.profile-image {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px white solid;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+  animation: glow 10s linear infinite;
+}
+
+.profile-image:hover {
+  transform: scale(1.1);
+}
+
+.portfolio-description {
+  max-width: 700px;
+  color: #ffffff;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* Resume Button */
+.resume-button {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: #fff;
+  text-decoration: none;
+  background: linear-gradient(135deg, #ff9a9e, #d743ad, #530df7, #0efacb);
+  background-size: 300% 300%;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  animation: gradientShift 10s ease infinite;
+  border-radius: 25px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  border: 2px white solid;
+}
+
+.resume-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.github-btn {
+  display: inline-block;
+  margin-left: 20px;
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: #fff;
+  text-decoration: none;
+  background: linear-gradient(135deg, #cd2d62, #f7ff0db7, #054d2a, #fa0ef2);
+  background-size: 300% 300%;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  animation: gradientShift 10s ease infinite;
+  border-radius: 25px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  border: 2px white solid;
+}
+
+.github-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive Styling for Mobile */
+@media (max-width: 768px) {
+  .portfolio-container {
+    flex-direction: column;
+    padding: 20px;
+    gap: 20px;
+  }
+
+  .portfolio-picture {
+    align-items: center;
+    padding: 10px;
+  }
+
+  .profile-image {
+    width: 300px;
+    height: 300px;
+  }
+
+  .portfolio-description {
+    font-size: 1rem;
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .portfolio-heading {
+    font-size: 2.5rem;
+    text-align: center;
+  }
+
+  .resume-button {
+    font-size: 1rem;
+    padding: 8px 16px;
+  }
+}
+
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.8);
+  }
+  25% {
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
+  }
+  50% {
+    box-shadow: 0 0 10px rgba(0, 0, 255, 0.8);
+  }
+  75% {
+    box-shadow: 0 0 10px rgba(255, 255, 0, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.8);
+  }
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+}
