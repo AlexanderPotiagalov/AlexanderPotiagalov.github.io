@@ -608,3 +608,234 @@ section {
     left: 100%;
   }
 }
+
+/* Contact Me Section */
+.contact-section {
+  padding: 20px;
+  background-color: #1e272e;
+  border: 2px white solid;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 1200px;
+  margin: 20px auto;
+  text-align: center;
+}
+
+.contact-heading {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 40px;
+  color: #ffffff;
+  text-shadow: 7px 7px 5px rgba(130, 123, 123, 0.5);
+}
+
+/* Contact Form */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #1e272e;
+  border: 2px white solid;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 2px solid white;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 1rem;
+}
+
+.contact-form textarea {
+  height: 120px;
+  resize: none;
+}
+
+.contact-form button {
+  display: inline-block;
+  margin-left: 20px;
+  margin-top: 20px;
+  padding: 15px 25px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+  text-decoration: none;
+  background: linear-gradient(270deg, #ff9a9e, #d743ad, #530df7, #0efacb);
+  background-size: 400% 400%;
+  animation: gradientShift 6s ease infinite;
+  border-radius: 25px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 2px white solid;
+  cursor: pointer;
+}
+
+.contact-form button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.4);
+}
+
+/* Social Media Buttons - Fixed Gradient Shift */
+.contact-container {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+  padding: 10px;
+}
+
+.contact-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 25px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+  background: linear-gradient(270deg, #a2a1a1, #646464, #46424f, #000000);
+  background-size: 400% 400%;
+  animation: gradientShift 6s ease infinite;
+  border-radius: 25px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 2px white solid;
+  cursor: pointer;
+}
+
+/* Icon inside Button */
+.contact-icon {
+  font-size: 1.3rem;
+}
+
+/* Button Text */
+.contact-text {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/* 🌈 Keyframe Animations */
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Social Media Buttons - Gradient Backgrounds */
+.linkedin-btn {
+  background: linear-gradient(270deg, #0077b5, #004471, #010b5f, #0e9cfa);
+  background-size: 400% 400%;
+  animation: gradientShift 6s ease infinite;
+  cursor: pointer;
+}
+
+.instagram-btn {
+  background: linear-gradient(135deg, #f9ce34, #ee2a7b, #6228d7);
+  background-size: 400% 400%;
+  animation: gradientShift 6s ease infinite;
+  cursor: pointer;
+}
+
+.facebook-btn {
+  background: linear-gradient(135deg, #cddd53, #0aca67);
+  background-size: 400% 400%;
+  animation: gradientShift 6s ease infinite;
+  cursor: pointer;
+}
+
+.twitter-btn {
+  background: linear-gradient(135deg, #1da1f2, #0d8ddf);
+  background-size: 400% 400%;
+  animation: gradientShift 6s ease infinite;
+  cursor: pointer;
+}
+
+.phone-btn {
+  background: linear-gradient(135deg, #25d366, #128c7e);
+  background-size: 400% 400%;
+  animation: gradientShift 6s ease infinite;
+  cursor: pointer;
+}
+
+.email-btn {
+  background: linear-gradient(135deg, #ff7eb3, #ff2a6d);
+  background-size: 400% 400%;
+  animation: gradientShift 6s ease infinite;
+  cursor: pointer;
+}
+
+/* Hover Effects */
+.contact-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 5px 40px rgba(255, 255, 255, 0.3);
+}
+
+/* Icon Animations */
+.linkedin-btn:hover .contact-icon {
+  animation: bounce 0.6s ease-in-out;
+}
+
+.instagram-btn:hover .contact-icon {
+  animation: pulse 0.6s ease-in-out;
+}
+
+.facebook-btn:hover .contact-icon {
+  animation: spin 0.8s ease-in-out;
+}
+
+.twitter-btn:hover .contact-icon {
+  animation: bounce 0.5s linear;
+}
+
+.phone-btn:hover .contact-icon {
+  animation: pulse 0.6s ease-in-out;
+}
+.email-btn:hover .contact-icon {
+  animation: spin 0.6s ease-in-out;
+}
+
+/* 📱 Mobile Responsiveness */
+@media (max-width: 768px) {
+  .contact-btn {
+    font-size: 0.8rem;
+    padding: 10px 20px;
+  }
+
+  .contact-icon {
+    font-size: 1.2rem;
+  }
+}
