@@ -8,7 +8,7 @@ function PortfolioPicture() {
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  const images = ["./src/assets/trip2.jpg", "./src/assets/trip3.jpg"];
+  const images = ["/trip2.jpg", "/trip3.jpg"];
 
   const texts = [
     "Alex Potiagalov",
