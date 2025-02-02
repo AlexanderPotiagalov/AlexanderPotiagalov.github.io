@@ -482,3 +482,129 @@ section {
   font-size: 2.5rem;
   margin-bottom: 10px;
 }
+
+/* Projects Section */
+.projects-section {
+  padding: 20px;
+  background-color: #1e272e;
+  border: 2px white solid;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 1200px;
+  margin: 20px auto;
+}
+
+.projects-heading {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #ffffff;
+  text-align: center;
+  margin-bottom: 20px;
+  text-shadow: 7px 7px 5px rgba(130, 123, 123, 0.5);
+}
+
+.projects-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  justify-items: center;
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: left;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+  color: white;
+  border: 2px white solid;
+}
+
+.project-card:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  animation: glow 10s linear infinite;
+}
+
+.project-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  border: 2px white solid;
+}
+
+.project-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #fcfcfc;
+  text-shadow: 7px 7px 5px rgba(130, 123, 123, 0.5);
+}
+
+.project-description {
+  font-size: 1rem;
+  color: #ffffff;
+  line-height: 1.5;
+  margin-bottom: auto;
+}
+
+.project-link {
+  align-self: flex-start;
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  margin-top: 15px;
+  padding: 10px 20px;
+  color: #fff;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  font-style: normal;
+  background-color: rgba(16, 16, 16, 0.9);
+  transition: color 0.3s ease, background-color 0.3s ease;
+  border: 3px white solid;
+}
+
+.project-link:hover {
+  background-color: rgba(16, 16, 16, 0);
+  font-style: italic;
+  color: #fff;
+}
+
+.project-link::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #ff9a9e,
+    #faaf9a,
+    #d743ad,
+    #530df7
+  );
+  z-index: -1;
+  transition: none;
+}
+
+.project-link:hover::before {
+  animation: swipe 1.5s linear infinite;
+}
+
+@keyframes swipe {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
