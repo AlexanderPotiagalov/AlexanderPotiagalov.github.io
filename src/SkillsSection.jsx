@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import {
   FaPython,
   FaJsSquare,
@@ -18,7 +19,20 @@ import { SiMongodb } from "react-icons/si";
 import "./index.css"; // Ensure your CSS is properly configured
 
 const SkillsSection = () => {
+  const location = useLocation();
   const [activeTab, setActiveTab] = useState("skills");
+
+  // Check URL when component mounts
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.hash.split("?")[1]);
+    const tab = params.get("tab");
+
+    if (tab) {
+      setActiveTab(tab);
+    } else {
+      setActiveTab("skills"); // Default tab
+    }
+  }, [location]);
 
   const skills = [
     { name: "Python", icon: <FaPython />, color: "#3776AB" },
@@ -127,7 +141,7 @@ const SkillsSection = () => {
           className={activeTab === "honors" ? "active" : ""}
           onClick={() => setActiveTab("honors")}
         >
-          Honors & Awards
+          Awards
         </button>
       </div>
 

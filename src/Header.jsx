@@ -4,6 +4,10 @@ import {
   FaUserAlt,
   FaProjectDiagram,
   FaEnvelope,
+  FaAward,
+  FaGraduationCap,
+  FaCertificate,
+  FaLaptopCode,
 } from "react-icons/fa";
 
 function Header() {
@@ -49,6 +53,27 @@ function Header() {
         <li>
           <a href="#projects">
             <FaProjectDiagram className="icon" /> Projects
+          </a>
+        </li>
+        {/* 🔹 Added links to skills-section with query params for tabs */}
+        <li>
+          <a href="#skills-section">
+            <FaLaptopCode className="icon" /> Skills
+          </a>
+        </li>
+        <li>
+          <a href="#skills-section?tab=certifications">
+            <FaCertificate className="icon" /> Certifications
+          </a>
+        </li>
+        <li>
+          <a href="#skills-section?tab=education">
+            <FaGraduationCap className="icon" /> Education
+          </a>
+        </li>
+        <li>
+          <a href="#skills-section?tab=honors">
+            <FaAward className="icon" /> Awards
           </a>
         </li>
         <li>
