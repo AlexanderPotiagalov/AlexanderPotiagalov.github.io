@@ -20,3 +20,9 @@ This **fully responsive** personal portfolio website was designed and developed 
 - **Expanded Sections 📌**: Adding testimonials, achievements, and more to enrich the portfolio.
 - **Performance Optimized ⚡**: Lazy loading, minimized re-renders, and efficient rendering.
 - **Light/Dark Mode 🌙☀️**: Planned feature for user customization.
+
+## **MIT License:**
+
+This project is licensed under the **MIT License**.
+
+I chose the MIT License because it allows others to freely use, modify, and share my project while requiring attribution to the original author. This makes my project accessible and encourages collaboration in the open-source community without imposing strict restrictions.

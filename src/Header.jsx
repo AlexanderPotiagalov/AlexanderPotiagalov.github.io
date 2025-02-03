@@ -32,6 +32,10 @@ function Header() {
     setMenuOpen(!menuOpen);
   };
 
+  const handleLinkClick = () => {
+    setMenuOpen(false);
+  };
+
   return (
     <div className="navigation">
       <div className="menu-toggle" onClick={toggleMenu}>
@@ -41,43 +45,46 @@ function Header() {
       </div>
       <ul className={menuOpen ? "open" : ""}>
         <li>
-          <a href="#profile-picture">
+          <a href="#profile-picture" onClick={handleLinkClick}>
             <FaHome className="icon" /> Home
           </a>
         </li>
         <li>
-          <a href="#experience">
+          <a href="#experience" onClick={handleLinkClick}>
             <FaUserAlt className="icon" /> Experience
           </a>
         </li>
         <li>
-          <a href="#projects">
+          <a href="#projects" onClick={handleLinkClick}>
             <FaProjectDiagram className="icon" /> Projects
           </a>
         </li>
         {/* 🔹 Added links to skills-section with query params for tabs */}
         <li>
-          <a href="#skills-section">
+          <a href="#skills-section" onClick={handleLinkClick}>
             <FaLaptopCode className="icon" /> Skills
           </a>
         </li>
         <li>
-          <a href="#skills-section?tab=certifications">
+          <a
+            href="#skills-section?tab=certifications"
+            onClick={handleLinkClick}
+          >
             <FaCertificate className="icon" /> Certifications
           </a>
         </li>
         <li>
-          <a href="#skills-section?tab=education">
+          <a href="#skills-section?tab=education" onClick={handleLinkClick}>
             <FaGraduationCap className="icon" /> Education
           </a>
         </li>
         <li>
-          <a href="#skills-section?tab=honors">
+          <a href="#skills-section?tab=honors" onClick={handleLinkClick}>
             <FaAward className="icon" /> Awards
           </a>
         </li>
         <li>
-          <a href="#contact-me">
+          <a href="#contact-me" onClick={handleLinkClick}>
             <FaEnvelope className="icon" /> Contact
           </a>
         </li>
