@@ -211,6 +211,14 @@ section {
   text-align: center;
 }
 
+@media (max-width: 500px) {
+  .footer {
+    font-size: 10px;
+    height: 20px;
+    padding: 3px;
+  }
+}
+
 /* Profile Content */
 .portfolio-container {
   display: flex;
