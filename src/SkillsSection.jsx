@@ -29,8 +29,12 @@ const SkillsSection = () => {
 
     if (tab) {
       setActiveTab(tab);
+      // Scroll to the section when tab changes
+      document
+        .getElementById("skills-section")
+        ?.scrollIntoView({ behavior: "smooth" });
     } else {
-      setActiveTab("skills"); // Default tab
+      setActiveTab("skills");
     }
   }, [location]);
 
