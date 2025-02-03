@@ -67,27 +67,33 @@ section {
 
 .navigation ul {
   display: flex;
+  flex-wrap: wrap; /* Allows wrapping when space is limited */
+  justify-content: center;
+  align-items: center;
   margin: 0;
   padding: 0;
   list-style: none;
-  justify-content: space-between;
   width: 80%;
   max-width: 1200px;
+  gap: 10px; /* Ensures spacing is uniform */
 }
 
 .navigation ul li {
   position: relative;
-  padding: 8px 20px;
+  padding: 8px 15px;
   border-radius: 8px;
   transition: transform var(--transition-speed);
   background: var(--transition-speed), box-shadow var(--transition-speed);
   cursor: pointer;
   overflow: hidden;
+  white-space: nowrap; /* Prevents text wrapping */
+  text-overflow: ellipsis; /* Adds "..." when text is too long */
+  max-width: 150px; /* Limits text width */
 }
 
 .navigation ul li:hover {
+  transform: scale(1.02); /* Reduced from 1.05 */
   background: var(--highlight-gradient);
-  transform: scale(1.05);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   color: var(--text-color);
 }
@@ -123,7 +129,19 @@ section {
   transform: rotate(360deg);
 }
 
-/* Mobile responsiveness */
+@media (max-width: 1024px) {
+  .navigation ul {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .navigation ul li {
+    padding: 6px 12px;
+    font-size: 14px; /* Reduced font size for better fit */
+  }
+}
+
+/* Mobile Navigation Fix */
 @media (max-width: 768px) {
   .navigation ul {
     flex-direction: column;
@@ -145,10 +163,11 @@ section {
     width: 100%;
     text-align: center;
     margin: 5px 0;
+    padding: 10px;
   }
 
   .navigation ul li a {
-    font-size: 18px;
+    font-size: 17px;
   }
 }
 
