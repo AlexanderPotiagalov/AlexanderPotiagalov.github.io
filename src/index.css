@@ -249,18 +249,44 @@ section {
   color: white;
   font-weight: bold;
   font-size: 2.5rem;
-  display: flex;
-  flex-direction: column;
-  align-items: left;
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
   justify-content: center;
   max-width: 1200px;
   margin: 20px auto;
   text-shadow: 7px 7px 5px rgba(130, 123, 123, 0.5);
-  border-right: 2px solid #fff;
+  border-right: none;
   white-space: nowrap;
   display: inline-block;
-  animation: blink 2s step-end infinite;
-  max-width: 100%;
+  max-width: 90%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  margin: 0 auto;
+}
+
+/* Blinking effect for the separator */
+.separator {
+  font-size: inherit;
+  font-weight: bold;
+  color: white;
+  animation: blink 1s step-end infinite;
+}
+
+/* Adjust for smaller screens */
+@media (max-width: 768px) {
+  .portfolio-heading {
+    font-size: 2rem; /* Reduce size */
+    max-width: 85%;
+  }
+}
+
+@media (max-width: 500px) {
+  .portfolio-heading {
+    font-size: 1.5rem; /* Further reduce size */
+    max-width: 80%;
+  }
 }
 
 .portfolio-heading-info {
@@ -396,9 +422,10 @@ section {
   }
 }
 
+/* Blinking animation */
 @keyframes blink {
   50% {
-    border-color: transparent;
+    opacity: 0;
   }
 }
 

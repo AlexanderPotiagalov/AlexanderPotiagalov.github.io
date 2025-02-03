@@ -56,7 +56,9 @@ function PortfolioPicture() {
         />
       </div>
       <div className="portfolio-description">
-        <h1 className="portfolio-heading">I'm {currentText}</h1>
+        <h1 className="portfolio-heading">
+          <span>I'm {currentText}</span> <span className="separator">|</span>
+        </h1>
         <p>
           I’m a Computer Science student at Simon Fraser University, pursuing a
           minor in Business. Growing up with parents in the tech industry, I
