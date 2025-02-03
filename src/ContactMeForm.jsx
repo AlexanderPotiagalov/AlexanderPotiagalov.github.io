@@ -87,6 +87,7 @@ function ContactMeForm() {
           name="name"
           placeholder="Your Name"
           required
+          value={formData.name}
           onChange={handleChange}
         />
         <input
@@ -94,12 +95,14 @@ function ContactMeForm() {
           name="email"
           placeholder="Your Email"
           required
+          value={formData.email}
           onChange={handleChange}
         />
         <textarea
           name="message"
           placeholder="Your Message"
           required
+          value={formData.message}
           onChange={handleChange}
         ></textarea>
         <button type="submit" className="animated-gradient-button">
