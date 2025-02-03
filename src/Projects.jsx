@@ -3,12 +3,12 @@ import React from "react";
 function Projects() {
   const projectData = [
     {
-      name: "Photon Dash Game",
+      name: "Vacuum Cleaner Pathfinding Simulation",
       description:
-        "A space-themed game where players navigate a photon through obstacles. Built using JavaScript, HTML, and CSS with interactive front-end gameplay.",
-      imageUrl: "/photon-dash-img.jpg",
-      link: "https://github.com/AlexanderPotiagalov/photon-dash",
-      bgColor: "linear-gradient(135deg, #1e1f2d, #00bcd4, #ff0066)",
+        "A Python-based AI agent that navigates a grid to clean dirt using A*, Greedy, BFS, DFS, UCS, and custom movement heuristics.",
+      imageUrl: "/VacuumCleanerAI.png",
+      link: "https://github.com/AlexanderPotiagalov/VacuumCleanerAIAgent",
+      bgColor: "linear-gradient(135deg, #f39c12, #e74c3c)",
     },
     {
       name: "AVL Tree Implementation",
@@ -19,20 +19,20 @@ function Projects() {
       bgColor: "linear-gradient(135deg, #3498db, #2ecc71)",
     },
     {
+      name: "Photon Dash Game",
+      description:
+        "A space-themed game where players navigate a photon through obstacles. Built using JavaScript, HTML, and CSS with interactive front-end gameplay.",
+      imageUrl: "/photon-dash-img.jpg",
+      link: "https://github.com/AlexanderPotiagalov/photon-dash",
+      bgColor: "linear-gradient(135deg, #1e1f2d, #00bcd4, #ff0066)",
+    },
+    {
       name: "Mastermind Game Variant",
       description:
         "A C-based Mastermind game that provides feedback on guesses, featuring memory-efficient design validated by Valgrind.",
       imageUrl: "/mastermind-img.webp",
       link: "https://github.com/AlexanderPotiagalov/CS-projects/blob/57b1fbe88f4fe749526005f63269fa247ed6b803/Mastermind.c",
       bgColor: "linear-gradient(135deg, #8e44ad, #16a085)",
-    },
-    {
-      name: "Billboard Top 100 Songs Analysis",
-      description:
-        "A Python-based tool using Pandas to analyze trends and retrieve performance insights for artists and songs.",
-      imageUrl: "/billbordtop100-img.webp",
-      link: "https://github.com/AlexanderPotiagalov/CS-projects/blob/400714287741c51c4944a724fc3dc0101a844172/Billboard_Top_100_Songs_Charts.py",
-      bgColor: "linear-gradient(135deg, #f39c12, #e74c3c)",
     },
   ];
 
