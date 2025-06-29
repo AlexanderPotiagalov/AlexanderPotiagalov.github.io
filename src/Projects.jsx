@@ -3,35 +3,35 @@ import React from "react";
 function Projects() {
   const projectData = [
     {
-      name: "Vacuum Cleaner Pathfinding Simulation",
+      name: "Tech Notes",
       description:
-        "A Python-based AI agent that navigates a grid to clean dirt using A*, Greedy, BFS, DFS, UCS, and custom movement heuristics.",
-      imageUrl: "/VacuumCleanerAI.png",
-      link: "https://github.com/AlexanderPotiagalov/VacuumCleanerAIAgent",
+        "A full-stack MERN note & task management app with secure JWT auth and responsive UI. Supports real-time CRUD and Redux Toolkit for state management.",
+      imageUrl: "/TechNotes.png",
+      link: "https://github.com/AlexanderPotiagalov/TechNotes",
       bgColor: "linear-gradient(135deg, #f39c12, #e74c3c)",
     },
     {
-      name: "AVL Tree Implementation",
+      name: "Sketch 3D Converter",
       description:
-        "A functional AVL Tree class in C++ with insertion, deletion, rebalancing, and height tracking optimized for logarithmic operations.",
-      imageUrl: "/avltree.webp",
-      link: "https://github.com/AlexanderPotiagalov/CS-projects/tree/400714287741c51c4944a724fc3dc0101a844172/AVL%20Tree%20Implementation",
+        "A React & Three.js app that converts hand-drawn strokes into SVGs, classifies them using OpenAI Vision API, and renders 3D extrusions interactively.",
+      imageUrl: "/Sketch3dConverter.png",
+      link: "https://github.com/AlexanderPotiagalov/Sketch3DConverter",
       bgColor: "linear-gradient(135deg, #3498db, #2ecc71)",
     },
     {
-      name: "Photon Dash Game",
+      name: "Clean The Web",
       description:
-        "A space-themed game where players navigate a photon through obstacles. Built using JavaScript, HTML, and CSS with interactive front-end gameplay.",
-      imageUrl: "/photon-dash-img.jpg",
-      link: "https://github.com/AlexanderPotiagalov/photon-dash",
+        "A Chrome extension that flags suspicious websites using Google Safe Browsing & WhoisXML APIs. Analyzes trust via SSL, domain age, and phishing reports.",
+      imageUrl: "/CleanTheWeb.png",
+      link: "https://github.com/AlexanderPotiagalov/Clean-the-Web-Extension",
       bgColor: "linear-gradient(135deg, #1e1f2d, #00bcd4, #ff0066)",
     },
     {
-      name: "Mastermind Game Variant",
+      name: "Vacuum Cleaner AI",
       description:
-        "A C-based Mastermind game that provides feedback on guesses, featuring memory-efficient design validated by Valgrind.",
-      imageUrl: "/mastermind-img.webp",
-      link: "https://github.com/AlexanderPotiagalov/CS-projects/blob/57b1fbe88f4fe749526005f63269fa247ed6b803/Mastermind.c",
+        "A Python AI agent that uses BFS, DFS, UCS, A*, and custom heuristics to optimize vacuum pathfinding across a dirt-filled grid environment.",
+      imageUrl: "/VacuumCleanerAI.png",
+      link: "https://github.com/AlexanderPotiagalov/VacuumCleanerAIAgent",
       bgColor: "linear-gradient(135deg, #8e44ad, #16a085)",
     },
   ];
