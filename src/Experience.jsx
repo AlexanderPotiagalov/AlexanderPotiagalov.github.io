@@ -3,59 +3,60 @@ import React from "react";
 function Experience() {
   const experiences = [
     {
-      title: "JavaScript Developer",
-      duration: "Nov 2024 – Present",
-      frontImage: "/javascript.png",
+      title: "Software Developer",
+      duration: "May 2025 – Present",
+      frontImage: "/GSDC.png",
       backDescription: `
         <ul>
-          <li>Designed a full-stack e-commerce and messaging platform.</li>
-          <li>Developed using React, Node.js, and MongoDB.</li>
-          <li>Improved performance by 20% through database query optimization.</li>
-          <li>Collaborated with a team of 4 to implement real-time chat features.</li>
+          <li>Built React/Firebase campus dashboard for 200+ students, real-time data.</li>
+          <li>Ran 3 workshops on Next.js, Tailwind; increased turnout 35%.</li>
+          <li>Mentored 10+ juniors in JS, cut bugs by 20%.</li>
+          <li>Led GDSC outreach initiatives which boosted club visibility and membership.</li>
         </ul>
       `,
       color: "linear-gradient(135deg, #3494e6, #ec6ead)",
     },
     {
-      title: "Backend Software Developer",
-      duration: "Sep 2024 – Present",
-      frontImage: "/c-sharp.png",
+      title: "Peer Tutor",
+      duration: "May 2025 – Present",
+      frontImage: "/SFU.jpg",
       backDescription: `
         <ul>
-          <li>Designed scalable inventory and object interaction systems in Unity.</li>
-          <li>Optimized performance and reduced load time by 15% using C#.</li>
-          <li>Collaborated closely with designers for seamless interaction logic.</li>
-          <li>Ensured smooth UI integration through modular backend development.</li>
+          <li>Tutored peers in CMPT 120, 125, and 295 at SFU.</li>
+          <li>Explained assembly, memory, and processor design with clear examples.</li>
+          <li>Led 1-on-1 and group sessions to reinforce course concepts.</li>
+          <li>Debugged student code and clarified labs for better understanding.</li>
+        </ul>
+      `,
+      color: "linear-gradient(135deg, #84fab0, #8fd3f4)",
+    },
+    {
+      title: "Software Developer",
+      duration: "Jan 2025 – Apr. 2025",
+      frontImage: "/sfu_surge_logo.jpg",
+      backDescription: `
+        <ul>
+          <li>Built resume generator using OpenAI and prompt engineering for personalization.</li>
+          <li>Connected resumes to 120,000+ jobs via JSearch API matching.</li>
+          <li>Designed UI with Nielsen’s heuristics in React and Tailwind.</li>
+          <li>Led MVP dev, handling architecture, APIs, and iterative polishing.</li>
         </ul>
       `,
       color: "linear-gradient(135deg, #ff9a9e, #fad0c4)",
     },
     {
-      title: "Volunteer at StormHacks",
-      duration: "Oct 2024",
-      frontImage: "/sfu_surge_logo.jpg",
+      title: " Frontend Developer",
+      duration: "Apr. 2024 - Aug. 2024",
+      frontImage: "/CJSF.jpg",
       backDescription: `
         <ul>
-          <li>Assisted 100+ participants with technical troubleshooting.</li>
-          <li>Supported team collaboration and event facilitation.</li>
-          <li>Ensured smooth time management for hackathon events.</li>
+          <li>Designed & built CJSF Radio site with Agile and boosted engagement. </li>
+          <li>Used Headless Drupal + Next.js for dynamic, API-powered frontend.</li>
+          <li>Prototyped layouts with Figma which increased donations by over 20%.</li>
+          <li>Improved accessibility which ensured full WCAG compliance for usability</li>
         </ul>
       `,
       color: "linear-gradient(135deg, #fbc2eb, #a18cd1)",
-    },
-    {
-      title: "President",
-      duration: "Sep 2021 – June 2023",
-      frontImage: "/mayor.png",
-      backDescription: `
-        <ul>
-          <li>Organized coding competitions and gaming events for 20+ participants.</li>
-          <li>Conducted workshops on Python, JavaScript, and game development.</li>
-          <li>Mentored members in creating mods for Minecraft and Roblox.</li>
-          <li>Fostered an innovative club culture with regular events.</li>
-        </ul>
-      `,
-      color: "linear-gradient(135deg, #84fab0, #8fd3f4)",
     },
   ];
 
