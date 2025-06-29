@@ -84,7 +84,7 @@ const SkillsSection = () => {
       school: "Simon Fraser University",
       degree: "BSc Computer Science & Minor in Business",
       gpa: "3.62",
-      honors: "Dean's Honor Roll",
+      honors: "Dean's Honor Roll (Fall 2024 & Spring 2025)",
       icon: <FaUniversity />,
       color: "linear-gradient(135deg, #3494e6, #ec6ead)",
     },
@@ -101,7 +101,7 @@ const SkillsSection = () => {
   const honors = [
     {
       title: "SFU Dean’s Honor Roll",
-      issuer: "Simon Fraser University",
+      issuer: "Simon Fraser University (Fall 2024 & Spring 2025)",
       icon: <FaAward />,
       color:
         "linear-gradient(135deg,rgb(253, 122, 126),rgb(250, 149, 121),rgb(253, 132, 219),rgb(170, 138, 246))",
