@@ -64,6 +64,18 @@ function Projects() {
           </div>
         ))}
       </div>
+
+      {/* ➕ More Projects Button */}
+      <div className="more-projects-button-wrapper">
+        <a
+          href="https://github.com/AlexanderPotiagalov?tab=repositories"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="more-projects-button"
+        >
+          More Projects on GitHub →
+        </a>
+      </div>
     </div>
   );
 }

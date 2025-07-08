@@ -1166,3 +1166,71 @@ section {
     height: 40px;
   }
 }
+
+.more-projects-button-wrapper {
+  margin-top: 3rem;
+  text-align: center;
+}
+
+.more-projects-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 13px 28px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
+  background: linear-gradient(
+    135deg,
+    #1504ff53,
+    #021ff865,
+    #00ffd076,
+    #fb00006f
+  );
+  background-size: 300% 300%;
+  animation: gradientShift 6s ease infinite;
+  border-radius: 35px;
+  border: 2px solid white;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.more-projects-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transform: skewX(-20deg);
+  z-index: 0;
+}
+
+.more-projects-button:hover::before {
+  animation: swipeHighlight 1s ease-in-out forwards;
+}
+
+.more-projects-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
+}
+
+@keyframes swipeHighlight {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 200%;
+  }
+}
