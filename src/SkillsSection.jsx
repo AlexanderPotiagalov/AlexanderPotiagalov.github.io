@@ -42,17 +42,123 @@ const SkillsSection = () => {
     { name: "Python", icon: <FaPython />, color: "#3776AB" },
     { name: "C/C++", icon: <FaCogs />, color: "#00599C" },
     { name: "JavaScript", icon: <FaJsSquare />, color: "#F7DF1E" },
+    {
+      name: "TypeScript",
+      icon: (
+        <img
+          src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"
+          alt="TypeScript"
+          className="skill-icon"
+        />
+      ),
+      color: "#3178C6",
+    },
     { name: "SQL", icon: <FaDatabase />, color: "#F29111" },
     { name: "HTML", icon: <FaHtml5 />, color: "#E34F26" },
     { name: "CSS", icon: <FaCss3Alt />, color: "#1572B6" },
+    {
+      name: "Tailwind CSS",
+      icon: (
+        <img
+          src="https://www.vectorlogo.zone/logos/tailwindcss/tailwindcss-icon.svg"
+          alt="Tailwind CSS"
+          className="skill-icon"
+        />
+      ),
+      color: "#38BDF8",
+    },
     { name: "ReactJS", icon: <FaReact />, color: "#61DAFB" },
+    {
+      name: "Next.js",
+      icon: (
+        <img
+          src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg"
+          alt="Next.js"
+          className="skill-icon"
+        />
+      ),
+      color: "#000000",
+    },
     { name: "Node.js", icon: <FaNodeJs />, color: "#3C873A" },
+    {
+      name: "Express.js",
+      icon: (
+        <img
+          src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg"
+          alt="Express"
+          className="skill-icon"
+        />
+      ),
+      color: "#303030",
+    },
     { name: "MongoDB", icon: <SiMongodb />, color: "#47A248" },
+    {
+      name: "Firebase",
+      icon: (
+        <img
+          src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg"
+          alt="Firebase"
+          className="skill-icon"
+        />
+      ),
+      color: "#FFCA28",
+    },
+    {
+      name: "Docker",
+      icon: (
+        <img
+          src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg"
+          alt="Docker"
+          className="skill-icon"
+        />
+      ),
+      color: "#2496ED",
+    },
     { name: "Git", icon: <FaCodeBranch />, color: "#F05032" },
     {
       name: "C#",
-      icon: <img src="/c-sharp.png" alt="C#" className="skill-icon" />,
+      icon: (
+        <img
+          src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg"
+          alt="C#"
+          className="skill-icon"
+        />
+      ),
       color: "#68217A",
+    },
+    {
+      name: "OpenCV",
+      icon: (
+        <img
+          src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/opencv/opencv-original.svg"
+          alt="OpenCV"
+          className="skill-icon"
+        />
+      ),
+      color: "#5C3EE8",
+    },
+    {
+      name: "Vapi SDK",
+      icon: (
+        <img
+          src="https://img.icons8.com/ios-filled/50/ffffff/voice-presentation.png"
+          alt="Vapi SDK"
+          className="skill-icon"
+        />
+      ),
+      color: "#202A44",
+    },
+
+    {
+      name: "Three.js",
+      icon: (
+        <img
+          src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/threejs/threejs-original.svg"
+          alt="Three.js"
+          className="skill-icon"
+        />
+      ),
+      color: "#000000",
     },
   ];
 
