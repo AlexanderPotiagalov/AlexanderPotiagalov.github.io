@@ -3,9 +3,25 @@ import React from "react";
 function Experience() {
   const experiences = [
     {
+      title: "Jr. Data Analyst",
+      duration: "Aug. 2025 – Present",
+      frontImage: "/DFO.png",
+      imgStyle: { width: "220px", height: "60px" },
+      backDescription: `
+        <ul>
+          <li>Architected a full-stack ML Model Repository for 15+ models at DFO.</li>
+          <li>Prototyped a RAG pipeline to process PDFs, chunk text, and summarize.</li>
+          <li>Built a web scraper chatbot using Crawl4AI/BeautifulSoup + Chroma embeddings.</li>
+          <li>Received an Immediate Award for delivering AI tools supporting PSSI innovation.</li>
+        </ul>
+      `,
+      color: "linear-gradient(135deg, #3494e6, #ec6ead)",
+    },
+    {
       title: "Software Developer",
       duration: "May 2025 – Present",
       frontImage: "/GSDC.png",
+      imgStyle: { width: "80px", height: "50px" },
       backDescription: `
         <ul>
           <li>Built React/Firebase campus dashboard for 200+ students, real-time data.</li>
@@ -14,25 +30,11 @@ function Experience() {
           <li>Led GDSC outreach initiatives which boosted club visibility and membership.</li>
         </ul>
       `,
-      color: "linear-gradient(135deg, #3494e6, #ec6ead)",
-    },
-    {
-      title: "Peer Tutor",
-      duration: "May 2025 – Present",
-      frontImage: "/SFU.jpg",
-      backDescription: `
-        <ul>
-          <li>Tutored peers in CMPT 120, 125, and 295 at SFU.</li>
-          <li>Explained assembly, memory, and processor design with clear examples.</li>
-          <li>Led 1-on-1 and group sessions to reinforce course concepts.</li>
-          <li>Debugged student code and clarified labs for better understanding.</li>
-        </ul>
-      `,
       color: "linear-gradient(135deg, #84fab0, #8fd3f4)",
     },
     {
       title: "Software Developer",
-      duration: "Jan 2025 – Apr. 2025",
+      duration: "Jan. 2025 – Apr. 2025",
       frontImage: "/sfu_surge_logo.jpg",
       backDescription: `
         <ul>
@@ -76,6 +78,7 @@ function Experience() {
                   src={experience.frontImage}
                   alt={`${experience.title} icon`}
                   className="front-icon-img"
+                  style={experience.imgStyle}
                 />
                 <h3 className="experience-title">{experience.title}</h3>
                 <p className="experience-duration">{experience.duration}</p>
