@@ -89,7 +89,7 @@ function PortfolioPicture() {
         </p>
 
         <a
-          href="/Alexander_Potiagalov_Official_Resume_Dec_2025.pdf"
+          href="/Alexander_Potiagalov_Official_Resume_2026_Coop.pdf"
           target="_blank"
           rel="noopener noreferrer"
           className="resume-button"
