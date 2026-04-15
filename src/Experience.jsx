@@ -4,7 +4,7 @@ function Experience() {
   const experiences = [
     {
       title: "SDE Intern",
-      duration: "Aug. 2025 – Present",
+      duration: "Aug. 2025 – Apr. 2026",
       frontImage: "/DFO.png",
       imgStyle: { width: "220px", height: "60px" },
       backDescription: `
@@ -19,7 +19,7 @@ function Experience() {
     },
     {
       title: "Software Developer",
-      duration: "May 2025 – Present",
+      duration: "May 2025 – Aug. 2025",
       frontImage: "/GSDC.png",
       imgStyle: { width: "80px", height: "50px" },
       backDescription: `
