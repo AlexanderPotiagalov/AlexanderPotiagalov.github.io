@@ -3,7 +3,7 @@ import React from "react";
 function Experience() {
   const experiences = [
     {
-      title: "Software Developer Intern",
+      title: "SDE Intern",
       duration: "Aug. 2025 – Present",
       frontImage: "/DFO.png",
       imgStyle: { width: "220px", height: "60px" },
