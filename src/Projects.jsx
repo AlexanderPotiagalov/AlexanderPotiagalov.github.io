@@ -1,82 +1,320 @@
-import React from "react";
+import { useState } from "react";
+import PropTypes from "prop-types";
+import {
+  FiArrowUpRight,
+  FiExternalLink,
+  FiGithub,
+  FiLock,
+  FiShield,
+  FiZap,
+} from "react-icons/fi";
 
-function Projects() {
-  const projectData = [
-    {
-      name: "Tech Notes",
-      description:
-        "A full-stack MERN note & task management app with secure JWT auth and responsive UI. Supports real-time CRUD and Redux Toolkit for state management.",
-      imageUrl: "/TechNotes.png",
-      link: "https://github.com/AlexanderPotiagalov/TechNotes",
-      bgColor: "linear-gradient(135deg, #f39c12, #e74c3c)",
-    },
-    {
-      name: "Sketch 3D Converter",
-      description:
-        "A React & Three.js app that converts hand-drawn strokes into SVGs, classifies them using OpenAI Vision API, and renders 3D extrusions interactively.",
-      imageUrl: "/Sketch3dConverter.png",
-      link: "https://github.com/AlexanderPotiagalov/Sketch3DConverter",
-      bgColor: "linear-gradient(135deg, #3498db, #2ecc71)",
-    },
-    {
-      name: "Clean The Web",
-      description:
-        "A Chrome extension that flags suspicious websites using Google Safe Browsing & WhoisXML APIs. Analyzes trust via SSL, domain age, and phishing reports.",
-      imageUrl: "/CleanTheWeb.png",
-      link: "https://github.com/AlexanderPotiagalov/Clean-the-Web-Extension",
-      bgColor: "linear-gradient(135deg, #1e1f2d, #00bcd4, #ff0066)",
-    },
-    {
-      name: "Vacuum Cleaner AI",
-      description:
-        "A Python AI agent that uses BFS, DFS, UCS, A*, and custom heuristics to optimize vacuum pathfinding across a dirt-filled grid environment.",
-      imageUrl: "/VacuumCleanerAI.png",
-      link: "https://github.com/AlexanderPotiagalov/VacuumCleanerAIAgent",
-      bgColor: "linear-gradient(135deg, #8e44ad, #16a085)",
-    },
-  ];
+const projects = [
+  {
+    id: "subtura",
+    index: "01",
+    name: "Subtura",
+    type: "PRODUCT / FULL-STACK",
+    line: "Student subletting without the group-chat archaeology.",
+    built:
+      "A student-first marketplace for short-term rentals with search, bookings, payments, real-time messaging, maps, and AI-assisted lease parsing.",
+    why:
+      "University housing cycles rarely fit standard leases. Subtura gives students a purpose-built flow for finding, listing, and managing co-op-term housing.",
+    stack: ["REACT", "TYPESCRIPT", "SUPABASE", "STRIPE", "MAPBOX", "FASTAPI"],
+    accent: "blue",
+    stat: "MVP",
+    statLabel: "LIVE PRODUCT",
+    artifact: "listings",
+    liveUrl: "https://subtura.com",
+  },
+  {
+    id: "trace",
+    index: "02",
+    name: "Trace",
+    type: "BROWSER EXTENSION / AI",
+    line: "A private journal for what happened in your browser.",
+    built:
+      "A local-first Chrome and Edge extension that turns sanitized browser activity into a daily timeline, archive, and optional on-device AI reflection.",
+    why:
+      "Most activity trackers trade context for surveillance. Trace remembers useful patterns while excluding typed text, search terms, passwords, and filenames.",
+    stack: ["JAVASCRIPT", "MANIFEST V3", "CHROME APIs", "GEMINI NANO", "NODE TEST"],
+    accent: "paper",
+    stat: "LOCAL",
+    statLabel: "PRIVACY FIRST",
+    artifact: "trace",
+    githubUrl: "https://github.com/AlexanderPotiagalov/Trace",
+    privateRepo: true,
+  },
+  {
+    id: "prepmate",
+    index: "03",
+    name: "PrepMate",
+    type: "AI / PRODUCT",
+    line: "Interview practice that talks back.",
+    built:
+      "An AI interview assistant with role-specific voice simulations, generated questions, intelligent feedback, and performance analytics.",
+    why:
+      "Interview preparation is usually passive. PrepMate makes users explain their thinking aloud in a realistic, repeatable practice loop.",
+    stack: ["NEXT.JS", "TYPESCRIPT", "FIREBASE", "VAPI", "TAILWIND", "AI APIs"],
+    accent: "pink",
+    stat: "VOICE",
+    statLabel: "INTERACTIVE AI",
+    artifact: "wave",
+    liveUrl: "https://ai-agent-interview-assistant.vercel.app",
+    githubUrl: "https://github.com/AlexanderPotiagalov/PrepMate",
+  },
+  {
+    id: "technotes",
+    index: "04",
+    name: "TechNotes",
+    type: "MERN / PRODUCTIVITY",
+    line: "Secure notes and tasks for work that needs a system.",
+    built:
+      "A full-stack note and task manager with JWT authentication, role-aware access, real-time CRUD workflows, and Redux Toolkit state management.",
+    why:
+      "It turns scattered tasks and notes into one protected workflow while demonstrating a complete authentication and REST API architecture.",
+    stack: ["REACT", "NODE.JS", "EXPRESS", "MONGODB", "JWT", "RTK QUERY"],
+    accent: "acid",
+    stat: "MERN",
+    statLabel: "FULL-STACK APP",
+    artifact: "technotes",
+    liveUrl: "https://technoteshub-dis4.onrender.com",
+    githubUrl: "https://github.com/AlexanderPotiagalov/TechNotes",
+  },
+  {
+    id: "deepscan",
+    index: "05",
+    name: "DeepScan AI",
+    type: "AI / COMPUTER VISION",
+    line: "Frame-by-frame deepfake detection for suspicious video.",
+    built:
+      "An AI-powered detection system that processes uploaded video frame by frame and uses a neural network pipeline to surface likely manipulated content.",
+    why:
+      "Synthetic media is getting easier to produce and harder to inspect manually. DeepScan explores a practical review flow for video authenticity.",
+    stack: ["PYTHON", "FASTAPI", "TENSORFLOW", "KERAS", "OPENCV", "NEXT.JS"],
+    accent: "orange",
+    stat: "CV",
+    statLabel: "DEEPFAKE SCAN",
+    artifact: "scan",
+    githubUrl: "https://github.com/AlexanderPotiagalov/DeepScan-AI",
+  },
+  {
+    id: "sketch3d",
+    index: "06",
+    name: "Sketch3D Converter",
+    type: "CREATIVE DEV / 3D",
+    line: "Draw it flat. Pull it into the third dimension.",
+    built:
+      "A React and TypeScript application that captures user strokes, vectorizes them into SVG paths, and extrudes the result into an interactive Three.js model.",
+    why:
+      "The project connects a familiar drawing interaction to geometry, vector processing, and real-time 3D rendering in one playful workflow.",
+    stack: ["REACT", "TYPESCRIPT", "THREE.JS", "REACT KONVA", "SVG", "TAILWIND"],
+    accent: "purple",
+    stat: "3D",
+    statLabel: "SKETCH TO MODEL",
+    artifact: "sketch",
+    githubUrl: "https://github.com/AlexanderPotiagalov/Sketch3DConverter",
+  },
+];
+
+function ProjectArtifact({ type }) {
+  if (type === "listings") {
+    return (
+      <div className="artifact screenshot-artifact subtura-artifact">
+        <img src="./Subtura.png" alt="Subtura student subletting marketplace homepage" />
+        <span>LIVE MARKETPLACE / SEARCH / LISTINGS</span>
+      </div>
+    );
+  }
+
+  if (type === "trace") {
+    return (
+      <div className="artifact trace-artifact" aria-hidden="true">
+        <div className="trace-journal">
+          <div className="trace-head"><strong>Trace</strong><span>TODAY / LOCAL</span></div>
+          <div className="trace-date">YOUR BROWSER, IN PLAIN ENGLISH.</div>
+          <div className="trace-time">2h 14m<small>IN VIEW</small></div>
+          <div className="trace-metrics">
+            <span>PLACES<strong>18</strong></span>
+            <span>SEARCHES<strong>9</strong></span>
+            <span>EDITS<strong>47</strong></span>
+          </div>
+          <div className="trace-reflection">A focused build session with a suspicious amount of documentation.</div>
+        </div>
+        <div className="trace-lock"><FiLock /> ON-DEVICE</div>
+      </div>
+    );
+  }
+
+  if (type === "wave") {
+    return (
+      <div className="artifact wave-artifact" aria-hidden="true">
+        <div className="interview-avatar">AP</div>
+        <div className="wave-bars">
+          {[16, 30, 52, 26, 68, 42, 22, 58, 36, 18, 48, 28, 12].map((height, index) => (
+            <i key={index} style={{ height }} />
+          ))}
+        </div>
+        <div className="feedback-chip">CLARITY 86</div>
+        <span className="recording-dot">LIVE PRACTICE</span>
+      </div>
+    );
+  }
+
+  if (type === "technotes") {
+    return (
+      <div className="artifact screenshot-artifact technotes-artifact">
+        <img src="./TechNotes.png" alt="TechNotes application dashboard" />
+        <span>JWT AUTH / TASKS / NOTES</span>
+      </div>
+    );
+  }
+
+  if (type === "sketch") {
+    return (
+      <div className="artifact screenshot-artifact sketch-artifact">
+        <img src="./Sketch3dConverter.png" alt="Sketch3D Converter interface" />
+        <span>STROKES / SVG / THREE.JS</span>
+      </div>
+    );
+  }
 
   return (
-    <div className="projects-section">
-      <h2 className="projects-heading">My Projects</h2>
-      <div className="projects-container">
-        {projectData.map((project, index) => (
-          <div
-            className="project-card"
-            key={index}
-            style={{ background: project.bgColor }}
-          >
-            <img
-              src={project.imageUrl}
-              alt={project.name}
-              className="project-image"
-            />
-            <h3 className="project-title">{project.name}</h3>
-            <p className="project-description">{project.description}</p>
+    <div className="artifact scan-artifact" aria-hidden="true">
+      <div className="scan-screen">
+        <div className="shield-scanner">
+          <span className="radar-ring ring-one" />
+          <span className="radar-ring ring-two" />
+          <span className="threat-node node-one" />
+          <span className="threat-node node-two" />
+          <span className="threat-node node-three" />
+          <div className="shield-core">
+            <FiShield />
+            <span>DS</span>
+          </div>
+          <span className="defense-scan-beam" />
+        </div>
+        <div className="scan-data">
+          <span>DEFENSE LAYER / VIDEO AUTH</span>
+          <strong>THREAT PATTERN DETECTED</strong>
+          <div><i style={{ width: "78%" }} /></div>
+          <small>FRAME INTEGRITY / NEURAL SIGNAL / TEMPORAL DRIFT</small>
+        </div>
+      </div>
+      <div className="scan-verdict">DEEPFAKE RISK <strong>78%</strong></div>
+    </div>
+  );
+}
+
+ProjectArtifact.propTypes = {
+  type: PropTypes.string.isRequired,
+};
+
+function Projects() {
+  const [selectedId, setSelectedId] = useState(projects[0].id);
+  const selected = projects.find((project) => project.id === selectedId) ?? projects[0];
+
+  return (
+    <section id="projects" className="projects-section paper-grid">
+      <div className="page-shell">
+        <div className="section-title" data-reveal>
+          <div>
+            <span className="micro-label">04 / Selected work</span>
+            <h2>PROJECT<br /><em>CASE FILES.</em></h2>
+          </div>
+          <p>
+            Real projects, real links. Pick a file to inspect the product,
+            problem, stack, and build decisions behind it.
+          </p>
+        </div>
+
+        <div className="project-dossier" data-reveal>
+          <div className="project-index" role="tablist" aria-label="Select a project">
+            {projects.map((project) => (
+              <button
+                key={project.id}
+                type="button"
+                role="tab"
+                aria-selected={selectedId === project.id}
+                className={selectedId === project.id ? "active" : ""}
+                onClick={() => setSelectedId(project.id)}
+              >
+                <span>{project.index}</span>
+                <div>
+                  <strong>{project.name}</strong>
+                  <small>{project.type}</small>
+                </div>
+                <FiArrowUpRight />
+              </button>
+            ))}
+
             <a
-              href={project.link}
-              className="project-link"
+              className="all-projects"
+              href="https://github.com/AlexanderPotiagalov?tab=repositories"
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noreferrer"
             >
-              View Project
+              <FiGithub /> ALL REPOSITORIES <FiArrowUpRight />
             </a>
           </div>
-        ))}
-      </div>
 
-      {/* ➕ More Projects Button */}
-      <div className="more-projects-button-wrapper">
-        <a
-          href="https://github.com/AlexanderPotiagalov?tab=repositories"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="more-projects-button"
-        >
-          More Projects on GitHub →
-        </a>
+          <article className={`project-stage ${selected.accent}`} key={selected.id}>
+            <div className="stage-topline">
+              <span>FILE {selected.index} / {selected.type}</span>
+              <span>STATUS: BUILT</span>
+            </div>
+
+            <ProjectArtifact type={selected.artifact} />
+
+            <div className="project-main">
+              <div className="project-title-block">
+                <span className={`project-stat ${selected.stat.length >= 5 ? "compact" : ""}`}>
+                  {selected.stat}
+                  <small>{selected.statLabel}</small>
+                </span>
+                <div>
+                  <h3 className={selected.name.length > 12 ? "long-title" : ""}>
+                    {selected.name}
+                  </h3>
+                  <p>{selected.line}</p>
+                </div>
+              </div>
+
+              <div className="project-links">
+                {selected.liveUrl && (
+                  <a href={selected.liveUrl} target="_blank" rel="noreferrer">
+                    <FiExternalLink /> LIVE SITE <FiArrowUpRight />
+                  </a>
+                )}
+                {selected.githubUrl && (
+                  <a href={selected.githubUrl} target="_blank" rel="noreferrer">
+                    {selected.privateRepo ? <FiLock /> : <FiGithub />}
+                    {selected.privateRepo ? "PRIVATE GITHUB" : "VIEW GITHUB"}
+                    <FiArrowUpRight />
+                  </a>
+                )}
+              </div>
+
+              <div className="project-notes">
+                <div>
+                  <span className="micro-label">What I built</span>
+                  <p>{selected.built}</p>
+                </div>
+                <div>
+                  <span className="micro-label">Why it matters</span>
+                  <p>{selected.why}</p>
+                </div>
+              </div>
+
+              <div className="project-stack">
+                <FiZap />
+                {selected.stack.map((item) => <span key={item}>{item}</span>)}
+              </div>
+            </div>
+          </article>
+        </div>
       </div>
-    </div>
+    </section>
   );
 }
 

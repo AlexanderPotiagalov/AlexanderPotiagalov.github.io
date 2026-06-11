@@ -1,96 +1,63 @@
-import React, { useEffect, useState } from "react";
-import {
-  FaHome,
-  FaUserAlt,
-  FaProjectDiagram,
-  FaEnvelope,
-  FaAward,
-  FaGraduationCap,
-  FaCertificate,
-  FaLaptopCode,
-} from "react-icons/fa";
+import { useState } from "react";
+import PropTypes from "prop-types";
+import { FiCommand, FiMenu, FiRefreshCw, FiX } from "react-icons/fi";
 
-function Header() {
-  useEffect(() => {
-    const list = document.querySelectorAll(".list");
+const navItems = [
+  ["About", "#about"],
+  ["Experience", "#experience"],
+  ["Projects", "#projects"],
+  ["Toolbox", "#skills"],
+  ["Contact", "#contact"],
+];
 
-    function activateLink() {
-      list.forEach((item) => item.classList.remove("active"));
-      this.classList.add("active");
-    }
-
-    list.forEach((item) => item.addEventListener("click", activateLink));
-
-    return () => {
-      list.forEach((item) => item.removeEventListener("click", activateLink));
-    };
-  }, []);
-
-  const [menuOpen, setMenuOpen] = useState(false);
-
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
-  };
-
-  const handleLinkClick = () => {
-    setMenuOpen(false);
-  };
+function Header({ onOpenCommand, onCyclePalette }) {
+  const [open, setOpen] = useState(false);
 
   return (
-    <div className="navigation">
-      <div className="menu-toggle" onClick={toggleMenu}>
-        <span className="bar"></span>
-        <span className="bar"></span>
-        <span className="bar"></span>
+    <header className="site-header">
+      <a className="brand" href="#top" aria-label="Alexander Potiagalov home">
+        <span className="brand-mark">AP</span>
+        <span className="brand-copy">
+          <strong>ALEXANDER</strong>
+          <small>POTIAGALOV</small>
+        </span>
+      </a>
+
+      <nav className={open ? "main-nav open" : "main-nav"}>
+        {navItems.map(([label, href]) => (
+          <a key={href} href={href} onClick={() => setOpen(false)}>
+            {label}
+          </a>
+        ))}
+      </nav>
+
+      <div className="header-tools">
+        <button type="button" className="ink-button" onClick={onCyclePalette}>
+          <FiRefreshCw />
+          <span>RE-INK</span>
+        </button>
+        <button type="button" className="deck-button" onClick={onOpenCommand}>
+          <FiCommand />
+          <span>DECK</span>
+          <kbd>CTRL K</kbd>
+        </button>
+        <button
+          type="button"
+          className="menu-button"
+          aria-label={open ? "Close navigation" : "Open navigation"}
+          aria-expanded={open}
+          onClick={() => setOpen((current) => !current)}
+        >
+          {open ? <FiX /> : <FiMenu />}
+        </button>
       </div>
-      <ul className={menuOpen ? "open" : ""}>
-        <li>
-          <a href="#profile-picture" onClick={handleLinkClick}>
-            <FaHome className="icon" /> Home
-          </a>
-        </li>
-        <li>
-          <a href="#experience" onClick={handleLinkClick}>
-            <FaUserAlt className="icon" /> Experience
-          </a>
-        </li>
-        <li>
-          <a href="#projects" onClick={handleLinkClick}>
-            <FaProjectDiagram className="icon" /> Projects
-          </a>
-        </li>
-        {/* 🔹 Added links to skills-section with query params for tabs */}
-        <li>
-          <a href="#skills-section" onClick={handleLinkClick}>
-            <FaLaptopCode className="icon" /> Skills
-          </a>
-        </li>
-        <li>
-          <a
-            href="#skills-section?tab=certifications"
-            onClick={handleLinkClick}
-          >
-            <FaCertificate className="icon" /> Certifications
-          </a>
-        </li>
-        <li>
-          <a href="#skills-section?tab=education" onClick={handleLinkClick}>
-            <FaGraduationCap className="icon" /> Education
-          </a>
-        </li>
-        <li>
-          <a href="#skills-section?tab=honors" onClick={handleLinkClick}>
-            <FaAward className="icon" /> Awards
-          </a>
-        </li>
-        <li>
-          <a href="#contact-me" onClick={handleLinkClick}>
-            <FaEnvelope className="icon" /> Contact
-          </a>
-        </li>
-      </ul>
-    </div>
+    </header>
   );
 }
+
+Header.propTypes = {
+  onOpenCommand: PropTypes.func.isRequired,
+  onCyclePalette: PropTypes.func.isRequired,
+};
 
 export default Header;
