@@ -1,28 +1,113 @@
-# My Portfolio Website 🌐
+# Alexander Potiagalov Portfolio
 
-This **fully responsive** personal portfolio website was designed and developed by me to showcase my **software development skills**, **projects**, and **experience**. The website features modern design principles, dynamic animations, and an engaging user interface built with **React**.
+Personal portfolio website for Alexander Potiagalov, a Computing Science student
+and software developer working across AI, full-stack development, cybersecurity,
+and data systems.
 
-## **Key Features:**
+**Live site:** [alexanderpotiagalov.github.io](https://alexanderpotiagalov.github.io/)
 
-- **Responsive Design 📱**: The layout and content dynamically adjust to different screen sizes, ensuring an optimal experience on **mobile**, **tablet**, and **desktop** devices.
-- **Dynamic Animations 🎨**: Includes animations such as **blink** and **typing effects**, **gradient color transitions**, and other interactive effects to engage users.
-- **Project Showcase 💻** : Features various software development projects with concise descriptions and links to **files** and **repositories**.
+## Features
 
-## **Technologies Used:**
+- Responsive editorial-style interface for desktop, tablet, and mobile
+- Interactive project case files with live demos and repository links
+- Experience, technical skills, education, and contact sections
+- Rotating hero photo gallery with manual controls
+- Command deck navigation opened with `Ctrl+K`, `Cmd+K`, or `/`
+- Switchable color palettes
+- Scroll-triggered reveal animations with reduced-motion support
+- Formspree-powered contact form with submission status feedback
+- SEO and Open Graph metadata
 
-- **React ⚛️** for building dynamic and reusable UI components.
-- **CSS 🎨** for styling, emphasizing modern design principles and responsive layouts.
-- **JavaScript 🚀** for handling interactivity, animations, and front-end logic.
-- **HTML 🟧** for structuring content with semantic elements and ensuring accessibility.
+## Tech Stack
 
-## **Features to be Added:**
+- React 18
+- Vite
+- JavaScript and JSX
+- CSS
+- React Icons
+- PropTypes
+- Formspree
+- GitHub Pages
 
-- **Expanded Sections 📌**: Adding testimonials, achievements, and more to enrich the portfolio.
-- **Performance Optimized ⚡**: Lazy loading, minimized re-renders, and efficient rendering.
-- **Light/Dark Mode 🌙☀️**: Planned feature for user customization.
+## Local Development
 
-## **MIT License:**
+### Requirements
 
-This project is licensed under the **MIT License**.
+- Node.js
+- npm
 
-I chose the MIT License because it allows others to freely use, modify, and share my project while requiring attribution to the original author. This makes my project accessible and encourages collaboration in the open-source community without imposing strict restrictions.
+### Setup
+
+```bash
+git clone https://github.com/AlexanderPotiagalov/AlexanderPotiagalov.github.io.git
+cd AlexanderPotiagalov.github.io
+npm install
+npm run dev
+```
+
+Vite will print the local development URL in the terminal.
+
+## Available Scripts
+
+```bash
+npm run dev
+```
+
+Starts the Vite development server.
+
+```bash
+npm run build
+```
+
+Creates a production build in `dist/`.
+
+```bash
+npm run preview
+```
+
+Serves the production build locally for verification.
+
+```bash
+npm run lint
+```
+
+Runs ESLint across the project.
+
+```bash
+npm run deploy
+```
+
+Builds the site and publishes `dist/` through `gh-pages`.
+
+## Project Structure
+
+```text
+public/                 Static images, documents, and other assets
+src/
+  App.jsx               Page composition and command deck
+  Header.jsx            Navigation and palette controls
+  PortfolioPicture.jsx  Hero section and photo gallery
+  Experience.jsx        Professional experience
+  Projects.jsx          Interactive project case files
+  SkillsSection.jsx     Technical skills and education
+  ContactMeForm.jsx     Contact form and social links
+  Footer.jsx            Site footer
+  index.css             Global styles and responsive layouts
+  main.jsx              React entry point
+index.html              Page metadata and application mount point
+vite.config.js          Vite configuration
+```
+
+## Deployment
+
+The site is configured for deployment to the root GitHub Pages domain:
+
+```text
+https://alexanderpotiagalov.github.io/
+```
+
+Run `npm run deploy` to generate the production build and publish it.
+
+## License
+
+This project is available under the [MIT License](LICENSE).
