@@ -98,7 +98,7 @@ function PortfolioPicture() {
             </a>
             <a
               className="poster-button secondary"
-              href="./Alexander_Potiagalov_Official_Resume_2026_Coop.pdf"
+              href="./Alexander_Potiagalov_Resume.pdf"
               target="_blank"
               rel="noreferrer"
             >
