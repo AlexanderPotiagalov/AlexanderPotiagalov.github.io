@@ -29,13 +29,6 @@ const photos = [
   },
 ];
 
-const tickerItems = [
-  "AI ENGINEERING",
-  "FULL-STACK SWE",
-  "ML SYSTEMS",
-  "SECURITY RESEARCH",
-];
-
 function PortfolioPicture() {
   const [activePhoto, setActivePhoto] = useState(0);
 
@@ -58,17 +51,6 @@ function PortfolioPicture() {
   return (
     <section id="top" className="hero paper-grid">
       <div className="hero-ticker" aria-hidden="true">
-        <div className="ticker-track">
-          {[0, 1].map((copy) => (
-            <div className="ticker-group" key={copy}>
-              {tickerItems.map((item) => (
-                <span className="ticker-item" key={`${copy}-${item}`}>
-                  <b>{item}</b><i />
-                </span>
-              ))}
-            </div>
-          ))}
-        </div>
       </div>
 
       <div className="hero-orbit orbit-one">BUILD<small>LEARN / REPEAT</small></div>

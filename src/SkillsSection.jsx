@@ -31,7 +31,7 @@ const groups = [
   },
   {
     number: "04",
-    title: "DATA / RETRIEVAL",
+    title: "DATA",
     note: "Turning raw information into training signals, context, and decisions.",
     skills: ["SQL", "Pandas", "MongoDB", "Supabase", "Feature Engineering", "MLflow"],
     color: "pink",
@@ -65,7 +65,7 @@ function SkillsSection() {
       <div className="page-shell">
         <div className="section-title light" data-reveal>
           <div>
-            <span className="micro-label">05 / Toolbox</span>
+            <span className="micro-label">06 / Toolbox</span>
             <h2>TOOLS I USE<br /><em>TO GET THERE.</em></h2>
           </div>
           <p>
@@ -102,7 +102,8 @@ function SkillsSection() {
             <span>BSc Computing Science + Minor in Business</span>
           </div>
           <div className="receipt-meta">
-            <span>DEAN&apos;S HONOUR ROLL</span>
+            <span>DEAN&apos;S HONOUR ROLL:</span>
+            <span>FALL 2024 + SPRING 2025</span>
             <span>STATUS: IN PROGRESS</span>
           </div>
           <div className="barcode" aria-hidden="true" />

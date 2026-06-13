@@ -33,7 +33,7 @@ function ContactMeForm() {
       <div className="contact-sticker">NO<br />BORING<br />EMAILS</div>
       <div className="page-shell contact-layout" data-reveal>
         <div className="contact-copy">
-          <span className="micro-label">06 / Open channel</span>
+          <span className="micro-label">07 / Open channel</span>
           <h2>
             GOT A PROBLEM
             <em>WORTH BUILDING?</em>

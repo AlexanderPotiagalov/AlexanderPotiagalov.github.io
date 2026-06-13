@@ -4,6 +4,7 @@ import { FiCommand, FiMenu, FiRefreshCw, FiX } from "react-icons/fi";
 
 const navItems = [
   ["About", "#about"],
+  ["Outside", "#outside"],
   ["Experience", "#experience"],
   ["Projects", "#projects"],
   ["Toolbox", "#skills"],

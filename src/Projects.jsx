@@ -5,7 +5,6 @@ import {
   FiExternalLink,
   FiGithub,
   FiLock,
-  FiShield,
   FiZap,
 } from "react-icons/fi";
 
@@ -95,7 +94,7 @@ const projects = [
     accent: "orange",
     stat: "CV",
     statLabel: "DEEPFAKE SCAN",
-    artifact: "scan",
+    artifact: "deepscan",
     githubUrl: "https://github.com/AlexanderPotiagalov/DeepScan-AI",
   },
   {
@@ -114,6 +113,58 @@ const projects = [
     statLabel: "SKETCH TO MODEL",
     artifact: "sketch",
     githubUrl: "https://github.com/AlexanderPotiagalov/Sketch3DConverter",
+  },
+  {
+    id: "oceanintel",
+    index: "07",
+    name: "OceanIntel",
+    type: "AI / DATA INTELLIGENCE",
+    line: "Fisheries policy documents turned into usable data and insight.",
+    built:
+      "An interactive Streamlit pipeline that extracts text from fisheries PDFs, summarizes policy with GPT, cross-references species and catch data, and visualizes trends for analysis.",
+    why:
+      "Policy documents and harvest datasets are difficult to compare manually. OceanIntel connects both sources so researchers can reach relevant evidence faster.",
+    stack: ["PYTHON", "STREAMLIT", "OPENAI", "PYMUPDF", "PANDAS", "PLOTLY"],
+    accent: "blue",
+    stat: "PDF",
+    statLabel: "POLICY INTEL",
+    artifact: "oceanintel",
+    liveUrl: "https://oceanintel.streamlit.app/",
+    githubUrl: "https://github.com/AlexanderPotiagalov/OceanIntel",
+  },
+  {
+    id: "vacuum-ai",
+    index: "08",
+    name: "Vacuum Cleaner AI",
+    type: "AI / PATHFINDING",
+    line: "A cleaning agent that makes search algorithms visible.",
+    built:
+      "A Python grid simulator that compares A*, UCS, BFS, DFS, and Greedy search while tracking path length, explored nodes, and execution time.",
+    why:
+      "Seeing an agent move through the same environment makes the tradeoffs between optimality, speed, heuristics, and search cost much easier to understand.",
+    stack: ["PYTHON", "NUMPY", "MATPLOTLIB", "A*", "BFS", "UCS"],
+    accent: "acid",
+    stat: "A*",
+    statLabel: "SEARCH AGENT",
+    artifact: "vacuum",
+    githubUrl: "https://github.com/AlexanderPotiagalov/VacuumCleanerAIAgent",
+  },
+  {
+    id: "clean-web",
+    index: "09",
+    name: "Clean the Web",
+    type: "BROWSER EXTENSION / SECURITY",
+    line: "An instant trust score for the site in front of you.",
+    built:
+      "A full-stack Chrome extension that checks SSL, domain age, suspicious keywords, crowdsourced reports, and Google Safe Browsing to explain whether a site is safe, suspicious, or a scam.",
+    why:
+      "Security warnings are often vague or arrive too late. Clean the Web gives people a clear verdict, a score, and the signals behind it before they trust a page.",
+    stack: ["JAVASCRIPT", "NODE.JS", "EXPRESS", "MONGODB", "SAFE BROWSING", "WHOIS"],
+    accent: "pink",
+    stat: "100%",
+    statLabel: "TRUST SCORE",
+    artifact: "cleanweb",
+    githubUrl: "https://github.com/AlexanderPotiagalov/Clean-the-Web-Extension",
   },
 ];
 
@@ -179,29 +230,37 @@ function ProjectArtifact({ type }) {
     );
   }
 
-  return (
-    <div className="artifact scan-artifact" aria-hidden="true">
-      <div className="scan-screen">
-        <div className="shield-scanner">
-          <span className="radar-ring ring-one" />
-          <span className="radar-ring ring-two" />
-          <span className="threat-node node-one" />
-          <span className="threat-node node-two" />
-          <span className="threat-node node-three" />
-          <div className="shield-core">
-            <FiShield />
-            <span>DS</span>
-          </div>
-          <span className="defense-scan-beam" />
-        </div>
-        <div className="scan-data">
-          <span>DEFENSE LAYER / VIDEO AUTH</span>
-          <strong>THREAT PATTERN DETECTED</strong>
-          <div><i style={{ width: "78%" }} /></div>
-          <small>FRAME INTEGRITY / NEURAL SIGNAL / TEMPORAL DRIFT</small>
-        </div>
+  if (type === "deepscan") {
+    return (
+      <div className="artifact screenshot-artifact deepscan-artifact">
+        <img src="./DeepScanImage.jpeg" alt="DeepScan AI facial analysis visualization" />
+        <span>VIDEO / FRAME ANALYSIS / CV</span>
       </div>
-      <div className="scan-verdict">DEEPFAKE RISK <strong>78%</strong></div>
+    );
+  }
+
+  if (type === "oceanintel") {
+    return (
+      <div className="artifact screenshot-artifact oceanintel-artifact">
+        <img src="./OceanIntel.png" alt="OceanIntel fisheries intelligence project cover" />
+        <span>PDFS / POLICY / DATA</span>
+      </div>
+    );
+  }
+
+  if (type === "vacuum") {
+    return (
+      <div className="artifact screenshot-artifact vacuum-artifact">
+        <img src="./VacuumCleanerAIWide.png" alt="Vacuum Cleaner AI pathfinding visualizer" />
+        <span>A* / BFS / DFS / UCS</span>
+      </div>
+    );
+  }
+
+  return (
+    <div className="artifact screenshot-artifact cleanweb-artifact">
+      <img src="./CleanTheWeb.png" alt="Clean the Web extension trust score states" />
+      <span>TRUST SCORE / THREAT CHECKS</span>
     </div>
   );
 }
@@ -219,7 +278,7 @@ function Projects() {
       <div className="page-shell">
         <div className="section-title" data-reveal>
           <div>
-            <span className="micro-label">04 / Selected work</span>
+            <span className="micro-label">05 / Selected work</span>
             <h2>PROJECT<br /><em>CASE FILES.</em></h2>
           </div>
           <p>
@@ -268,7 +327,7 @@ function Projects() {
 
             <div className="project-main">
               <div className="project-title-block">
-                <span className={`project-stat ${selected.stat.length >= 5 ? "compact" : ""}`}>
+                <span className={`project-stat ${selected.stat.length >= 4 ? "compact" : ""}`}>
                   {selected.stat}
                   <small>{selected.statLabel}</small>
                 </span>

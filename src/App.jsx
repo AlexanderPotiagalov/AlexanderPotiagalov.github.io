@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { FiArrowUpRight, FiCommand, FiGithub, FiLinkedin, FiMail, FiX } from "react-icons/fi";
 import Header from "./Header.jsx";
 import Hero from "./PortfolioPicture.jsx";
+import OutsideTech from "./OutsideTech.jsx";
 import Experience from "./Experience.jsx";
 import Projects from "./Projects.jsx";
 import SkillsSection from "./SkillsSection.jsx";
@@ -12,6 +13,7 @@ import "./index.css";
 
 const commands = [
   { label: "Go to about", detail: "The short version", href: "#about", key: "A" },
+  { label: "Step outside", detail: "Travel, nature, and life", href: "#outside", key: "O" },
   { label: "Inspect experience", detail: "Where I have shipped", href: "#experience", key: "E" },
   { label: "Open project files", detail: "Selected builds", href: "#projects", key: "P" },
   { label: "Scan the toolbox", detail: "Skills and systems", href: "#skills", key: "S" },
@@ -187,18 +189,19 @@ function App() {
                 analysts can use, platforms people understand, and prototypes that
                 survive contact with actual users.
               </p>
-            </div>
 
-            <div className="field-notes" aria-label="Current interests">
-              <span>AI engineering</span>
-              <span>Security automation</span>
-              <span>Product systems</span>
-              <span>Fast MVPs</span>
-              <span>Clean UX</span>
+              <div className="field-notes" aria-label="Current interests">
+                <span>AI engineering</span>
+                <span>Security automation</span>
+                <span>Product systems</span>
+                <span>Fast MVPs</span>
+                <span>Clean UX</span>
+              </div>
             </div>
           </div>
         </section>
 
+        <OutsideTech />
         <Experience />
         <Projects />
         <SkillsSection />

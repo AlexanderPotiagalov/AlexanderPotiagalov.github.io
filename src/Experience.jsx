@@ -49,7 +49,7 @@ function Experience() {
       <div className="page-shell">
         <div className="section-title light" data-reveal>
           <div>
-            <span className="micro-label">03 / Field history</span>
+            <span className="micro-label">04 / Field history</span>
             <h2>PLACES I&apos;VE<br />MADE THINGS.</h2>
           </div>
           <p>
