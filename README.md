@@ -11,6 +11,7 @@ and data systems.
 - Responsive editorial-style interface for desktop, tablet, and mobile
 - Interactive project case files with live demos and repository links
 - Experience, technical skills, education, and contact sections
+- Outside-of-tech photo contact sheet focused on travel, nature, and friends
 - Rotating hero photo gallery with manual controls
 - Command deck navigation opened with `Ctrl+K`, `Cmd+K`, or `/`
 - Switchable color palettes
