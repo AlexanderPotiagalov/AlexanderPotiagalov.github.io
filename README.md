@@ -16,7 +16,7 @@ and data systems.
 - Command deck navigation opened with `Ctrl+K`, `Cmd+K`, or `/`
 - Switchable color palettes
 - Scroll-triggered reveal animations with reduced-motion support
-- Formspree-powered contact form with submission status feedback
+- Formspree-powered contact form with layered spam and rate-limit protection
 - SEO and Open Graph metadata
 
 ## Tech Stack
