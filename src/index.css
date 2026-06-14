@@ -720,6 +720,8 @@ svg {
 }
 
 .about-layout {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: 96px minmax(0, 1fr) minmax(300px, 0.52fr);
   align-items: center;
@@ -727,14 +729,40 @@ svg {
 }
 
 .about-section {
+  isolation: isolate;
+  overflow: hidden;
   border-top: 3px solid var(--ink);
+  color: #f0ece2;
+  background: black;
   padding-top: clamp(58px, 7vw, 92px);
   padding-bottom: clamp(58px, 7vw, 92px);
+}
+
+.about-section::before {
+  position: absolute;
+  z-index: 0;
+  top: clamp(-230px, -15vw, -150px);
+  right: clamp(-190px, -10vw, -90px);
+  width: clamp(320px, 34vw, 520px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  pointer-events: none;
+  content: "";
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--accent) 24%, transparent) 0,
+    color-mix(in srgb, var(--accent) 12%, transparent) 42%,
+    transparent 72%
+  );
 }
 
 .about-section .section-stamp {
   width: 88px;
   padding: 12px 8px;
+  border-color: rgba(255, 253, 246, 0.72);
+  color: var(--ink);
+  background: color-mix(in srgb, var(--accent) 78%, #ded8ca);
+  box-shadow: 5px 5px 0 color-mix(in srgb, var(--accent-two) 68%, #24231f);
 }
 
 .about-section .section-stamp span {
@@ -742,6 +770,7 @@ svg {
 }
 
 .about-headline h2 {
+  color: #f0ece2;
   font-size: clamp(2.8rem, 4.4vw, 4.8rem);
 }
 
@@ -787,9 +816,9 @@ svg {
 
 .about-headline h2 span {
   display: block;
-  color: var(--accent-two);
-  -webkit-text-stroke: 2px var(--ink);
-  text-shadow: 5px 5px 0 var(--accent);
+  color: color-mix(in srgb, var(--accent-two) 82%, #ded8ca);
+  -webkit-text-stroke: 1px #24231f;
+  text-shadow: 3px 3px 0 color-mix(in srgb, var(--accent) 68%, #24231f);
 }
 
 .about-copy {
@@ -798,13 +827,13 @@ svg {
 
 .about-copy p {
   margin: 0 0 13px;
-  color: var(--muted);
+  color: rgba(240, 236, 226, 0.68);
   font-size: 0.9rem;
   line-height: 1.58;
 }
 
 .about-copy .about-lead {
-  color: var(--ink);
+  color: rgba(240, 236, 226, 0.92);
   font-size: clamp(1.02rem, 1.5vw, 1.24rem);
   font-weight: 700;
   line-height: 1.4;
@@ -819,9 +848,10 @@ svg {
 
 .field-notes span {
   padding: 7px 10px;
-  border: 2px solid var(--ink);
+  border: 1px solid rgba(255, 253, 246, 0.38);
   border-radius: 999px;
-  background: var(--paper-bright);
+  color: rgba(240, 236, 226, 0.9);
+  background: rgba(255, 253, 246, 0.08);
   font-family: "DM Mono", monospace;
   font-size: 0.57rem;
   font-weight: 500;
@@ -830,11 +860,15 @@ svg {
 }
 
 .field-notes span:nth-child(2) {
-  background: var(--acid);
+  border-color: transparent;
+  color: var(--ink);
+  background: color-mix(in srgb, var(--accent) 72%, #ded8ca);
 }
 
 .field-notes span:nth-child(4) {
-  background: var(--pink);
+  border-color: transparent;
+  color: var(--ink);
+  background: color-mix(in srgb, var(--accent-two) 72%, #ded8ca);
 }
 
 .travel-section {
@@ -3152,11 +3186,24 @@ svg {
 }
 
 .contact-form {
+  position: relative;
   padding: clamp(22px, 4vw, 38px);
   border: var(--border);
   background: var(--accent);
   box-shadow: 12px 12px 0 var(--ink);
   transform: rotate(0.7deg);
+}
+
+.contact-honeypot {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  margin: -1px !important;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
 .form-topline {
@@ -3254,6 +3301,11 @@ svg {
   font-size: 0.5rem;
   font-weight: 500;
   text-align: center;
+}
+
+.form-status.limited,
+.form-status.error {
+  color: #7b1509;
 }
 
 .contact-sticker {

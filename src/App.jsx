@@ -164,7 +164,7 @@ function App() {
       <main>
         <Hero />
 
-        <section id="about" className="about-section paper-section">
+        <section id="about" className="about-section ink-section">
           <div className="page-shell about-layout" data-reveal>
             <div className="section-stamp">
               <span>02</span>
