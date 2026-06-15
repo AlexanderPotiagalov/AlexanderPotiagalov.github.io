@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   FiCamera,
   FiChevronLeft,
@@ -6,6 +6,9 @@ import {
   FiMapPin,
   FiX,
 } from "react-icons/fi";
+
+const INITIAL_FEATURED_INDEX = 9;
+const imageCache = new Map();
 
 const moments = [
   ["beach.jpg", "Quiet coast", "COAST", "A quiet shoreline, an open horizon, and nowhere else I needed to be."],
@@ -31,7 +34,7 @@ const moments = [
   ["sun1.jpg", "Chasing light", "SUN", "Staying out long enough to catch the last good light of the day."],
 ].map(([file, title, tag, description]) => ({
   id: file.replace(/\.[^.]+$/, ""),
-  src: `${import.meta.env.BASE_URL}outsideoftech/${file}`,
+  src: `${import.meta.env.BASE_URL}outsideoftech/web/${file}`,
   alt: `${title}, from Alexander's life outside of tech`,
   title,
   tag,
@@ -39,14 +42,101 @@ const moments = [
   focus: "50% 50%",
 }));
 
+const preloadImage = (src) => {
+  if (typeof Image === "undefined" || imageCache.has(src)) {
+    return imageCache.get(src)?.promise ?? Promise.resolve();
+  }
+
+  const image = new Image();
+  image.decoding = "async";
+
+  const promise = new Promise((resolve) => {
+    let settled = false;
+    const finish = () => {
+      if (settled) return;
+      settled = true;
+
+      if (typeof image.decode === "function") {
+        image.decode().catch(() => {}).finally(resolve);
+      } else {
+        resolve();
+      }
+    };
+
+    image.onload = finish;
+    image.onerror = finish;
+    image.src = src;
+  });
+
+  imageCache.set(src, { image, promise });
+  return promise;
+};
+
+const preloadAround = (index, radius = 2) => {
+  for (let distance = 0; distance <= radius; distance += 1) {
+    const offsets = distance === 0 ? [0] : [distance, -distance];
+    offsets.forEach((offset) => {
+      const target = (index + offset + moments.length) % moments.length;
+      preloadImage(moments[target].src);
+    });
+  }
+};
+
 function OutsideTech() {
-  const [featuredIndex, setFeaturedIndex] = useState(9);
+  const sectionRef = useRef(null);
+  const [featuredIndex, setFeaturedIndex] = useState(INITIAL_FEATURED_INDEX);
   const [activeIndex, setActiveIndex] = useState(null);
   const featuredMoment = moments[featuredIndex];
   const activeMoment = activeIndex === null ? null : moments[activeIndex];
   const hasCompactTitle =
     featuredMoment.title.length > 13 ||
     featuredMoment.title.split(" ").some((word) => word.length > 8);
+
+  useEffect(() => {
+    let observer;
+    let idleId;
+    let timer;
+    let started = false;
+
+    const startPreloading = () => {
+      if (started) return;
+      started = true;
+      preloadAround(INITIAL_FEATURED_INDEX, 3);
+
+      timer = window.setTimeout(() => {
+        const preloadRemaining = () => moments.forEach((moment) => preloadImage(moment.src));
+
+        if ("requestIdleCallback" in window) {
+          idleId = window.requestIdleCallback(preloadRemaining, { timeout: 4000 });
+        } else {
+          preloadRemaining();
+        }
+      }, 350);
+    };
+
+    if ("IntersectionObserver" in window && sectionRef.current) {
+      observer = new IntersectionObserver(
+        (entries) => {
+          if (entries.some((entry) => entry.isIntersecting)) {
+            startPreloading();
+            observer.disconnect();
+          }
+        },
+        { rootMargin: "1000px 0px" },
+      );
+      observer.observe(sectionRef.current);
+    } else {
+      startPreloading();
+    }
+
+    return () => {
+      observer?.disconnect();
+      if (timer !== undefined) window.clearTimeout(timer);
+      if (idleId !== undefined && "cancelIdleCallback" in window) {
+        window.cancelIdleCallback(idleId);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     if (activeIndex === null) return undefined;
@@ -71,15 +161,23 @@ function OutsideTech() {
   }, [activeIndex]);
 
   const move = (direction) => {
-    setActiveIndex((current) => (current + direction + moments.length) % moments.length);
+    setActiveIndex((current) => {
+      const next = (current + direction + moments.length) % moments.length;
+      preloadAround(next, 3);
+      return next;
+    });
   };
 
   const moveFeatured = (direction) => {
-    setFeaturedIndex((current) => (current + direction + moments.length) % moments.length);
+    setFeaturedIndex((current) => {
+      const next = (current + direction + moments.length) % moments.length;
+      preloadAround(next, 3);
+      return next;
+    });
   };
 
   return (
-    <section id="outside" className="travel-section">
+    <section ref={sectionRef} id="outside" className="travel-section">
       <div className="travel-ribbon" aria-hidden="true">
         <span>FIELD NOTES</span>
         <i />
@@ -136,6 +234,9 @@ function OutsideTech() {
             <img
               src={featuredMoment.src}
               alt={featuredMoment.alt}
+              decoding="async"
+              fetchPriority="high"
+              loading="lazy"
               style={{ "--focus": featuredMoment.focus }}
             />
             <span className="travel-photo-tape" aria-hidden="true" />
@@ -201,7 +302,12 @@ function OutsideTech() {
               className="lightbox-photo"
               style={{ "--focus": activeMoment.focus }}
             >
-              <img src={activeMoment.src} alt={activeMoment.alt} />
+              <img
+                src={activeMoment.src}
+                alt={activeMoment.alt}
+                decoding="async"
+                fetchPriority="high"
+              />
             </div>
 
             <div className="lightbox-caption">
