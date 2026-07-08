@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import { FiArrowUpRight, FiCommand, FiGithub, FiLinkedin, FiMail, FiX } from "react-icons/fi";
 import Header from "./Header.jsx";
@@ -19,6 +19,43 @@ const commands = [
   { label: "Scan the toolbox", detail: "Skills and systems", href: "#skills", key: "S" },
   { label: "Start a conversation", detail: "Email Alexander", href: "#contact", key: "C" },
 ];
+
+const INTRO_CHARS = [..."Alexander Potiagalov"];
+
+function LoadingScreen() {
+  const [phase, setPhase] = useState("enter");
+  const timerRef = useRef(null);
+
+  useEffect(() => {
+    // last char finishes at ~(19*30 + 550)=1120ms, line at ~1350ms → hold → exit at 2000ms
+    timerRef.current = setTimeout(() => setPhase("exit"), 2000);
+    return () => clearTimeout(timerRef.current);
+  }, []);
+
+  if (phase === "done") return null;
+
+  return (
+    <div
+      className={`intro-overlay intro-overlay--${phase}`}
+      onAnimationEnd={(e) => {
+        if (e.animationName === "intro-curtain-up") setPhase("done");
+      }}
+    >
+      <div className="intro-content">
+        <p className="intro-name">
+          {INTRO_CHARS.map((char, i) => (
+            <span key={i} className="intro-char-wrap">
+              <span className="intro-char" style={{ "--i": i }}>
+                {char === " " ? "\u00A0" : char}
+              </span>
+            </span>
+          ))}
+        </p>
+        <span className="intro-line" />
+      </div>
+    </div>
+  );
+}
 
 function CommandDeck({ open, onClose }) {
   useEffect(() => {
@@ -156,6 +193,7 @@ function App() {
 
   return (
     <div className={`site palette-${palette}`}>
+      <LoadingScreen />
       <Header
         onOpenCommand={() => setCommandOpen(true)}
         onCyclePalette={() => setPalette((current) => (current + 1) % 3)}
