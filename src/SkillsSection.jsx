@@ -1,3 +1,7 @@
+import { motion } from "framer-motion";
+
+const EASE = [0.22, 1, 0.36, 1];
+
 const groups = [
   {
     number: "01",
@@ -76,11 +80,14 @@ function SkillsSection() {
 
         <div className="tool-grid">
           {groups.map((group, index) => (
-            <article
+            <motion.article
               className={`tool-card ${group.color}`}
               key={group.title}
-              data-reveal
-              style={{ "--delay": `${index * 60}ms` }}
+              initial={{ opacity: 0, y: 32, scale: 0.97 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: false, amount: 0.1 }}
+              whileHover={{ y: -6, transition: { duration: 0.2 } }}
+              transition={{ duration: 0.55, ease: EASE, delay: index * 0.06 }}
             >
               <div className="tool-card-head">
                 <span>{group.number}</span>
@@ -88,13 +95,29 @@ function SkillsSection() {
               </div>
               <p>{group.note}</p>
               <div className="tool-tags">
-                {group.skills.map((skill) => <span key={skill}>{skill}</span>)}
+                {group.skills.map((skill, si) => (
+                  <motion.span
+                    key={skill}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: false }}
+                    transition={{ duration: 0.3, ease: EASE, delay: index * 0.06 + si * 0.04 }}
+                  >
+                    {skill}
+                  </motion.span>
+                ))}
               </div>
-            </article>
+            </motion.article>
           ))}
         </div>
 
-        <div className="education-receipt" data-reveal>
+        <motion.div
+          className="education-receipt"
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.2 }}
+          transition={{ duration: 0.6, ease: EASE }}
+        >
           <div className="receipt-hole" />
           <span className="micro-label">Education receipt / keep for your records</span>
           <div className="receipt-main">
@@ -107,7 +130,7 @@ function SkillsSection() {
             <span>STATUS: IN PROGRESS</span>
           </div>
           <div className="barcode" aria-hidden="true" />
-        </div>
+        </motion.div>
       </div>
     </section>
   );

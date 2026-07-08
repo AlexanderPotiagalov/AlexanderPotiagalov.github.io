@@ -1,5 +1,6 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
+import { AnimatePresence, motion } from "framer-motion";
 import {
   FiArrowUpRight,
   FiExternalLink,
@@ -7,6 +8,8 @@ import {
   FiLock,
   FiZap,
 } from "react-icons/fi";
+
+const EASE = [0.22, 1, 0.36, 1];
 
 const projects = [
   {
@@ -289,14 +292,20 @@ function Projects() {
 
         <div className="project-dossier" data-reveal>
           <div className="project-index" role="tablist" aria-label="Select a project">
-            {projects.map((project) => (
-              <button
+            {projects.map((project, index) => (
+              <motion.button
                 key={project.id}
                 type="button"
                 role="tab"
                 aria-selected={selectedId === project.id}
                 className={selectedId === project.id ? "active" : ""}
                 onClick={() => setSelectedId(project.id)}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: false, amount: 0.05 }}
+                whileHover={{ x: 5 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ duration: 0.45, ease: EASE, delay: index * 0.045 }}
               >
                 <span>{project.index}</span>
                 <div>
@@ -304,7 +313,7 @@ function Projects() {
                   <small>{project.type}</small>
                 </div>
                 <FiArrowUpRight />
-              </button>
+              </motion.button>
             ))}
 
             <a
@@ -317,7 +326,15 @@ function Projects() {
             </a>
           </div>
 
-          <article className={`project-stage ${selected.accent}`} key={selected.id}>
+          <AnimatePresence mode="wait">
+            <motion.article
+              className={`project-stage ${selected.accent}`}
+              key={selected.id}
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -16 }}
+              transition={{ duration: 0.38, ease: EASE }}
+            >
             <div className="stage-topline">
               <span>FILE {selected.index} / {selected.type}</span>
               <span>STATUS: BUILT</span>
@@ -365,12 +382,25 @@ function Projects() {
                 </div>
               </div>
 
-              <div className="project-stack">
+              <motion.div
+                className="project-stack"
+                initial="hidden"
+                animate="visible"
+                variants={{ visible: { transition: { staggerChildren: 0.05, delayChildren: 0.1 } } }}
+              >
                 <FiZap />
-                {selected.stack.map((item) => <span key={item}>{item}</span>)}
-              </div>
+                {selected.stack.map((item) => (
+                  <motion.span
+                    key={item}
+                    variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0, transition: { duration: 0.35, ease: EASE } } }}
+                  >
+                    {item}
+                  </motion.span>
+                ))}
+              </motion.div>
             </div>
-          </article>
+            </motion.article>
+          </AnimatePresence>
         </div>
       </div>
     </section>

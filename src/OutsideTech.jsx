@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import {
   FiCamera,
   FiChevronLeft,
@@ -6,6 +7,8 @@ import {
   FiMapPin,
   FiX,
 } from "react-icons/fi";
+
+const EASE = [0.22, 1, 0.36, 1];
 
 const INITIAL_FEATURED_INDEX = 9;
 const imageCache = new Map();
@@ -189,7 +192,13 @@ function OutsideTech() {
       </div>
 
       <div className="page-shell travel-shell">
-        <div className="travel-intro" data-reveal>
+        <motion.div
+          className="travel-intro"
+          initial={{ opacity: 0, y: 36 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.2 }}
+          transition={{ duration: 0.7, ease: EASE }}
+        >
           <div className="travel-stamp">
             <FiCamera />
             <span>03</span>
@@ -215,9 +224,15 @@ function OutsideTech() {
               <span>PACK LIGHT / CAMERA READY</span>
             </div>
           </div>
-        </div>
+        </motion.div>
 
-        <div className="travel-book" data-reveal>
+        <motion.div
+          className="travel-book"
+          initial={{ opacity: 0, x: 48 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: false, amount: 0.1 }}
+          transition={{ duration: 0.75, ease: EASE, delay: 0.1 }}
+        >
           <div className="notebook-rings" aria-hidden="true">
             {Array.from({ length: 7 }, (_, index) => <i key={index} />)}
           </div>
@@ -275,59 +290,69 @@ function OutsideTech() {
               <span className="notebook-turn-note">FLIP THROUGH THE NOTEBOOK</span>
             </div>
           </article>
-        </div>
+        </motion.div>
       </div>
 
-      {activeMoment && (
-        <div
-          className="life-lightbox-backdrop"
-          role="presentation"
-          onMouseDown={() => setActiveIndex(null)}
-        >
-          <section
-            className="life-lightbox"
-            role="dialog"
-            aria-modal="true"
-            aria-label={`${activeMoment.title} photo`}
-            onMouseDown={(event) => event.stopPropagation()}
+      <AnimatePresence>
+        {activeMoment && (
+          <motion.div
+            className="life-lightbox-backdrop"
+            role="presentation"
+            onMouseDown={() => setActiveIndex(null)}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
           >
-            <div className="lightbox-topline">
-              <span>FRAME {String(activeIndex + 1).padStart(2, "0")} / {moments.length}</span>
-              <button type="button" onClick={() => setActiveIndex(null)} aria-label="Close photo">
-                <FiX />
-              </button>
-            </div>
-
-            <div
-              className="lightbox-photo"
-              style={{ "--focus": activeMoment.focus }}
+            <motion.section
+              className="life-lightbox"
+              role="dialog"
+              aria-modal="true"
+              aria-label={`${activeMoment.title} photo`}
+              onMouseDown={(event) => event.stopPropagation()}
+              initial={{ opacity: 0, y: 48, scale: 0.96 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 32, scale: 0.97 }}
+              transition={{ duration: 0.4, ease: EASE }}
             >
-              <img
-                src={activeMoment.src}
-                alt={activeMoment.alt}
-                decoding="async"
-                fetchPriority="high"
-              />
-            </div>
+              <div className="lightbox-topline">
+                <span>FRAME {String(activeIndex + 1).padStart(2, "0")} / {moments.length}</span>
+                <button type="button" onClick={() => setActiveIndex(null)} aria-label="Close photo">
+                  <FiX />
+                </button>
+              </div>
 
-            <div className="lightbox-caption">
-              <div>
-                <span className="micro-label">{activeMoment.tag}</span>
-                <h3>{activeMoment.title}</h3>
-                <p>{activeMoment.description}</p>
+              <div
+                className="lightbox-photo"
+                style={{ "--focus": activeMoment.focus }}
+              >
+                <img
+                  src={activeMoment.src}
+                  alt={activeMoment.alt}
+                  decoding="async"
+                  fetchPriority="high"
+                />
               </div>
-              <div className="lightbox-controls">
-                <button type="button" onClick={() => move(-1)} aria-label="Previous photo">
-                  <FiChevronLeft />
-                </button>
-                <button type="button" onClick={() => move(1)} aria-label="Next photo">
-                  <FiChevronRight />
-                </button>
+
+              <div className="lightbox-caption">
+                <div>
+                  <span className="micro-label">{activeMoment.tag}</span>
+                  <h3>{activeMoment.title}</h3>
+                  <p>{activeMoment.description}</p>
+                </div>
+                <div className="lightbox-controls">
+                  <button type="button" onClick={() => move(-1)} aria-label="Previous photo">
+                    <FiChevronLeft />
+                  </button>
+                  <button type="button" onClick={() => move(1)} aria-label="Next photo">
+                    <FiChevronRight />
+                  </button>
+                </div>
               </div>
-            </div>
-          </section>
-        </div>
-      )}
+            </motion.section>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

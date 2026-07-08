@@ -1,4 +1,7 @@
+import { motion } from "framer-motion";
 import { FiArrowUpRight } from "react-icons/fi";
+
+const EASE = [0.22, 1, 0.36, 1];
 
 const experiences = [
   {
@@ -60,11 +63,14 @@ function Experience() {
 
         <div className="experience-stack">
           {experiences.map((item, index) => (
-            <article
+            <motion.article
               className={`experience-file ${item.color}`}
               key={item.company}
-              data-reveal
-              style={{ "--delay": `${index * 70}ms` }}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.1 }}
+              whileHover={{ y: -4, transition: { duration: 0.2 } }}
+              transition={{ duration: 0.6, ease: EASE, delay: index * 0.07 }}
             >
               <div className="experience-number">{item.number}</div>
               <div className="experience-name">
@@ -73,13 +79,23 @@ function Experience() {
               </div>
               <p>{item.summary}</p>
               <div className="signal-list">
-                {item.signals.map((signal) => <span key={signal}>{signal}</span>)}
+                {item.signals.map((signal, si) => (
+                  <motion.span
+                    key={signal}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: false }}
+                    transition={{ duration: 0.35, ease: EASE, delay: index * 0.07 + si * 0.05 }}
+                  >
+                    {signal}
+                  </motion.span>
+                ))}
               </div>
               <div className="experience-period">
                 {item.period}
                 <FiArrowUpRight />
               </div>
-            </article>
+            </motion.article>
           ))}
         </div>
       </div>

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
+import { AnimatePresence, motion } from "framer-motion";
 import { FiArrowUpRight, FiCommand, FiGithub, FiLinkedin, FiMail, FiX } from "react-icons/fi";
 import Header from "./Header.jsx";
 import Hero from "./PortfolioPicture.jsx";
@@ -19,6 +20,41 @@ const commands = [
   { label: "Scan the toolbox", detail: "Skills and systems", href: "#skills", key: "S" },
   { label: "Start a conversation", detail: "Email Alexander", href: "#contact", key: "C" },
 ];
+
+const EASE = [0.22, 1, 0.36, 1];
+
+/* Wraps every top-level section with a scroll-triggered reveal */
+function SectionReveal({ children }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 70 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: false, amount: 0.04 }}
+      transition={{ duration: 0.85, ease: EASE }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+/* Animated accent rule drawn between sections */
+function SectionDivider() {
+  return (
+    <motion.div
+      aria-hidden="true"
+      style={{
+        height: 2,
+        background: "var(--ink)",
+        transformOrigin: "left center",
+        margin: "0 var(--gutter)",
+      }}
+      initial={{ scaleX: 0, opacity: 0 }}
+      whileInView={{ scaleX: 1, opacity: 1 }}
+      viewport={{ once: false, amount: 0.5 }}
+      transition={{ duration: 0.7, ease: EASE }}
+    />
+  );
+}
 
 const INTRO_CHARS = [..."Alexander Potiagalov"];
 
@@ -74,8 +110,6 @@ function CommandDeck({ open, onClose }) {
     };
   }, [open, onClose]);
 
-  if (!open) return null;
-
   const followCommand = (href) => {
     onClose();
     window.setTimeout(() => {
@@ -84,58 +118,78 @@ function CommandDeck({ open, onClose }) {
   };
 
   return (
-    <div className="command-backdrop" role="presentation" onMouseDown={onClose}>
-      <section
-        className="command-deck"
-        role="dialog"
-        aria-modal="true"
-        aria-label="Portfolio command deck"
-        onMouseDown={(event) => event.stopPropagation()}
-      >
-        <div className="command-head">
-          <div>
-            <span className="micro-label">Quick navigation</span>
-            <h2>COMMAND DECK</h2>
-          </div>
-          <button type="button" onClick={onClose} aria-label="Close command deck">
-            <FiX />
-          </button>
-        </div>
-
-        <div className="command-list">
-          {commands.map((command) => (
-            <button
-              type="button"
-              key={command.href}
-              onClick={() => followCommand(command.href)}
-            >
-              <span className="command-key">{command.key}</span>
-              <span>
-                <strong>{command.label}</strong>
-                <small>{command.detail}</small>
-              </span>
-              <FiArrowUpRight />
-            </button>
-          ))}
-        </div>
-
-        <div className="command-socials">
-          <a href="mailto:apa168@sfu.ca">
-            <FiMail /> Email
-          </a>
-          <a href="https://github.com/AlexanderPotiagalov" target="_blank" rel="noreferrer">
-            <FiGithub /> GitHub
-          </a>
-          <a
-            href="https://www.linkedin.com/in/alexander-potiagalov/"
-            target="_blank"
-            rel="noreferrer"
+    <AnimatePresence>
+      {open && (
+        <motion.div
+          className="command-backdrop"
+          role="presentation"
+          onMouseDown={onClose}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
+        >
+          <motion.section
+            className="command-deck"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Portfolio command deck"
+            onMouseDown={(event) => event.stopPropagation()}
+            initial={{ opacity: 0, y: 28, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 16, scale: 0.97 }}
+            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
           >
-            <FiLinkedin /> LinkedIn
-          </a>
-        </div>
-      </section>
-    </div>
+            <div className="command-head">
+              <div>
+                <span className="micro-label">Quick navigation</span>
+                <h2>COMMAND DECK</h2>
+              </div>
+              <button type="button" onClick={onClose} aria-label="Close command deck">
+                <FiX />
+              </button>
+            </div>
+
+            <div className="command-list">
+              {commands.map((command, i) => (
+                <motion.button
+                  type="button"
+                  key={command.href}
+                  onClick={() => followCommand(command.href)}
+                  initial={{ opacity: 0, x: -16 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  whileHover={{ x: 6 }}
+                  transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1], delay: i * 0.04 }}
+                >
+                  <span className="command-key">{command.key}</span>
+                  <span>
+                    <strong>{command.label}</strong>
+                    <small>{command.detail}</small>
+                  </span>
+                  <FiArrowUpRight />
+                </motion.button>
+              ))}
+            </div>
+
+            <div className="command-socials">
+              <a href="mailto:apa168@sfu.ca">
+                <FiMail /> Email
+              </a>
+              <a href="https://github.com/AlexanderPotiagalov" target="_blank" rel="noreferrer">
+                <FiGithub /> GitHub
+              </a>
+              <a
+                href="https://www.linkedin.com/in/alexander-potiagalov/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <FiLinkedin /> LinkedIn
+              </a>
+            </div>
+          </motion.section>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }
 
@@ -202,63 +256,118 @@ function App() {
       <main>
         <Hero />
 
-        <section id="about" className="about-section ink-section">
-          <div className="page-shell about-layout" data-reveal>
-            <div className="section-stamp">
-              <span>02</span>
-              <strong>THE SHORT VERSION</strong>
-            </div>
+        <SectionDivider />
 
-            <div className="about-headline">
-              <p className="micro-label">Builder / researcher / product person</p>
-              <h2>
-                MESSY PROBLEM IN.
-                <span>USEFUL SOFTWARE OUT.</span>
-              </h2>
-            </div>
-
-            <div className="about-copy">
-              <p className="about-lead">
-                I&apos;m a Computing Science student at Simon Fraser University
-                working across AI, full-stack development, cybersecurity, and data.
-              </p>
-              <p>
-                I like projects with real constraints and visible outcomes: tools
-                analysts can use, platforms people understand, and prototypes that
-                survive contact with actual users.
-              </p>
-
-              <div className="field-notes" aria-label="Current interests">
-                <span>AI engineering</span>
-                <span>Security automation</span>
-                <span>Product systems</span>
-                <span>Fast MVPs</span>
-                <span>Clean UX</span>
+        <SectionReveal>
+          <section id="about" className="about-section ink-section">
+            <div className="page-shell about-layout">
+              <div className="section-stamp">
+                <span>02</span>
+                <strong>THE SHORT VERSION</strong>
               </div>
-            </div>
-          </div>
-        </section>
 
-        <OutsideTech />
-        <Experience />
-        <Projects />
-        <SkillsSection />
-        <Contact />
+              <motion.div
+                className="about-headline"
+                initial={{ opacity: 0, y: 32 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, amount: 0.2 }}
+                transition={{ duration: 0.65, ease: EASE }}
+              >
+                <p className="micro-label">Builder / researcher / product person</p>
+                <h2>
+                  MESSY PROBLEM IN.
+                  <span>USEFUL SOFTWARE OUT.</span>
+                </h2>
+              </motion.div>
+
+              <motion.div
+                className="about-copy"
+                initial={{ opacity: 0, y: 32 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, amount: 0.2 }}
+                transition={{ duration: 0.65, ease: EASE, delay: 0.1 }}
+              >
+                <p className="about-lead">
+                  I&apos;m a Computing Science student at Simon Fraser University
+                  working across AI, full-stack development, cybersecurity, and data.
+                </p>
+                <p>
+                  I like projects with real constraints and visible outcomes: tools
+                  analysts can use, platforms people understand, and prototypes that
+                  survive contact with actual users.
+                </p>
+
+                <motion.div
+                  className="field-notes"
+                  aria-label="Current interests"
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: false }}
+                  variants={{ visible: { transition: { staggerChildren: 0.07, delayChildren: 0.15 } } }}
+                >
+                  {["AI engineering", "Security automation", "Product systems", "Fast MVPs", "Clean UX"].map((tag) => (
+                    <motion.span
+                      key={tag}
+                      variants={{ hidden: { opacity: 0, scale: 0.85 }, visible: { opacity: 1, scale: 1, transition: { duration: 0.4, ease: EASE } } }}
+                    >
+                      {tag}
+                    </motion.span>
+                  ))}
+                </motion.div>
+              </motion.div>
+            </div>
+          </section>
+        </SectionReveal>
+
+        <SectionDivider />
+
+        <SectionReveal>
+          <OutsideTech />
+        </SectionReveal>
+
+        <SectionDivider />
+
+        <SectionReveal>
+          <Experience />
+        </SectionReveal>
+
+        <SectionDivider />
+
+        <SectionReveal>
+          <Projects />
+        </SectionReveal>
+
+        <SectionDivider />
+
+        <SectionReveal>
+          <SkillsSection />
+        </SectionReveal>
+
+        <SectionDivider />
+
+        <SectionReveal>
+          <Contact />
+        </SectionReveal>
       </main>
 
       <Footer />
-      <CommandDeck open={commandOpen} onClose={() => setCommandOpen(false)} />
+      <CommandDeck open={commandOpen} onClose={() => setCommandOpen(false)} key="command-deck" />
 
-      <button
+      <motion.button
         className="floating-command"
         type="button"
         onClick={() => setCommandOpen(true)}
         aria-label="Open command deck"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        whileHover={{ scale: 1.06, y: -2 }}
+        whileTap={{ scale: 0.95 }}
+        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 1 }}
       >
         <FiCommand />
         <span>COMMAND</span>
         <kbd>CTRL K</kbd>
-      </button>
+      </motion.button>
     </div>
   );
 }

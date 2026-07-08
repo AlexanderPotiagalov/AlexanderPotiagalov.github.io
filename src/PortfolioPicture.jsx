@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import {
   FiArrowDownRight,
   FiArrowUpRight,
@@ -7,6 +8,23 @@ import {
   FiDownload,
   FiGithub,
 } from "react-icons/fi";
+
+const EASE = [0.22, 1, 0.36, 1];
+
+const heroCopyVariants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.11, delayChildren: 0.05 } },
+};
+
+const heroItemVariants = {
+  hidden: { opacity: 0, y: 28 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: EASE } },
+};
+
+const heroLineVariants = {
+  hidden: { opacity: 0, y: 52 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.72, ease: EASE } },
+};
 
 const photos = [
   {
@@ -57,39 +75,58 @@ function PortfolioPicture() {
       <div className="hero-orbit orbit-two">SHIP IT<small>THEN POLISH IT</small></div>
 
       <div className="page-shell hero-layout">
-        <div className="hero-copy" data-reveal>
-          <p className="hero-overline">
+        <motion.div
+          className="hero-copy"
+          variants={heroCopyVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          <motion.p className="hero-overline" variants={heroItemVariants}>
             <span />
             Computing Science @ Simon Fraser University
-          </p>
+          </motion.p>
 
           <h1>
-            <span className="hero-line line-one">I BUILD</span>
-            <span className="hero-line line-two">USEFUL</span>
-            <span className="hero-line line-three">SOFTWARE.</span>
+            <motion.span className="hero-line line-one" variants={heroLineVariants}>I BUILD</motion.span>
+            <motion.span className="hero-line line-two" variants={heroLineVariants}>USEFUL</motion.span>
+            <motion.span className="hero-line line-three" variants={heroLineVariants}>SOFTWARE.</motion.span>
           </h1>
 
-          <p className="hero-intro">
+          <motion.p className="hero-intro" variants={heroItemVariants}>
             AI, full-stack, cybersecurity, and data. Built with unreasonable
             curiosity and a healthy dislike of useless software.
-          </p>
+          </motion.p>
 
-          <div className="hero-actions">
-            <a className="poster-button primary" href="#projects">
+          <motion.div className="hero-actions" variants={heroItemVariants}>
+            <motion.a
+              className="poster-button primary"
+              href="#projects"
+              whileHover={{ scale: 1.04, x: 3 }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ duration: 0.2 }}
+            >
               OPEN THE PROJECT FILES <FiArrowDownRight />
-            </a>
-            <a
+            </motion.a>
+            <motion.a
               className="poster-button secondary"
               href="./Alexander_Potiagalov_Resume.pdf"
               target="_blank"
               rel="noreferrer"
+              whileHover={{ scale: 1.04, x: 3 }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ duration: 0.2 }}
             >
               RESUME <FiDownload />
-            </a>
-          </div>
-        </div>
+            </motion.a>
+          </motion.div>
+        </motion.div>
 
-        <div className="hero-portrait-wrap" data-reveal>
+        <motion.div
+          className="hero-portrait-wrap"
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.9, ease: EASE, delay: 0.35 }}
+        >
           <div className="portrait-stack">
             {photos.map((photo, index) => {
               const position = (index - activePhoto + photos.length) % photos.length;
@@ -153,7 +190,7 @@ function PortfolioPicture() {
             <strong>SOLIDIGM</strong>
             <small>AI SOFTWARE ENGINEER CO-OP</small>
           </div>
-        </div>
+        </motion.div>
       </div>
 
       <div className="hero-index">

@@ -1,5 +1,8 @@
 import { useRef, useState } from "react";
+import { motion } from "framer-motion";
 import { FiArrowUpRight, FiCheck, FiGithub, FiLinkedin, FiMail } from "react-icons/fi";
+
+const EASE = [0.22, 1, 0.36, 1];
 
 const FORM_ENDPOINT = "https://formspree.io/f/mdkazlkg";
 const RATE_LIMIT_KEY = "portfolio-contact-attempts-v1";
@@ -231,8 +234,14 @@ function ContactMeForm() {
   return (
     <section id="contact" className="contact-section paper-grid">
       <div className="contact-sticker">NO<br />BORING<br />EMAILS</div>
-      <div className="page-shell contact-layout" data-reveal>
-        <div className="contact-copy">
+      <div className="page-shell contact-layout">
+        <motion.div
+          className="contact-copy"
+          initial={{ opacity: 0, x: -40 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: false, amount: 0.2 }}
+          transition={{ duration: 0.7, ease: EASE }}
+        >
           <span className="micro-label">07 / Open channel</span>
           <h2>
             GOT A PROBLEM
@@ -244,21 +253,36 @@ function ContactMeForm() {
           </p>
 
           <div className="direct-links">
-            <a href="mailto:apa168@sfu.ca"><FiMail /> EMAIL <FiArrowUpRight /></a>
-            <a href="https://github.com/AlexanderPotiagalov" target="_blank" rel="noreferrer">
-              <FiGithub /> GITHUB <FiArrowUpRight />
-            </a>
-            <a
-              href="https://www.linkedin.com/in/alexander-potiagalov/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <FiLinkedin /> LINKEDIN <FiArrowUpRight />
-            </a>
+            {[
+              { href: "mailto:apa168@sfu.ca", icon: <FiMail />, label: "EMAIL" },
+              { href: "https://github.com/AlexanderPotiagalov", icon: <FiGithub />, label: "GITHUB", external: true },
+              { href: "https://www.linkedin.com/in/alexander-potiagalov/", icon: <FiLinkedin />, label: "LINKEDIN", external: true },
+            ].map((link, i) => (
+              <motion.a
+                key={link.label}
+                href={link.href}
+                target={link.external ? "_blank" : undefined}
+                rel={link.external ? "noreferrer" : undefined}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false }}
+                whileHover={{ x: 4 }}
+                transition={{ duration: 0.45, ease: EASE, delay: i * 0.07 }}
+              >
+                {link.icon} {link.label} <FiArrowUpRight />
+              </motion.a>
+            ))}
           </div>
-        </div>
+        </motion.div>
 
-        <form className="contact-form" onSubmit={handleSubmit}>
+        <motion.form
+          className="contact-form"
+          onSubmit={handleSubmit}
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.15 }}
+          transition={{ duration: 0.7, ease: EASE, delay: 0.1 }}
+        >
           <div className="form-topline">
             <span>TRANSMISSION FORM</span>
             <span>ENCRYPTION: VIBES</span>
@@ -274,33 +298,35 @@ function ContactMeForm() {
               autoComplete="off"
             />
           </label>
-          <label>
-            <span>YOUR NAME</span>
-            <input
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              placeholder="Who is this?"
-              autoComplete="name"
-              minLength="2"
-              maxLength="80"
-              required
-            />
-          </label>
-          <label>
-            <span>YOUR EMAIL</span>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              placeholder="Where do I reply?"
-              autoComplete="email"
-              maxLength="254"
-              required
-            />
-          </label>
-          <label>
+          {[
+            { fieldLabel: "YOUR NAME", name: "name", type: "text", placeholder: "Who is this?", props: { autoComplete: "name", minLength: "2", maxLength: "80" } },
+            { fieldLabel: "YOUR EMAIL", name: "email", type: "email", placeholder: "Where do I reply?", props: { autoComplete: "email", maxLength: "254" } },
+          ].map((field, i) => (
+            <motion.label
+              key={field.name}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false }}
+              transition={{ duration: 0.5, ease: EASE, delay: 0.2 + i * 0.08 }}
+            >
+              <span>{field.fieldLabel}</span>
+              <input
+                type={field.type}
+                name={field.name}
+                value={formData[field.name]}
+                onChange={handleChange}
+                placeholder={field.placeholder}
+                required
+                {...field.props}
+              />
+            </motion.label>
+          ))}
+          <motion.label
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false }}
+            transition={{ duration: 0.5, ease: EASE, delay: 0.36 }}
+          >
             <span>THE INTERESTING PART</span>
             <textarea
               name="message"
@@ -312,15 +338,24 @@ function ContactMeForm() {
               maxLength="2000"
               required
             />
-          </label>
-          <button type="submit" disabled={status === "sending"}>
+          </motion.label>
+          <motion.button
+            type="submit"
+            disabled={status === "sending"}
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false }}
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ duration: 0.45, ease: EASE, delay: 0.44 }}
+          >
             {status === "sending" ? "SENDING..." : "SEND TRANSMISSION"}
             {status === "sent" ? <FiCheck /> : <FiArrowUpRight />}
-          </button>
+          </motion.button>
           <p className={`form-status ${status}`} aria-live="polite">
             {statusMessage}
           </p>
-        </form>
+        </motion.form>
       </div>
     </section>
   );
