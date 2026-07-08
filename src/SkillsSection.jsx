@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 const EASE = [0.22, 1, 0.36, 1];
 
@@ -52,8 +53,12 @@ const groups = [
 const marqueeWords = ["BUILD", "TEST", "BREAK", "FIX", "SHIP", "LEARN"];
 
 function SkillsSection() {
+  const sectionRef = useRef(null);
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "end start"] });
+  const headingY = useTransform(scrollYProgress, [0, 1], [-40, 40]);
+
   return (
-    <section id="skills" className="skills-section ink-section">
+    <section ref={sectionRef} id="skills" className="skills-section ink-section">
       <div className="skills-marquee" aria-hidden="true">
         <div className="marquee-track">
           {[0, 1].map((copy) => (
@@ -67,7 +72,7 @@ function SkillsSection() {
       </div>
 
       <div className="page-shell">
-        <div className="section-title light" data-reveal>
+        <motion.div className="section-title light" style={{ y: headingY }}>
           <div>
             <span className="micro-label">06 / Toolbox</span>
             <h2>TOOLS I USE<br /><em>TO GET THERE.</em></h2>
@@ -76,7 +81,7 @@ function SkillsSection() {
             AI systems first, then the software required to train, serve,
             inspect, and ship them without hand-waving.
           </p>
-        </div>
+        </motion.div>
 
         <div className="tool-grid">
           {groups.map((group, index) => (

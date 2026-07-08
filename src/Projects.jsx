@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import PropTypes from "prop-types";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
 import {
   FiArrowUpRight,
   FiExternalLink,
@@ -275,11 +275,14 @@ ProjectArtifact.propTypes = {
 function Projects() {
   const [selectedId, setSelectedId] = useState(projects[0].id);
   const selected = projects.find((project) => project.id === selectedId) ?? projects[0];
+  const sectionRef = useRef(null);
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "end start"] });
+  const headingY = useTransform(scrollYProgress, [0, 1], [-40, 40]);
 
   return (
-    <section id="projects" className="projects-section paper-grid">
+    <section ref={sectionRef} id="projects" className="projects-section paper-grid">
       <div className="page-shell">
-        <div className="section-title" data-reveal>
+        <motion.div className="section-title" style={{ y: headingY }}>
           <div>
             <span className="micro-label">05 / Selected work</span>
             <h2>PROJECT<br /><em>CASE FILES.</em></h2>
@@ -288,7 +291,7 @@ function Projects() {
             Real projects, real links. Pick a file to inspect the product,
             problem, stack, and build decisions behind it.
           </p>
-        </div>
+        </motion.div>
 
         <div className="project-dossier" data-reveal>
           <div className="project-index" role="tablist" aria-label="Select a project">

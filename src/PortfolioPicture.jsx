@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import {
   FiArrowDownRight,
   FiArrowUpRight,
@@ -49,6 +49,15 @@ const photos = [
 
 function PortfolioPicture() {
   const [activePhoto, setActivePhoto] = useState(0);
+  const heroRef = useRef(null);
+  const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
+
+  // copy drifts up as hero scrolls out (-160px)
+  const copyY = useTransform(scrollYProgress, [0, 1], [0, -160]);
+  // portrait drifts up more slowly — parallax depth difference
+  const portraitY = useTransform(scrollYProgress, [0, 1], [0, -80]);
+  // both fade out as user scrolls past
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.75], [1, 0]);
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -67,7 +76,7 @@ function PortfolioPicture() {
   };
 
   return (
-    <section id="top" className="hero paper-grid">
+    <section ref={heroRef} id="top" className="hero paper-grid">
       <div className="hero-ticker" aria-hidden="true">
       </div>
 
@@ -80,6 +89,7 @@ function PortfolioPicture() {
           variants={heroCopyVariants}
           initial="hidden"
           animate="visible"
+          style={{ y: copyY, opacity: heroOpacity }}
         >
           <motion.p className="hero-overline" variants={heroItemVariants}>
             <span />
@@ -126,6 +136,7 @@ function PortfolioPicture() {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.9, ease: EASE, delay: 0.35 }}
+          style={{ y: portraitY }}
         >
           <div className="portrait-stack">
             {photos.map((photo, index) => {

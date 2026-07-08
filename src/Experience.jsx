@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { FiArrowUpRight } from "react-icons/fi";
 
 const EASE = [0.22, 1, 0.36, 1];
@@ -47,10 +48,14 @@ const experiences = [
 ];
 
 function Experience() {
+  const sectionRef = useRef(null);
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "end start"] });
+  const headingY = useTransform(scrollYProgress, [0, 1], [-40, 40]);
+
   return (
-    <section id="experience" className="experience-section ink-section">
+    <section ref={sectionRef} id="experience" className="experience-section ink-section">
       <div className="page-shell">
-        <div className="section-title light" data-reveal>
+        <motion.div className="section-title light" style={{ y: headingY }}>
           <div>
             <span className="micro-label">04 / Field history</span>
             <h2>PLACES I&apos;VE<br />MADE THINGS.</h2>
@@ -59,7 +64,7 @@ function Experience() {
             Research labs, government teams, and startup rooms. Different
             constraints, same objective: make the thing actually work.
           </p>
-        </div>
+        </motion.div>
 
         <div className="experience-stack">
           {experiences.map((item, index) => (

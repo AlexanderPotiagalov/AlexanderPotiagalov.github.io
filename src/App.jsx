@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { FiArrowUpRight, FiCommand, FiGithub, FiLinkedin, FiMail, FiX } from "react-icons/fi";
 import Header from "./Header.jsx";
 import Hero from "./PortfolioPicture.jsx";
@@ -23,6 +23,44 @@ const commands = [
 
 const EASE = [0.22, 1, 0.36, 1];
 
+/* Thin accent bar fixed at the top that fills as you scroll the page */
+function ScrollProgressBar() {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, { stiffness: 200, damping: 30, restDelta: 0.001 });
+
+  return (
+    <motion.div
+      aria-hidden="true"
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        right: 0,
+        height: 3,
+        background: "var(--accent)",
+        transformOrigin: "left center",
+        scaleX,
+        zIndex: 10000,
+      }}
+    />
+  );
+}
+
+/* Parallax wrapper — children shift vertically at `speed` ratio as page scrolls */
+function ParallaxSection({ children, speed = 0.12 }) {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", `${speed * 100}%`]);
+
+  return (
+    <motion.div ref={ref} style={{ y }}>
+      {children}
+    </motion.div>
+  );
+}
+
+ParallaxSection.propTypes = { children: PropTypes.node.isRequired, speed: PropTypes.number };
+
 /* Wraps every top-level section with a scroll-triggered reveal */
 function SectionReveal({ children }) {
   return (
@@ -36,6 +74,8 @@ function SectionReveal({ children }) {
     </motion.div>
   );
 }
+
+SectionReveal.propTypes = { children: PropTypes.node.isRequired };
 
 /* Animated accent rule drawn between sections */
 function SectionDivider() {
@@ -247,6 +287,7 @@ function App() {
 
   return (
     <div className={`site palette-${palette}`}>
+      <ScrollProgressBar />
       <LoadingScreen />
       <Header
         onOpenCommand={() => setCommandOpen(true)}
