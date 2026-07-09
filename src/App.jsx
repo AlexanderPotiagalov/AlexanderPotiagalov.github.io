@@ -141,11 +141,17 @@ function CommandDeck({ open, onClose }) {
       if (event.key === "Escape") onClose();
     };
 
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+    const header = document.querySelector(".site-header");
+    document.body.style.paddingRight = `${scrollbarWidth}px`;
+    if (header) header.style.paddingRight = `calc(var(--gutter) + ${scrollbarWidth}px)`;
     document.body.classList.add("deck-open");
     window.addEventListener("keydown", closeOnEscape);
 
     return () => {
       document.body.classList.remove("deck-open");
+      document.body.style.paddingRight = "";
+      if (header) header.style.paddingRight = "";
       window.removeEventListener("keydown", closeOnEscape);
     };
   }, [open, onClose]);
