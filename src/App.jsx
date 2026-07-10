@@ -96,14 +96,20 @@ function SectionDivider() {
   );
 }
 
-const INTRO_CHARS = [..."Alexander Potiagalov"];
+const INTRO_NAME = "Alexander Potiagalov";
+const INTRO_WORDS = INTRO_NAME.split(" ").map((word, wordIndex, words) => ({
+  word,
+  offset:
+    words.slice(0, wordIndex).reduce((count, currentWord) => count + currentWord.length, 0) +
+    wordIndex,
+}));
 
 function LoadingScreen() {
   const [phase, setPhase] = useState("enter");
   const timerRef = useRef(null);
 
   useEffect(() => {
-    // last char finishes at ~(19*30 + 550)=1120ms, line at ~1350ms → hold → exit at 2000ms
+    // Last char finishes at roughly 1120ms, line at 1350ms, then exit at 2000ms.
     timerRef.current = setTimeout(() => setPhase("exit"), 2000);
     return () => clearTimeout(timerRef.current);
   }, []);
@@ -118,12 +124,16 @@ function LoadingScreen() {
       }}
     >
       <div className="intro-content">
-        <p className="intro-name">
-          {INTRO_CHARS.map((char, i) => (
-            <span key={i} className="intro-char-wrap">
-              <span className="intro-char" style={{ "--i": i }}>
-                {char === " " ? "\u00A0" : char}
-              </span>
+        <p className="intro-name" aria-label={INTRO_NAME}>
+          {INTRO_WORDS.map(({ word, offset }) => (
+            <span key={word} className="intro-word" aria-hidden="true">
+              {[...word].map((char, i) => (
+                <span key={`${word}-${i}`} className="intro-char-wrap">
+                  <span className="intro-char" style={{ "--i": offset + i }}>
+                    {char}
+                  </span>
+                </span>
+              ))}
             </span>
           ))}
         </p>

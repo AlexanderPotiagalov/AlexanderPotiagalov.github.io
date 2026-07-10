@@ -3633,15 +3633,26 @@ svg {
 .intro-content {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 10px;
+  align-items: center;
+  gap: clamp(8px, 1.8vw, 14px);
+  width: fit-content;
+  max-width: calc(100vw - 32px);
 }
 
 .intro-name {
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 100%;
   margin: 0;
-  line-height: 1;
+  gap: 0.04em clamp(0.22em, 1.4vw, 0.38em);
+  line-height: 0.98;
+  text-align: center;
+}
+
+.intro-word {
+  display: inline-flex;
+  white-space: nowrap;
 }
 
 .intro-char-wrap {
@@ -3673,6 +3684,28 @@ svg {
   opacity: 0;
   animation: intro-line-draw 500ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
   animation-delay: 900ms;
+}
+
+@media (max-width: 620px) {
+  .intro-content {
+    max-width: calc(100vw - 28px);
+    gap: 8px;
+  }
+
+  .intro-name {
+    column-gap: 0.32em;
+    row-gap: 0.08em;
+  }
+
+  .intro-char {
+    font-size: clamp(1.55rem, 8.5vw, 2.35rem);
+    letter-spacing: 0.01em;
+  }
+
+  .intro-line {
+    height: 2px;
+    width: min(100%, 19rem);
+  }
 }
 
 @media (max-width: 900px) {
