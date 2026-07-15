@@ -80,9 +80,6 @@ function PortfolioPicture() {
       <div className="hero-ticker" aria-hidden="true">
       </div>
 
-      <div className="hero-orbit orbit-one">BUILD<small>LEARN / REPEAT</small></div>
-      <div className="hero-orbit orbit-two">SHIP IT<small>THEN POLISH IT</small></div>
-
       <div className="page-shell hero-layout">
         <motion.div
           className="hero-copy"
@@ -129,6 +126,7 @@ function PortfolioPicture() {
               RESUME <FiDownload />
             </motion.a>
           </motion.div>
+
         </motion.div>
 
         <motion.div

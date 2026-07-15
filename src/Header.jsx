@@ -2,6 +2,7 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import { motion } from "framer-motion";
 import { FiCommand, FiMenu, FiRefreshCw, FiX } from "react-icons/fi";
+import MusicPlayer from "./MusicPlayer.jsx";
 
 const navItems = [
   ["About", "#about"],
@@ -47,6 +48,7 @@ function Header({ onOpenCommand, onCyclePalette }) {
       </nav>
 
       <div className="header-tools">
+        <MusicPlayer />
         <button type="button" className="ink-button" onClick={onCyclePalette}>
           <FiRefreshCw />
           <span>RE-INK</span>

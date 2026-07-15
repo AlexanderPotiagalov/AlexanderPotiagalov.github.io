@@ -133,6 +133,125 @@ svg {
   backdrop-filter: blur(14px);
 }
 
+.music-player {
+  position: relative;
+  z-index: 2;
+  flex: 0 0 auto;
+}
+
+.music-player-tab {
+  width: 42px;
+  height: 38px;
+  padding: 0 5px;
+  border: 2px solid var(--ink);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--ink);
+  background: #1db954;
+  box-shadow: 3px 3px 0 var(--ink);
+  cursor: pointer;
+  transition: transform 120ms ease, box-shadow 120ms ease;
+}
+
+.music-player-tab:hover {
+  box-shadow: 1px 1px 0 var(--ink);
+  transform: translate(2px, 2px);
+}
+
+.music-note {
+  width: 15px;
+  height: 15px;
+}
+
+.music-disc {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  color: var(--paper-bright);
+  background: #1db954;
+}
+
+.music-player-copy {
+  min-width: 0;
+  display: grid;
+  text-align: left;
+  line-height: 1;
+}
+
+.music-player-copy strong {
+  font-family: "Archivo Black", Impact, sans-serif;
+  font-size: 0.64rem;
+}
+
+.music-player-copy small {
+  margin-top: 4px;
+  font-family: "DM Mono", monospace;
+  font-size: 0.42rem;
+  letter-spacing: 0.08em;
+}
+
+.music-embed-head {
+  height: 44px;
+  padding: 7px 9px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--paper-bright);
+  background: #121212;
+}
+
+.music-track-controls {
+  margin-left: auto;
+  display: flex;
+  gap: 5px;
+}
+
+.music-track-controls button {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 1px solid #555;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: var(--paper-bright);
+  background: transparent;
+  cursor: pointer;
+}
+
+.music-track-controls button:hover {
+  border-color: #1db954;
+  color: #1db954;
+}
+
+.music-embed {
+  position: absolute;
+  top: 46px;
+  right: 0;
+  width: min(340px, calc(100vw - 32px));
+  height: 0;
+  overflow: hidden;
+  border: 0 solid var(--ink);
+  background: #121212;
+  box-shadow: 0 0 0 transparent;
+  transition: height 220ms ease, border-width 220ms ease, box-shadow 220ms ease;
+}
+
+.music-player.is-open .music-embed {
+  height: 196px;
+  border-width: 2px;
+  box-shadow: 6px 6px 0 var(--ink);
+}
+
+.music-embed iframe {
+  border: 0;
+  display: block;
+}
+
 .brand {
   display: inline-flex;
   align-items: center;
@@ -3945,6 +4064,13 @@ svg {
 
   .site-header {
     height: 68px;
+  }
+
+  .music-embed {
+    position: fixed;
+    top: 73px;
+    right: 16px;
+    width: min(340px, calc(100vw - 32px));
   }
 
   .brand-copy,
