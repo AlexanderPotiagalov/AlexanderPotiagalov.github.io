@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import { AnimatePresence, motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { FiArrowUpRight, FiCommand, FiGithub, FiLinkedin, FiMail, FiX } from "react-icons/fi";
@@ -125,16 +125,19 @@ function LoadingScreen() {
     >
       <div className="intro-content">
         <p className="intro-name" aria-label={INTRO_NAME}>
-          {INTRO_WORDS.map(({ word, offset }) => (
-            <span key={word} className="intro-word" aria-hidden="true">
-              {[...word].map((char, i) => (
-                <span key={`${word}-${i}`} className="intro-char-wrap">
-                  <span className="intro-char" style={{ "--i": offset + i }}>
-                    {char}
+          {INTRO_WORDS.map(({ word, offset }, wordIndex) => (
+            <Fragment key={word}>
+              {wordIndex > 0 && <span className="intro-name-divider" aria-hidden="true" />}
+              <span className="intro-word" aria-hidden="true">
+                {[...word].map((char, i) => (
+                  <span key={`${word}-${i}`} className="intro-char-wrap">
+                    <span className="intro-char" style={{ "--i": offset + i }}>
+                      {char}
+                    </span>
                   </span>
-                </span>
-              ))}
-            </span>
+                ))}
+              </span>
+            </Fragment>
           ))}
         </p>
         <span className="intro-line" />

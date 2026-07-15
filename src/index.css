@@ -3641,13 +3641,29 @@ svg {
 
 .intro-name {
   display: flex;
-  flex-wrap: wrap;
+  align-items: center;
   justify-content: center;
   max-width: 100%;
   margin: 0;
-  gap: 0.04em clamp(0.22em, 1.4vw, 0.38em);
+  gap: clamp(10px, 1.6vw, 22px);
   line-height: 0.98;
   text-align: center;
+}
+
+.intro-name-divider {
+  flex: 0 0 auto;
+  width: clamp(3px, 0.35vw, 6px);
+  height: clamp(2.8rem, 6.4vw, 5.4rem);
+  background: var(--accent);
+  transform: skewX(-10deg) scaleY(0);
+  transform-origin: center;
+  animation: intro-divider-in 450ms cubic-bezier(0.22, 1, 0.36, 1) 500ms forwards;
+}
+
+@keyframes intro-divider-in {
+  to {
+    transform: skewX(-10deg) scaleY(1);
+  }
 }
 
 .intro-word {
@@ -3693,8 +3709,15 @@ svg {
   }
 
   .intro-name {
-    column-gap: 0.32em;
-    row-gap: 0.08em;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  .intro-name-divider {
+    width: min(42vw, 9rem);
+    height: 3px;
+    transform: skewX(-10deg) scaleX(0);
+    animation-name: intro-divider-in-mobile;
   }
 
   .intro-char {
@@ -3705,6 +3728,12 @@ svg {
   .intro-line {
     height: 2px;
     width: min(100%, 19rem);
+  }
+}
+
+@keyframes intro-divider-in-mobile {
+  to {
+    transform: skewX(-10deg) scaleX(1);
   }
 }
 
