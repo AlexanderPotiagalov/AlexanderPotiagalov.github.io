@@ -321,11 +321,6 @@ function App() {
         <SectionReveal>
           <section id="about" className="about-section ink-section">
             <div className="page-shell about-layout">
-              <div className="section-stamp">
-                <span>02</span>
-                <strong>THE SHORT VERSION</strong>
-              </div>
-
               <motion.div
                 className="about-headline"
                 initial={{ opacity: 0, y: 32 }}
@@ -333,7 +328,7 @@ function App() {
                 viewport={{ once: false, amount: 0.2 }}
                 transition={{ duration: 0.65, ease: EASE }}
               >
-                <p className="micro-label">Builder / researcher / product person</p>
+                <p className="micro-label">02 / About</p>
                 <h2>
                   MESSY PROBLEM IN.
                   <span>USEFUL <b className="about-software-word">SOFTWARE</b> OUT.</span>

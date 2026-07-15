@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import {
-  FiCamera,
   FiChevronLeft,
   FiChevronRight,
   FiMapPin,
@@ -206,14 +205,8 @@ function OutsideTech() {
           viewport={{ once: false, amount: 0.2 }}
           transition={{ duration: 0.7, ease: EASE }}
         >
-          <div className="travel-stamp">
-            <FiCamera />
-            <span>03</span>
-            <strong>FIELD NOTES</strong>
-          </div>
-
           <div className="travel-heading">
-            <span className="micro-label">Life beyond the terminal</span>
+            <span className="micro-label">03 / Outside</span>
             <h2>
               I COLLECT
               <em>HORIZONS.</em>
