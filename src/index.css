@@ -3037,13 +3037,35 @@ svg {
   gap: 5px;
 }
 
-.tool-tags span {
+.tool-tag {
   padding: 4px 6px;
   border: 1px solid var(--ink);
   border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
   background: rgba(255,255,255,.26);
   font-family: "DM Mono", monospace;
   font-size: 0.43rem;
+  cursor: default;
+}
+
+.tool-tag-icon {
+  width: 0.75rem;
+  height: 0.75rem;
+  flex: 0 0 auto;
+  stroke-width: 2.2;
+  filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.5));
+  animation: tool-icon-float 2.8s ease-in-out var(--icon-delay) infinite;
+}
+
+@keyframes tool-icon-float {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-2px) rotate(5deg);
+  }
 }
 
 .education-receipt {

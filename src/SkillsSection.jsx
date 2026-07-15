@@ -1,5 +1,41 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import {
+  FiActivity,
+  FiBox,
+  FiCode,
+  FiCpu,
+  FiDatabase,
+  FiGrid,
+  FiLayers,
+  FiSearch,
+  FiSliders,
+} from "react-icons/fi";
+import {
+  SiDocker,
+  SiExpress,
+  SiFastapi,
+  SiFlask,
+  SiGit,
+  SiGithubactions,
+  SiJsonwebtokens,
+  SiLinux,
+  SiMlflow,
+  SiMongodb,
+  SiNextdotjs,
+  SiNodedotjs,
+  SiPandas,
+  SiPython,
+  SiPytorch,
+  SiReact,
+  SiScikitlearn,
+  SiShadcnui,
+  SiSupabase,
+  SiTailwindcss,
+  SiTensorflow,
+  SiTypescript,
+  SiVercel,
+} from "react-icons/si";
 
 const EASE = [0.22, 1, 0.36, 1];
 
@@ -52,6 +88,74 @@ const groups = [
 
 const marqueeWords = ["BUILD", "TEST", "BREAK", "FIX", "SHIP", "LEARN"];
 
+const skillIcons = {
+  Python: SiPython,
+  PyTorch: SiPytorch,
+  TensorFlow: SiTensorflow,
+  "scikit-learn": SiScikitlearn,
+  "Deep Learning": FiCpu,
+  "Reinforcement Learning": FiActivity,
+  RAG: FiSearch,
+  CNNs: FiGrid,
+  FastAPI: SiFastapi,
+  "Node.js": SiNodedotjs,
+  Express: SiExpress,
+  Flask: SiFlask,
+  "REST APIs": FiCode,
+  JWT: SiJsonwebtokens,
+  React: SiReact,
+  "Next.js": SiNextdotjs,
+  TypeScript: SiTypescript,
+  "Tailwind CSS": SiTailwindcss,
+  "ShadCN UI": SiShadcnui,
+  SQL: FiDatabase,
+  Pandas: SiPandas,
+  MongoDB: SiMongodb,
+  Supabase: SiSupabase,
+  "Feature Engineering": FiSliders,
+  MLflow: SiMlflow,
+  Azure: FiBox,
+  Docker: SiDocker,
+  "GitHub Actions": SiGithubactions,
+  Vercel: SiVercel,
+  Git: SiGit,
+  Linux: SiLinux,
+};
+
+const skillIconColors = {
+  Python: "#306998",
+  PyTorch: "#ee4c2c",
+  TensorFlow: "#ff6f00",
+  "scikit-learn": "#f7931e",
+  "Deep Learning": "#6546d7",
+  "Reinforcement Learning": "#d81b60",
+  RAG: "#00695c",
+  CNNs: "#1565c0",
+  FastAPI: "#007f73",
+  "Node.js": "#3c873a",
+  Express: "#4b5563",
+  Flask: "#5b4b8a",
+  "REST APIs": "#0067b8",
+  JWT: "#7b1fa2",
+  React: "#087ea4",
+  "Next.js": "#404040",
+  TypeScript: "#235a97",
+  "Tailwind CSS": "#0284a8",
+  "ShadCN UI": "#52525b",
+  SQL: "#336791",
+  Pandas: "#150458",
+  MongoDB: "#137333",
+  Supabase: "#168f5b",
+  "Feature Engineering": "#a63c06",
+  MLflow: "#006fba",
+  Azure: "#0078d4",
+  Docker: "#1267b5",
+  "GitHub Actions": "#0969da",
+  Vercel: "#404040",
+  Git: "#d43f2a",
+  Linux: "#5c4b00",
+};
+
 function SkillsSection() {
   const sectionRef = useRef(null);
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "end start"] });
@@ -100,17 +204,32 @@ function SkillsSection() {
               </div>
               <p>{group.note}</p>
               <div className="tool-tags">
-                {group.skills.map((skill, si) => (
-                  <motion.span
-                    key={skill}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: false }}
-                    transition={{ duration: 0.3, ease: EASE, delay: index * 0.06 + si * 0.04 }}
-                  >
-                    {skill}
-                  </motion.span>
-                ))}
+                {group.skills.map((skill, si) => {
+                  const SkillIcon = skillIcons[skill] || FiLayers;
+                  const iconColor = skillIconColors[skill] || "var(--ink)";
+
+                  return (
+                    <motion.span
+                      className="tool-tag"
+                      key={skill}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      whileHover={{ y: -2, scale: 1.06 }}
+                      viewport={{ once: false }}
+                      transition={{ duration: 0.3, ease: EASE, delay: index * 0.06 + si * 0.04 }}
+                    >
+                      <SkillIcon
+                        className="tool-tag-icon"
+                        style={{
+                          "--icon-delay": `${(index * 6 + si) * -0.13}s`,
+                          color: iconColor,
+                        }}
+                        aria-hidden="true"
+                      />
+                      {skill}
+                    </motion.span>
+                  );
+                })}
               </div>
             </motion.article>
           ))}
