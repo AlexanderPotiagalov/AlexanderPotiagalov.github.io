@@ -336,7 +336,7 @@ function App() {
                 <p className="micro-label">Builder / researcher / product person</p>
                 <h2>
                   MESSY PROBLEM IN.
-                  <span>USEFUL SOFTWARE OUT.</span>
+                  <span>USEFUL <b className="about-software-word">SOFTWARE</b> OUT.</span>
                 </h2>
               </motion.div>
 

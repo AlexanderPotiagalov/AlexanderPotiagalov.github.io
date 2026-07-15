@@ -951,6 +951,11 @@ svg {
   text-shadow: 3px 3px 0 color-mix(in srgb, var(--accent) 68%, #24231f);
 }
 
+.about-headline h2 .about-software-word {
+  font-weight: inherit;
+  letter-spacing: -0.02em;
+}
+
 .about-copy {
   padding-top: 18px;
 }
