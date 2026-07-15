@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { FiChevronLeft, FiChevronRight, FiMusic, FiX } from "react-icons/fi";
+import { SiSpotify } from "react-icons/si";
 
 const tracks = [
   { title: "Passionfruit", artist: "Drake", id: "5mCPDVBb16L4XQwDdbRUpz" },
@@ -23,8 +24,10 @@ function MusicPlayer() {
         onClick={() => setOpen((current) => !current)}
         aria-expanded={open}
         aria-controls="spotify-player"
+        title="Open music playlist"
       >
-        <FiMusic className="music-note" />
+        <SiSpotify className="music-note" />
+        <span className="music-notification-dot" aria-hidden="true" />
       </button>
 
       <div className="music-embed" id="spotify-player">

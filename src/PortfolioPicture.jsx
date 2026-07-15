@@ -26,6 +26,11 @@ const heroLineVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.72, ease: EASE } },
 };
 
+const heroUsefulVariants = {
+  hidden: { opacity: 0, y: 52, rotate: -4 },
+  visible: { opacity: 1, y: 0, rotate: -4, transition: { duration: 0.72, ease: EASE } },
+};
+
 const photos = [
   {
     src: "./trip3.jpg",
@@ -95,7 +100,7 @@ function PortfolioPicture() {
 
           <h1>
             <motion.span className="hero-line line-one" variants={heroLineVariants}>I BUILD</motion.span>
-            <motion.span className="hero-line line-two" variants={heroLineVariants}>USEFUL</motion.span>
+            <motion.span className="hero-line line-two" variants={heroUsefulVariants}>USEFUL</motion.span>
             <motion.span className="hero-line line-three" variants={heroLineVariants}>SOFTWARE.</motion.span>
           </h1>
 
@@ -199,6 +204,7 @@ function PortfolioPicture() {
             <strong>SOLIDIGM</strong>
             <small>AI SOFTWARE ENGINEER CO-OP</small>
           </div>
+
         </motion.div>
       </div>
 

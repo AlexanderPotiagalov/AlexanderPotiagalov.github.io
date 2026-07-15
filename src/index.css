@@ -140,6 +140,7 @@ svg {
 }
 
 .music-player-tab {
+  position: relative;
   width: 42px;
   height: 38px;
   padding: 0 5px;
@@ -154,14 +155,41 @@ svg {
   transition: transform 120ms ease, box-shadow 120ms ease;
 }
 
+.music-player:not(.is-open) .music-player-tab::after {
+  position: absolute;
+  inset: -3px;
+  border: 2px solid #1db954;
+  content: "";
+  pointer-events: none;
+  animation: spotify-pulse 1.8s ease-out infinite;
+}
+
+@keyframes spotify-pulse {
+  70%, 100% {
+    opacity: 0;
+    transform: scale(1.22);
+  }
+}
+
 .music-player-tab:hover {
   box-shadow: 1px 1px 0 var(--ink);
   transform: translate(2px, 2px);
 }
 
 .music-note {
-  width: 15px;
-  height: 15px;
+  width: 18px;
+  height: 18px;
+}
+
+.music-notification-dot {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  width: 10px;
+  height: 10px;
+  border: 2px solid var(--paper-bright);
+  border-radius: 50%;
+  background: var(--orange);
 }
 
 .music-disc {
@@ -496,11 +524,12 @@ svg {
   color: var(--accent-two);
   -webkit-text-stroke: 3px var(--ink);
   text-shadow: 7px 7px 0 var(--accent);
-  transform: rotate(-1.5deg);
 }
 
 .line-three {
   margin-left: 0.04em;
+  font-size: 0.94em;
+  letter-spacing: -0.035em;
 }
 
 .hero-intro {
@@ -744,7 +773,7 @@ svg {
 .incoming-ticket {
   position: absolute;
   z-index: 3;
-  right: -42px;
+  right: -100px;
   bottom: 8%;
   width: 210px;
   padding: 13px 15px;
@@ -4121,6 +4150,11 @@ svg {
     margin-left: 0.08em;
     -webkit-text-stroke-width: 2px;
     text-shadow: 4px 4px 0 var(--accent);
+  }
+
+  .line-three {
+    font-size: 0.91em;
+    letter-spacing: -0.02em;
   }
 
   .hero-actions {

@@ -56,7 +56,6 @@ function Header({ onOpenCommand, onCyclePalette }) {
         <button type="button" className="deck-button" onClick={onOpenCommand}>
           <FiCommand />
           <span>DECK</span>
-          <kbd>CTRL K</kbd>
         </button>
         <button
           type="button"
