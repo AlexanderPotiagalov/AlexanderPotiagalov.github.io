@@ -89,6 +89,7 @@ function OutsideTech() {
   const sectionRef = useRef(null);
   const [featuredIndex, setFeaturedIndex] = useState(INITIAL_FEATURED_INDEX);
   const [activeIndex, setActiveIndex] = useState(null);
+  const [cycleReset, setCycleReset] = useState(0);
   const featuredMoment = moments[featuredIndex];
   const activeMoment = activeIndex === null ? null : moments[activeIndex];
   const hasCompactTitle =
@@ -163,6 +164,20 @@ function OutsideTech() {
     };
   }, [activeIndex]);
 
+  useEffect(() => {
+    if (activeIndex !== null) return undefined;
+
+    const timer = window.setInterval(() => {
+      setFeaturedIndex((current) => {
+        const next = (current + 1) % moments.length;
+        preloadAround(next, 3);
+        return next;
+      });
+    }, 5000);
+
+    return () => window.clearInterval(timer);
+  }, [activeIndex, cycleReset]);
+
   const move = (direction) => {
     setActiveIndex((current) => {
       const next = (current + direction + moments.length) % moments.length;
@@ -172,6 +187,7 @@ function OutsideTech() {
   };
 
   const moveFeatured = (direction) => {
+    setCycleReset((current) => current + 1);
     setFeaturedIndex((current) => {
       const next = (current + direction + moments.length) % moments.length;
       preloadAround(next, 3);
@@ -181,15 +197,6 @@ function OutsideTech() {
 
   return (
     <section ref={sectionRef} id="outside" className="travel-section">
-      <div className="travel-ribbon" aria-hidden="true">
-        <span>FIELD NOTES</span>
-        <i />
-        <span>{moments.length} ENTRIES</span>
-        <i />
-        <span>PACK LIGHT</span>
-        <i />
-        <span>LOOK UP</span>
-      </div>
 
       <div className="page-shell travel-shell">
         <motion.div
@@ -246,14 +253,22 @@ function OutsideTech() {
             <span className="notebook-entry">
               ENTRY {String(featuredIndex + 1).padStart(2, "0")} / {moments.length}
             </span>
-            <img
-              src={featuredMoment.src}
-              alt={featuredMoment.alt}
-              decoding="async"
-              fetchPriority="high"
-              loading="lazy"
-              style={{ "--focus": featuredMoment.focus }}
-            />
+            <motion.span
+              className="notebook-photo-flip"
+              key={featuredMoment.id}
+              initial={{ opacity: 0.25, rotateY: 72, scale: 0.96 }}
+              animate={{ opacity: 1, rotateY: 0, scale: 1 }}
+              transition={{ duration: 0.55, ease: EASE }}
+            >
+              <img
+                src={featuredMoment.src}
+                alt={featuredMoment.alt}
+                decoding="async"
+                fetchPriority="high"
+                loading="lazy"
+                style={{ "--focus": featuredMoment.focus }}
+              />
+            </motion.span>
             <span className="travel-photo-tape" aria-hidden="true" />
             <span className="notebook-photo-caption">{featuredMoment.tag} / VIEW FULL PHOTO</span>
           </button>

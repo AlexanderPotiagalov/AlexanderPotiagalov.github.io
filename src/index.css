@@ -864,7 +864,7 @@ svg {
 .skills-section,
 .contact-section {
   position: relative;
-  padding: clamp(85px, 11vw, 150px) var(--gutter);
+  padding: clamp(68px, 8vw, 112px) var(--gutter);
 }
 
 .about-layout {
@@ -1017,6 +1017,8 @@ svg {
     linear-gradient(var(--line) 1px, transparent 1px),
     linear-gradient(90deg, var(--line) 1px, transparent 1px);
   background-size: 42px 42px;
+  padding-top: clamp(58px, 7vw, 92px);
+  padding-bottom: clamp(58px, 7vw, 92px);
 }
 
 .travel-section::before {
@@ -1078,35 +1080,8 @@ svg {
   z-index: 1;
 }
 
-.travel-ribbon {
-  position: absolute;
-  z-index: 3;
-  top: 24px;
-  right: 10px;
-  padding: 10px 42px;
-  border: 2px solid var(--ink);
-  display: flex;
-  align-items: center;
-  gap: 13px;
-  color: var(--ink);
-  background: var(--accent);
-  box-shadow: 5px 5px 0 var(--ink);
-  font-family: "DM Mono", monospace;
-  font-size: 0.52rem;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  transform: rotate(2deg);
-}
-
-.travel-ribbon i {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--ink);
-}
-
 .travel-intro {
-  margin-bottom: clamp(48px, 6vw, 74px);
+  margin-bottom: clamp(38px, 5vw, 56px);
   display: grid;
   grid-template-columns: 120px minmax(0, 1fr) minmax(260px, 0.48fr);
   align-items: end;
@@ -1245,11 +1220,18 @@ svg {
   background-size: 100% 29px;
 }
 
+.notebook-photo-flip {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  display: block;
+  transform-origin: left center;
+  transform-style: preserve-3d;
+}
+
 .notebook-photo-page img {
   width: 100%;
-  height: auto;
+  height: 100%;
   min-height: 0;
-  aspect-ratio: 4 / 3;
   border: 2px solid var(--ink);
   object-fit: cover;
   object-position: var(--focus, 50% 50%);
@@ -1844,7 +1826,7 @@ svg {
 }
 
 .section-title {
-  margin-bottom: clamp(50px, 7vw, 84px);
+  margin-bottom: clamp(40px, 5vw, 64px);
   display: grid;
   grid-template-columns: minmax(0, 1.25fr) minmax(260px, 0.55fr);
   align-items: end;
@@ -3289,7 +3271,7 @@ svg {
 }
 
 .contact-section {
-  min-height: 760px;
+  min-height: 680px;
   display: grid;
   align-items: center;
 }
@@ -3954,10 +3936,6 @@ svg {
     grid-column: 2;
   }
 
-  .travel-ribbon {
-    display: none;
-  }
-
   .travel-intro {
     grid-template-columns: 100px 1fr;
     align-items: start;
@@ -4152,7 +4130,9 @@ svg {
   }
 
   .line-two {
-    margin-left: 0.08em;
+    margin: -0.08em 0 0.17em 0.08em;
+    padding-top: 0.04em;
+    padding-bottom: 0.05em;
     -webkit-text-stroke-width: 2px;
     text-shadow: 4px 4px 0 var(--accent);
   }
@@ -4242,8 +4222,12 @@ svg {
   }
 
   .travel-section {
-    padding-top: 100px;
-    padding-bottom: 90px;
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
+
+  .travel-intro {
+    margin-bottom: 36px;
   }
 
   .travel-map-lines {
