@@ -3,10 +3,16 @@ import { FiChevronLeft, FiChevronRight, FiMusic, FiX } from "react-icons/fi";
 import { SiSpotify } from "react-icons/si";
 
 const tracks = [
+  { title: "No Idea", artist: "Don Toliver", id: "7AzlLxHn24DxjgQX73F9fU" },
+  { title: "NIGHTS LIKE THIS", artist: "The Kid LAROI", id: "3UDpwoxz9SUvVE0e1mnsxx" },
   { title: "Passionfruit", artist: "Drake", id: "5mCPDVBb16L4XQwDdbRUpz" },
-  { title: "Mask Off", artist: "Future", id: "0VgkVdmE4gld66l8iyGjgx" },
+  { title: "After Party", artist: "Don Toliver", id: "527k23H0A4Q0UJN3vGs0Da" },
   { title: "MY EYES", artist: "Travis Scott", id: "4kjI1gwQZRKNDkw1nI475M" },
-  { title: "Starboy", artist: "The Weeknd", id: "38JOdzBE9kPj5UhKtqIIqQ" },
+  { title: "No Pole", artist: "Don Toliver", id: "0eaVIYo2zeOaGJeqZ5TwYz" },
+  { title: "on one tonight", artist: "Gunna", id: "6EUcP55GlbmsmCzfL2vxtZ" },
+  { title: "Too Many Nights", artist: "Metro Boomin, Future, Don Toliver", id: "2Hh3ETdQKrmSI3QS0hme7g" },
+  { title: "After Hours", artist: "The Weeknd", id: "2p8IUWQDrpjuFltbdgLOag" },
+  { title: "Mask Off", artist: "Future", id: "0VgkVdmE4gld66l8iyGjgx" },
 ];
 
 function MusicPlayer() {
