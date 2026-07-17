@@ -3,8 +3,8 @@ import { FiChevronLeft, FiChevronRight, FiMusic, FiX } from "react-icons/fi";
 import { SiSpotify } from "react-icons/si";
 
 const tracks = [
-  { title: "No Idea", artist: "Don Toliver", id: "7AzlLxHn24DxjgQX73F9fU" },
   { title: "NIGHTS LIKE THIS", artist: "The Kid LAROI", id: "3UDpwoxz9SUvVE0e1mnsxx" },
+  { title: "Sundress", artist: "A$AP Rocky", id: "2aPTvyE09vUCRwVvj0I8WK" },
   { title: "Passionfruit", artist: "Drake", id: "5mCPDVBb16L4XQwDdbRUpz" },
   { title: "After Party", artist: "Don Toliver", id: "527k23H0A4Q0UJN3vGs0Da" },
   { title: "MY EYES", artist: "Travis Scott", id: "4kjI1gwQZRKNDkw1nI475M" },
