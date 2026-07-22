@@ -1,11 +1,12 @@
 import { Fragment, useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import { AnimatePresence, motion, useScroll, useSpring, useTransform } from "framer-motion";
-import { FiArrowUpRight, FiCommand, FiGithub, FiLinkedin, FiMail, FiX } from "react-icons/fi";
+import { FiArrowUpRight, FiBox, FiCheck, FiCommand, FiFileText, FiGitBranch, FiGithub, FiLinkedin, FiMail, FiSearch, FiSettings, FiX } from "react-icons/fi";
 import Header from "./Header.jsx";
 import Hero from "./PortfolioPicture.jsx";
 import OutsideTech from "./OutsideTech.jsx";
 import Experience from "./Experience.jsx";
+import LinkedInPosts from "./LinkedInPosts.jsx";
 import Projects from "./Projects.jsx";
 import SkillsSection from "./SkillsSection.jsx";
 import Contact from "./ContactMeForm.jsx";
@@ -16,12 +17,71 @@ const commands = [
   { label: "Go to about", detail: "The short version", href: "#about", key: "A" },
   { label: "Step outside", detail: "Travel, nature, and life", href: "#outside", key: "O" },
   { label: "Inspect experience", detail: "Where I have shipped", href: "#experience", key: "E" },
+  { label: "Read field notes", detail: "Updates from LinkedIn", href: "#updates", key: "U" },
   { label: "Open project files", detail: "Selected builds", href: "#projects", key: "P" },
   { label: "Scan the toolbox", detail: "Skills and systems", href: "#skills", key: "S" },
   { label: "Start a conversation", detail: "Email Alexander", href: "#contact", key: "C" },
 ];
 
 const EASE = [0.22, 1, 0.36, 1];
+const EDITOR_LINE_HEIGHT = 28;
+const EDITOR_VISIBLE_LINES = 48;
+
+function EditorLineNumbers() {
+  const [firstLine, setFirstLine] = useState(1);
+
+  useEffect(() => {
+    let frameId = null;
+
+    const updateLines = () => {
+      setFirstLine(Math.floor(window.scrollY / EDITOR_LINE_HEIGHT) + 1);
+      frameId = null;
+    };
+
+    const handleScroll = () => {
+      if (frameId === null) frameId = window.requestAnimationFrame(updateLines);
+    };
+
+    updateLines();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (frameId !== null) window.cancelAnimationFrame(frameId);
+    };
+  }, []);
+
+  return (
+    <div className="editor-gutter">
+      {Array.from({ length: EDITOR_VISIBLE_LINES }, (_, index) => (
+        <span key={firstLine + index}>{firstLine + index}</span>
+      ))}
+    </div>
+  );
+}
+
+function EditorChrome() {
+  return (
+    <div className="editor-chrome" aria-hidden="true">
+      <aside className="editor-rail">
+        <FiFileText className="active" />
+        <FiSearch />
+        <FiGitBranch />
+        <FiBox />
+        <FiSettings className="rail-settings" />
+      </aside>
+      <EditorLineNumbers />
+      <div className="editor-status">
+        <span><FiGitBranch /> main*</span>
+        <span><FiCheck /> Portfolio ready</span>
+        <span className="status-spacer" />
+        <span>{"{}"} React</span>
+        <span>UTF-8</span>
+        <span>Ln 1, Col 1</span>
+      </div>
+    </div>
+  );
+}
 
 /* Thin accent bar fixed at the top that fills as you scroll the page */
 function ScrollProgressBar() {
@@ -76,25 +136,6 @@ function SectionReveal({ children }) {
 }
 
 SectionReveal.propTypes = { children: PropTypes.node.isRequired };
-
-/* Animated accent rule drawn between sections */
-function SectionDivider() {
-  return (
-    <motion.div
-      aria-hidden="true"
-      style={{
-        height: 2,
-        background: "var(--ink)",
-        transformOrigin: "left center",
-        margin: "0 var(--gutter)",
-      }}
-      initial={{ scaleX: 0, opacity: 0 }}
-      whileInView={{ scaleX: 1, opacity: 1 }}
-      viewport={{ once: false, amount: 0.5 }}
-      transition={{ duration: 0.7, ease: EASE }}
-    />
-  );
-}
 
 const INTRO_NAME = "Alexander Potiagalov";
 const INTRO_WORDS = INTRO_NAME.split(" ").map((word, wordIndex, words) => ({
@@ -260,6 +301,16 @@ CommandDeck.propTypes = {
 function App() {
   const [commandOpen, setCommandOpen] = useState(false);
   const [palette, setPalette] = useState(0);
+  const [theme, setTheme] = useState(() => {
+    const savedTheme = window.localStorage.getItem("portfolio-theme");
+    if (savedTheme === "light" || savedTheme === "dark") return savedTheme;
+    return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  });
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    window.localStorage.setItem("portfolio-theme", theme);
+  }, [theme]);
 
   useEffect(() => {
     const handleShortcut = (event) => {
@@ -305,18 +356,19 @@ function App() {
   }, []);
 
   return (
-    <div className={`site palette-${palette}`}>
+    <div className={`site theme-${theme} palette-${palette}`}>
+      <EditorChrome />
       <ScrollProgressBar />
       <LoadingScreen />
       <Header
         onOpenCommand={() => setCommandOpen(true)}
         onCyclePalette={() => setPalette((current) => (current + 1) % 3)}
+        theme={theme}
+        onToggleTheme={() => setTheme((current) => (current === "light" ? "dark" : "light"))}
       />
 
       <main>
         <Hero />
-
-        <SectionDivider />
 
         <SectionReveal>
           <section id="about" className="about-section ink-section">
@@ -374,31 +426,25 @@ function App() {
           </section>
         </SectionReveal>
 
-        <SectionDivider />
-
         <SectionReveal>
           <OutsideTech />
         </SectionReveal>
-
-        <SectionDivider />
 
         <SectionReveal>
           <Experience />
         </SectionReveal>
 
-        <SectionDivider />
+        <SectionReveal>
+          <LinkedInPosts />
+        </SectionReveal>
 
         <SectionReveal>
           <Projects />
         </SectionReveal>
 
-        <SectionDivider />
-
         <SectionReveal>
           <SkillsSection />
         </SectionReveal>
-
-        <SectionDivider />
 
         <SectionReveal>
           <Contact />

@@ -22,6 +22,17 @@
   --border: 3px solid var(--ink);
 }
 
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  color: #f1ede3;
+  background: #11110f;
+  --paper: #151513;
+  --paper-bright: #20201d;
+  --ink: #f1ede3;
+  --muted: #b4afa3;
+  --line: rgba(241, 237, 227, 0.12);
+}
+
 * {
   box-sizing: border-box;
 }
@@ -256,6 +267,23 @@ svg {
   color: #1db954;
 }
 
+.theme-dark .music-embed-head,
+.theme-dark .music-player-copy,
+.theme-dark .music-track-controls button {
+  color: #f1ede3;
+}
+
+.theme-dark .music-track-controls button {
+  border-color: #8b8b84;
+  background: #242421;
+}
+
+.theme-dark .music-track-controls button:hover {
+  border-color: #1ed760;
+  color: #1ed760;
+  background: #191917;
+}
+
 .music-embed {
   position: absolute;
   top: 46px;
@@ -361,6 +389,7 @@ svg {
   gap: 8px;
 }
 
+.theme-button,
 .ink-button,
 .deck-button,
 .menu-button {
@@ -384,15 +413,27 @@ svg {
     background 120ms ease;
 }
 
+.theme-button,
 .ink-button,
 .deck-button {
   padding: 0 11px;
+}
+
+.theme-button {
+  width: 38px;
+  padding: 0;
+}
+
+.theme-button svg {
+  width: 17px;
+  height: 17px;
 }
 
 .deck-button {
   background: var(--accent);
 }
 
+.theme-button:hover,
 .ink-button:hover,
 .deck-button:hover,
 .menu-button:hover {
@@ -583,6 +624,7 @@ svg {
   position: relative;
   z-index: 2;
   width: min(100%, 430px);
+  padding-bottom: 54px;
   justify-self: end;
 }
 
@@ -686,7 +728,7 @@ svg {
   position: absolute;
   z-index: 7;
   right: 13px;
-  bottom: -54px;
+  bottom: 0;
   left: 13px;
   display: flex;
   align-items: center;
@@ -844,22 +886,10 @@ svg {
   transform: rotate(7deg);
 }
 
-.hero-index {
-  position: absolute;
-  right: var(--gutter);
-  bottom: 18px;
-  left: var(--gutter);
-  display: flex;
-  justify-content: space-between;
-  font-family: "DM Mono", monospace;
-  font-size: 0.52rem;
-  font-weight: 500;
-  letter-spacing: 0.09em;
-}
-
 .about-section,
 .travel-section,
 .experience-section,
+.linkedin-section,
 .projects-section,
 .skills-section,
 .contact-section {
@@ -1102,7 +1132,7 @@ svg {
   display: grid;
   grid-template-columns: 1fr 1fr;
   color: var(--ink);
-  filter: drop-shadow(22px 28px 18px rgba(16, 16, 15, 0.34));
+  filter: drop-shadow(14px 16px 10px rgba(16, 16, 15, 0.32));
   transform: rotate(-0.5deg);
 }
 
@@ -1911,6 +1941,128 @@ svg {
   overflow: hidden;
   padding-top: clamp(65px, 8vw, 108px);
   padding-bottom: clamp(65px, 8vw, 108px);
+}
+
+.linkedin-section {
+  overflow: hidden;
+  color: var(--ink);
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 42px 42px;
+}
+
+.linkedin-title {
+  padding: clamp(22px, 3vw, 36px);
+  border: var(--border);
+  color: var(--ink);
+  background: var(--paper);
+  box-shadow: 9px 9px 0 var(--orange);
+}
+
+.linkedin-title h2 {
+  font-size: clamp(2.9rem, 5.2vw, 5.8rem);
+}
+
+.linkedin-title > p {
+  color: var(--ink);
+}
+
+.linkedin-heading-dark {
+  color: var(--ink);
+  -webkit-text-stroke: 0;
+  text-shadow: none;
+}
+
+.linkedin-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: start;
+  gap: clamp(18px, 2.4vw, 32px);
+}
+
+.linkedin-card {
+  min-width: 0;
+  border: var(--border);
+  background: var(--paper-bright);
+  box-shadow: 8px 8px 0 var(--ink);
+}
+
+.linkedin-card:nth-child(2) {
+  transform: translateY(28px) rotate(0.6deg);
+  box-shadow: 8px 8px 0 var(--blue);
+}
+
+.linkedin-card:nth-child(3) {
+  transform: rotate(-0.6deg);
+  box-shadow: 8px 8px 0 var(--orange);
+}
+
+.linkedin-card-topline,
+.linkedin-card > a {
+  padding: 11px 13px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  font-family: "DM Mono", monospace;
+  font-size: 0.55rem;
+  font-weight: 500;
+  letter-spacing: 0.07em;
+}
+
+.linkedin-card-topline {
+  border-bottom: 3px solid var(--ink);
+  background: var(--accent);
+}
+
+.linkedin-card-topline span:first-child,
+.linkedin-card > a {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.linkedin-embed {
+  height: 500px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.linkedin-embed iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+.linkedin-card > a {
+  border-top: 3px solid var(--ink);
+  justify-content: flex-end;
+  color: var(--ink);
+  background: var(--paper-bright);
+  text-decoration: none;
+}
+
+.linkedin-card > a:hover {
+  background: var(--acid);
+}
+
+.theme-dark .ink-section {
+  color: #f1ede3;
+  background: #0c0c0b;
+}
+
+.theme-dark .linkedin-section {
+  color: #f1ede3;
+  background: #0c0c0b;
+  background-image: none;
+}
+
+.theme-dark .linkedin-title {
+  color: var(--ink);
+  background: var(--paper-bright);
 }
 
 .projects-section .section-title {
@@ -2973,52 +3125,6 @@ svg {
   font-size: clamp(2.9rem, 5.2vw, 5.8rem);
 }
 
-.skills-marquee {
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  height: 50px;
-  overflow: hidden;
-  border-top: 3px solid var(--ink);
-  border-bottom: 3px solid var(--ink);
-  color: var(--ink);
-  background: var(--accent);
-  transform: rotate(-1.2deg) scale(1.03);
-}
-
-.skills-marquee .marquee-track {
-  width: max-content;
-  height: 100%;
-  display: flex;
-  font-family: "Archivo Black", Impact, sans-serif;
-  font-size: 1.4rem;
-  letter-spacing: -0.05em;
-  animation: ticker 24s linear infinite;
-}
-
-.skills-marquee .marquee-group {
-  min-width: 100vw;
-  flex-shrink: 0;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-}
-
-.skills-marquee .marquee-group span {
-  display: inline-flex;
-  align-items: center;
-  gap: 18px;
-  padding-right: 18px;
-  white-space: nowrap;
-}
-
-.skills-marquee .marquee-group i {
-  font-style: normal;
-  color: var(--orange);
-}
-
 .tool-grid {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -3114,17 +3220,6 @@ svg {
   height: 0.75rem;
   flex: 0 0 auto;
   stroke-width: 2.2;
-  filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.5));
-  animation: tool-icon-float 2.8s ease-in-out var(--icon-delay) infinite;
-}
-
-@keyframes tool-icon-float {
-  0%, 100% {
-    transform: translateY(0) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-2px) rotate(5deg);
-  }
 }
 
 .education-receipt {
@@ -3373,7 +3468,7 @@ svg {
 
 .contact-sticker {
   position: absolute;
-  top: 5%;
+  top: -2%;
   right: 2.5%;
   width: 118px;
   padding: 15px 8px;
@@ -3392,7 +3487,7 @@ svg {
   padding: 20px var(--gutter);
   border-top: 3px solid var(--ink);
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: 1fr auto;
   align-items: center;
   gap: 24px;
   color: var(--paper-bright);
@@ -3629,6 +3724,16 @@ svg {
 
   .notebook-notes-page {
     padding: 40px;
+  }
+
+  .linkedin-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .linkedin-card:nth-child(3) {
+    grid-column: 1 / -1;
+    width: calc(50% - 16px);
+    justify-self: center;
   }
 
 }
@@ -4010,6 +4115,7 @@ svg {
   }
 
   .brand-copy,
+  .theme-button span,
   .ink-button,
   .deck-button {
     display: none;
@@ -4109,8 +4215,7 @@ svg {
     width: 165px;
   }
 
-  .orbit-two,
-  .hero-index span:last-child {
+  .orbit-two {
     display: none;
   }
 
@@ -4235,6 +4340,22 @@ svg {
 
   .experience-file > p {
     grid-column: 2;
+  }
+
+  .linkedin-grid {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .linkedin-card:nth-child(n) {
+    width: 100%;
+    grid-column: auto;
+    transform: none;
+    box-shadow: 7px 7px 0 var(--ink);
+  }
+
+  .linkedin-embed {
+    height: min(500px, 68svh);
   }
 
   .project-dossier {
@@ -4400,4 +4521,788 @@ svg {
     opacity: 1;
     transform: none;
   }
+}
+
+/* Site-wide theme contract. Keep section surfaces consistent within each mode. */
+.theme-light :is(
+  .hero,
+  .about-section,
+  .travel-section,
+  .experience-section,
+  .linkedin-section,
+  .projects-section,
+  .skills-section,
+  .contact-section
+) {
+  color: var(--ink);
+  background-color: var(--paper);
+}
+
+.theme-light :is(.about-section, .experience-section, .skills-section) {
+  background-image: none;
+}
+
+.theme-light :is(.hero, .linkedin-section, .projects-section, .contact-section) {
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 42px 42px;
+}
+
+.theme-light .about-headline h2,
+.theme-light .about-section .about-copy,
+.theme-light .section-title.light h2,
+.theme-light .section-title.light > p,
+.theme-light .experience-file,
+.theme-light .skills-section {
+  color: var(--ink);
+}
+
+.theme-light .about-headline h2 span {
+  color: var(--accent-two);
+  -webkit-text-stroke-color: var(--ink);
+}
+
+.theme-light .section-title.light h2 {
+  -webkit-text-stroke-color: var(--ink);
+}
+
+.theme-light .section-title.light > p,
+.theme-light .experience-file > p {
+  color: var(--muted);
+}
+
+.theme-light .experience-stack,
+.theme-light .experience-file {
+  border-color: color-mix(in srgb, var(--ink) 35%, transparent);
+}
+
+.theme-dark :is(
+  .hero,
+  .about-section,
+  .travel-section,
+  .experience-section,
+  .linkedin-section,
+  .projects-section,
+  .skills-section,
+  .contact-section
+) {
+  color: #f1ede3;
+  background-color: #0c0c0b;
+  background-image: none;
+}
+
+.theme-dark :is(.hero, .linkedin-section, .projects-section, .contact-section) {
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 42px 42px;
+}
+
+.theme-dark .linkedin-section {
+  background-image: none;
+}
+
+.theme-dark :is(.section-title, .contact-copy) > p,
+.theme-dark .experience-file > p {
+  color: var(--muted);
+}
+
+.theme-dark .about-headline h2,
+.theme-dark .about-section .about-copy,
+.theme-dark .section-title.light h2,
+.theme-dark .skills-section {
+  color: #f1ede3;
+}
+
+.theme-dark :is(
+  .travel-book,
+  .life-lightbox,
+  .trace-journal
+) {
+  --ink: #10100f;
+  --paper: #f3efe4;
+  --paper-bright: #fffdf6;
+  --muted: #646158;
+  --line: rgba(16, 16, 15, 0.12);
+  color: #10100f;
+}
+
+.theme-light .about-copy p,
+.theme-light .about-copy .about-lead {
+  color: var(--ink);
+}
+
+.theme-light .field-notes span {
+  color: var(--ink);
+  border-color: color-mix(in srgb, var(--ink) 38%, transparent);
+  background: color-mix(in srgb, var(--paper-bright) 82%, transparent);
+}
+
+.theme-light .field-notes span:nth-child(2),
+.theme-light .field-notes span:nth-child(4) {
+  color: #10100f;
+  border-color: #10100f;
+}
+
+.theme-light .field-notes span:nth-child(2),
+.theme-dark .field-notes span:nth-child(2) {
+  color: #10100f;
+  background: var(--accent);
+}
+
+.theme-light .field-notes span:nth-child(4),
+.theme-dark .field-notes span:nth-child(4) {
+  color: #10100f;
+  background: var(--accent-two);
+}
+
+@media (min-width: 621px) {
+  .footer {
+    padding-left: max(var(--gutter), 82px);
+  }
+}
+
+.theme-light .footer,
+.theme-dark .footer {
+  background-color: transparent;
+  background-image: none;
+}
+
+/* Screen-print paper system for sections that would otherwise be flat. */
+.theme-light .about-section,
+.theme-light .experience-section,
+.theme-light .skills-section,
+.theme-dark .about-section,
+.theme-dark .experience-section,
+.theme-dark .skills-section {
+  isolation: isolate;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.72' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.055'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 180px 180px;
+}
+
+:is(.about-section, .experience-section, .skills-section)::after {
+  position: absolute;
+  z-index: 0;
+  right: clamp(-18px, 1vw, 20px);
+  bottom: clamp(-30px, -2vw, -8px);
+  color: var(--ink);
+  font-family: "Archivo Black", Impact, sans-serif;
+  font-size: clamp(12rem, 30vw, 34rem);
+  letter-spacing: -0.12em;
+  line-height: 0.72;
+  opacity: 0.035;
+  pointer-events: none;
+}
+
+:is(.about-section, .experience-section, .skills-section) > .page-shell {
+  position: relative;
+  z-index: 1;
+}
+
+.about-section::after {
+  content: "02";
+}
+
+.experience-section::after {
+  content: "04";
+}
+
+.skills-section::after {
+  content: "07";
+}
+
+.theme-dark :is(.about-section, .experience-section, .skills-section)::after {
+  color: #f1ede3;
+  opacity: 0.045;
+}
+
+/* Continuous VS Code-inspired editor canvas. */
+.site {
+  position: relative;
+  padding-bottom: 23px;
+  background-attachment: fixed;
+  background-repeat: repeat, no-repeat;
+  animation: none;
+}
+
+.site.theme-light {
+  background-color: #f3f3ef;
+  background-image:
+    repeating-linear-gradient(0deg, transparent 0 27px, rgba(16,16,15,.025) 27px 28px),
+    radial-gradient(ellipse at 50% 22%, #fafaf7, #ededE8 72%);
+  background-size: 100% 28px, 100% 100%;
+  background-position: 0 78px, 0 0;
+  --terminal-ink: #777777;
+  --terminal-rule: rgba(16, 16, 15, 0.14);
+}
+
+.site.theme-dark {
+  background-color: #090c0a;
+  background-image:
+    repeating-linear-gradient(0deg, transparent 0 27px, rgba(125,255,158,.022) 27px 28px),
+    radial-gradient(ellipse at 50% 18%, #101611, #070908 74%);
+  background-size: 100% 28px, 100% 100%;
+  background-position: 0 78px, 0 0;
+  --terminal-ink: #9a9a9a;
+  --terminal-rule: rgba(255, 255, 255, 0.14);
+}
+
+.editor-rail {
+  position: fixed;
+  z-index: 90;
+  top: 78px;
+  bottom: 23px;
+  left: 0;
+  width: 42px;
+  padding: 14px 0 10px;
+  border-right: 1px solid #3d3d3d;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 22px;
+  color: #969696;
+  background: #252526;
+}
+
+.editor-rail svg {
+  width: 19px;
+  height: 19px;
+}
+
+.editor-rail svg.active {
+  color: #fff;
+}
+
+.editor-rail .rail-settings {
+  margin-top: auto;
+}
+
+.editor-gutter {
+  position: fixed;
+  z-index: 89;
+  top: 78px;
+  bottom: 23px;
+  left: 42px;
+  width: 22px;
+  overflow: hidden;
+  border-right: 1px solid color-mix(in srgb, var(--terminal-ink) 24%, transparent);
+  color: color-mix(in srgb, var(--terminal-ink) 56%, transparent);
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  font-family: "DM Mono", Consolas, monospace;
+  font-size: 0.46rem;
+  user-select: none;
+}
+
+.editor-gutter span {
+  height: 28px;
+  padding-right: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.editor-status {
+  position: fixed;
+  z-index: 95;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 23px;
+  padding: 0 10px 0 48px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  border-top: 1px solid #3d3d3d;
+  color: #d8d8d8;
+  background: #252526;
+  font-family: "DM Mono", Consolas, monospace;
+  font-size: 0.5rem;
+}
+
+.editor-status span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+}
+
+.editor-status svg {
+  width: 11px;
+  height: 11px;
+}
+
+.editor-status span:first-child {
+  color: var(--accent);
+}
+
+.editor-status .status-spacer {
+  flex: 1;
+}
+
+.floating-command {
+  bottom: 39px;
+}
+
+@media (max-width: 620px) {
+  .editor-rail {
+    display: none;
+  }
+
+  .editor-gutter {
+    display: none;
+  }
+
+  .editor-status {
+    padding-left: 10px;
+  }
+
+  .editor-status span:nth-child(2),
+  .editor-status span:nth-last-child(-n + 2) {
+    display: none;
+  }
+
+  .site.theme-light {
+    background-image:
+      repeating-linear-gradient(0deg, transparent 0 27px, rgba(16,16,15,.025) 27px 28px),
+      radial-gradient(ellipse at 50% 22%, #fafaf7, #edede8 72%);
+    background-size: 100% 28px, 100% 100%;
+  }
+
+  .site.theme-dark {
+    background-image:
+      repeating-linear-gradient(0deg, transparent 0 27px, rgba(125,255,158,.022) 27px 28px),
+      radial-gradient(ellipse at 50% 18%, #101611, #070908 74%);
+    background-size: 100% 28px, 100% 100%;
+  }
+}
+
+:is(.theme-light, .theme-dark) :is(
+  .hero,
+  .about-section,
+  .travel-section,
+  .experience-section,
+  .linkedin-section,
+  .projects-section,
+  .skills-section,
+  .contact-section
+) {
+  background-color: transparent;
+  background-image: none;
+}
+
+:is(.about-section, .experience-section, .skills-section)::after {
+  display: none;
+}
+
+.theme-light :is(
+  .hero,
+  .about-section,
+  .travel-section,
+  .experience-section,
+  .linkedin-section,
+  .projects-section,
+  .skills-section,
+  .contact-section
+) {
+  color: #10100f;
+}
+
+/* Keep the editor canvas uninterrupted through the footer. */
+.theme-light .footer,
+.theme-dark .footer {
+  background: transparent;
+}
+
+/* No top-level boundaries; the editor canvas provides the page rhythm. */
+:is(.about-section, .travel-section) {
+  border-top: 0;
+  border-bottom: 0;
+}
+
+.footer {
+  border-top: 0;
+}
+
+.about-section {
+  margin-top: clamp(-76px, -5vw, -44px);
+}
+
+@media (max-width: 620px) {
+  .about-section {
+    margin-top: -20px;
+  }
+}
+
+@media (min-width: 621px) {
+  .about-layout {
+    grid-template-columns: minmax(300px, 0.52fr) minmax(0, 1fr);
+    gap: clamp(92px, 8vw, 150px);
+  }
+
+  .about-copy {
+    position: relative;
+    left: clamp(18px, 2.2vw, 38px);
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .about-headline {
+    position: relative;
+    left: clamp(40px, 7vw, 130px);
+    grid-column: 2;
+    grid-row: 1;
+  }
+}
+
+/* Uniform spacing between the content of every top-level section. */
+.site {
+  --section-space: 56px;
+}
+
+.hero {
+  min-height: auto;
+  padding-bottom: 20px;
+}
+
+.hero-layout {
+  min-height: auto;
+}
+
+:is(
+  .about-section,
+  .travel-section,
+  .experience-section,
+  .linkedin-section,
+  .projects-section,
+  .skills-section,
+  .contact-section
+) {
+  margin-top: 0;
+  padding-top: var(--section-space);
+  padding-bottom: var(--section-space);
+}
+
+.about-section {
+  padding-top: 20px;
+  padding-bottom: var(--section-space);
+}
+
+@media (min-width: 901px) {
+  :is(
+    .travel-section,
+    .experience-section,
+    .linkedin-section,
+    .projects-section,
+    .skills-section,
+    .contact-section
+  ) > .page-shell {
+    width: min(calc(100% - 64px), var(--page));
+    transform: translateX(32px);
+  }
+}
+
+.contact-section {
+  min-height: auto;
+  padding-bottom: var(--section-space);
+}
+
+@media (max-width: 620px) {
+  .site {
+    --section-space: 46px;
+  }
+
+  .hero {
+    padding-bottom: 18px;
+  }
+
+  .about-section {
+    padding-top: 18px;
+    padding-bottom: var(--section-space);
+  }
+
+}
+
+.theme-dark :is(
+  .hero,
+  .about-section,
+  .travel-section,
+  .experience-section,
+  .linkedin-section,
+  .projects-section,
+  .skills-section,
+  .contact-section
+) {
+  color: #f1ede3;
+}
+
+.theme-light .footer,
+.theme-dark .footer {
+  background: transparent;
+}
+
+.theme-dark .notebook-page {
+  color: #10100f;
+  border-color: #10100f;
+  background-color: #f5efdf;
+}
+
+.theme-dark :is(.travel-photo-card, .memory-card, .life-lightbox) {
+  color: #10100f;
+  border-color: #10100f;
+  background: #f8f3e8;
+}
+
+.theme-dark :is(.project-index, .command-list button, .command-socials a) {
+  color: var(--ink);
+  background: var(--paper-bright);
+}
+
+.theme-dark .project-index {
+  background: #24241f;
+}
+
+.theme-dark :is(.contact-form input, .contact-form textarea) {
+  color: var(--ink);
+  background: var(--paper-bright);
+}
+
+:root,
+body,
+.site,
+.site-header,
+.paper-grid,
+.paper-section,
+.ink-section {
+  transition: background-color 220ms ease, color 220ms ease, border-color 220ms ease;
+}
+
+/* Theme contrast fixes for interactive and high-density surfaces. */
+:is(
+  .deck-button,
+  .poster-button.primary,
+  .linkedin-card-topline,
+  .project-index button.active,
+  .project-index button:hover,
+  .floating-command,
+  .command-head
+) {
+  color: #10100f;
+}
+
+.theme-dark .travel-section {
+  background-color: #0c0c0b;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 42px 42px;
+}
+
+.theme-dark .command-deck {
+  color: #f1ede3;
+  background:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px),
+    #141412;
+  background-size: 28px 28px;
+}
+
+.theme-dark :is(.command-list button, .command-socials a) {
+  color: #f1ede3;
+  background: #1d1d1a;
+}
+
+.theme-dark .command-list small {
+  color: #aaa69c;
+}
+
+.theme-dark .command-key {
+  color: #f1ede3;
+  background: #11110f;
+}
+
+.theme-dark .command-head button {
+  color: #f1ede3;
+  background: #10100f;
+  border-color: #10100f;
+}
+
+.theme-dark .linkedin-card-topline {
+  color: #10100f;
+  border-color: #10100f;
+}
+
+.theme-dark .linkedin-title h2 em {
+  color: var(--accent-two);
+  -webkit-text-stroke-color: #10100f;
+}
+
+.theme-dark .projects-section {
+  color: #f1ede3;
+  background-color: #0c0c0b;
+}
+
+.theme-dark .project-dossier {
+  color: #f1ede3;
+  background: #181816;
+  border-color: #f1ede3;
+  box-shadow: 12px 12px 0 var(--accent-two);
+}
+
+.theme-dark .project-index,
+.theme-dark .project-stage {
+  color: #f1ede3;
+  background: #1d1d1a;
+}
+
+.theme-dark .project-index button {
+  color: #f1ede3;
+  border-color: #5b5851;
+}
+
+.theme-dark :is(.project-index button.active, .project-index button:hover) {
+  color: #10100f;
+}
+
+.theme-dark .footer {
+  color: #f1ede3;
+  background: #0c0c0b;
+  border-color: #f1ede3;
+}
+
+.theme-dark .footer-mark {
+  color: #10100f;
+  border-color: #f1ede3;
+  box-shadow: 3px 3px 0 #f1ede3;
+}
+
+.theme-dark .contact-form button {
+  color: #10100f;
+  background: var(--accent);
+  border-color: #f1ede3;
+}
+
+.theme-light .footer {
+  color: var(--ink);
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 42px 42px;
+}
+
+/* Skills and contact contrast corrections. */
+.theme-dark .tool-card:not(.white) {
+  color: #10100f;
+  border-color: #10100f;
+  box-shadow: 7px 7px 0 #f1ede3;
+}
+
+.theme-dark .tool-card:not(.white) :is(.tool-card-head, .tool-tag) {
+  border-color: #10100f;
+}
+
+.theme-dark .tool-card.white {
+  color: #f1ede3;
+  border-color: #10100f;
+  box-shadow: 7px 7px 0 #f1ede3;
+}
+
+.theme-dark .tool-card.white :is(.tool-card-head, .tool-tag) {
+  border-color: #f1ede3;
+}
+
+.theme-light .tool-card {
+  border-color: #10100f;
+  box-shadow: 7px 7px 0 #10100f;
+}
+
+.theme-dark .contact-form button {
+  color: #f1ede3;
+  background: #10100f;
+  border-color: #10100f;
+  box-shadow: 5px 5px 0 var(--orange);
+}
+
+.theme-dark .contact-form {
+  color: #10100f;
+  border-color: #10100f;
+  box-shadow: 12px 12px 0 #10100f;
+}
+
+.theme-dark .contact-form :is(.form-topline, label > span) {
+  color: #10100f;
+}
+
+.theme-dark .contact-form .form-topline {
+  border-color: #10100f;
+}
+
+.theme-dark .travel-book {
+  filter: drop-shadow(14px 16px 10px rgba(241, 237, 227, 0.28));
+}
+
+@media (max-width: 620px) {
+  .theme-dark .travel-book {
+    filter: drop-shadow(10px 14px 10px rgba(241, 237, 227, 0.28));
+  }
+}
+
+/* Every text-bearing yellow/accent surface uses dark ink in dark mode. */
+.theme-dark :is(
+  .brand-mark,
+  .deck-button,
+  .poster-button.primary,
+  .portrait-controls > button:hover,
+  .orbit-two,
+  .notebook-notes-page .travel-feature-kicker,
+  .notebook-notes-page .travel-feature-controls button:hover,
+  .notebook-notes-page .travel-feature-controls button:focus-visible,
+  .travel-feature-controls button:hover,
+  .travel-feature-controls button:focus-visible,
+  .travel-margin-note,
+  .linkedin-card-topline,
+  .linkedin-card > a:hover,
+  .project-index button:hover,
+  .project-index button.active,
+  .stage-topline span:last-child,
+  .threat-node,
+  .artifact-stamp,
+  .map-dot,
+  .wave-mic,
+  .feedback-chip,
+  .screenshot-artifact > span,
+  .scan-verdict,
+  .project-stat,
+  .tool-card:not(.white),
+  .floating-command,
+  .command-head
+) {
+  color: #10100f;
+}
+
+/* The editor canvas is the only top-level background in either theme. */
+:is(.theme-light, .theme-dark) :is(
+  .hero,
+  .about-section,
+  .travel-section,
+  .experience-section,
+  .linkedin-section,
+  .projects-section,
+  .skills-section,
+  .contact-section,
+  .footer
+) {
+  background-color: transparent;
+  background-image: none;
+}
+
+
+
+
+/* Keep the editor canvas uninterrupted through the footer. */
+.theme-light .footer,
+.theme-dark .footer {
+  background: transparent;
 }

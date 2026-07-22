@@ -1,19 +1,20 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 import { motion } from "framer-motion";
-import { FiCommand, FiMenu, FiRefreshCw, FiX } from "react-icons/fi";
+import { FiCommand, FiMenu, FiMoon, FiRefreshCw, FiSun, FiX } from "react-icons/fi";
 import MusicPlayer from "./MusicPlayer.jsx";
 
 const navItems = [
   ["About", "#about"],
   ["Outside", "#outside"],
   ["Experience", "#experience"],
+  ["Updates", "#updates"],
   ["Projects", "#projects"],
   ["Toolbox", "#skills"],
   ["Contact", "#contact"],
 ];
 
-function Header({ onOpenCommand, onCyclePalette }) {
+function Header({ onOpenCommand, onCyclePalette, theme, onToggleTheme }) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -49,6 +50,15 @@ function Header({ onOpenCommand, onCyclePalette }) {
 
       <div className="header-tools">
         <MusicPlayer />
+        <button
+          type="button"
+          className="theme-button"
+          onClick={onToggleTheme}
+          aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
+          title={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
+        >
+          {theme === "light" ? <FiMoon /> : <FiSun />}
+        </button>
         <button type="button" className="ink-button" onClick={onCyclePalette}>
           <FiRefreshCw />
           <span>RE-INK</span>
@@ -74,6 +84,8 @@ function Header({ onOpenCommand, onCyclePalette }) {
 Header.propTypes = {
   onOpenCommand: PropTypes.func.isRequired,
   onCyclePalette: PropTypes.func.isRequired,
+  theme: PropTypes.oneOf(["light", "dark"]).isRequired,
+  onToggleTheme: PropTypes.func.isRequired,
 };
 
 export default Header;
