@@ -3807,7 +3807,7 @@ svg {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--ink);
+  background: #050505;
   pointer-events: none;
   will-change: transform;
 }
@@ -3867,7 +3867,7 @@ svg {
   display: inline-block;
   font-family: "Archivo Black", sans-serif;
   font-size: clamp(1.9rem, 5.8vw, 4.8rem);
-  color: var(--paper);
+  color: #f1ede3;
   letter-spacing: 0.02em;
   text-transform: uppercase;
   opacity: 0;
