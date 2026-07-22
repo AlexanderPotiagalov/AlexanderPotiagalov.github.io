@@ -1,6 +1,6 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
-import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import {
   FiArrowUpRight,
   FiExternalLink,
@@ -275,16 +275,12 @@ ProjectArtifact.propTypes = {
 function Projects() {
   const [selectedId, setSelectedId] = useState(projects[0].id);
   const selected = projects.find((project) => project.id === selectedId) ?? projects[0];
-  const sectionRef = useRef(null);
-  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "end start"] });
-  const headingY = useTransform(scrollYProgress, [0, 1], [-40, 40]);
-
   return (
-    <section ref={sectionRef} id="projects" className="projects-section paper-grid">
+    <section id="projects" className="projects-section paper-grid">
       <div className="page-shell">
-        <motion.div className="section-title" style={{ y: headingY }}>
+        <motion.div className="section-title">
           <div>
-            <span className="micro-label">05 / Selected work</span>
+            <span className="micro-label">06 / Selected work</span>
             <h2>PROJECT<br /><em>CASE FILES.</em></h2>
           </div>
           <p>

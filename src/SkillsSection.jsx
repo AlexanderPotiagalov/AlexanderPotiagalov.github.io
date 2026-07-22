@@ -1,5 +1,4 @@
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   FiActivity,
   FiBox,
@@ -86,8 +85,6 @@ const groups = [
   },
 ];
 
-const marqueeWords = ["BUILD", "TEST", "BREAK", "FIX", "SHIP", "LEARN"];
-
 const skillIcons = {
   Python: SiPython,
   PyTorch: SiPytorch,
@@ -157,28 +154,12 @@ const skillIconColors = {
 };
 
 function SkillsSection() {
-  const sectionRef = useRef(null);
-  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "end start"] });
-  const headingY = useTransform(scrollYProgress, [0, 1], [-40, 40]);
-
   return (
-    <section ref={sectionRef} id="skills" className="skills-section ink-section">
-      <div className="skills-marquee" aria-hidden="true">
-        <div className="marquee-track">
-          {[0, 1].map((copy) => (
-            <div className="marquee-group" key={copy}>
-              {marqueeWords.map((word) => (
-                <span key={`${copy}-${word}`}>{word}<i>/</i></span>
-              ))}
-            </div>
-          ))}
-        </div>
-      </div>
-
+    <section id="skills" className="skills-section ink-section">
       <div className="page-shell">
-        <motion.div className="section-title light" style={{ y: headingY }}>
+        <motion.div className="section-title light">
           <div>
-            <span className="micro-label">06 / Toolbox</span>
+            <span className="micro-label">07 / Toolbox</span>
             <h2>TOOLS I USE<br /><em>TO GET THERE.</em></h2>
           </div>
           <p>
@@ -204,30 +185,22 @@ function SkillsSection() {
               </div>
               <p>{group.note}</p>
               <div className="tool-tags">
-                {group.skills.map((skill, si) => {
+                {group.skills.map((skill) => {
                   const SkillIcon = skillIcons[skill] || FiLayers;
                   const iconColor = skillIconColors[skill] || "var(--ink)";
 
                   return (
-                    <motion.span
+                    <span
                       className="tool-tag"
                       key={skill}
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      whileHover={{ y: -2, scale: 1.06 }}
-                      viewport={{ once: false }}
-                      transition={{ duration: 0.3, ease: EASE, delay: index * 0.06 + si * 0.04 }}
                     >
                       <SkillIcon
                         className="tool-tag-icon"
-                        style={{
-                          "--icon-delay": `${(index * 6 + si) * -0.13}s`,
-                          color: iconColor,
-                        }}
+                        style={{ color: iconColor }}
                         aria-hidden="true"
                       />
                       {skill}
-                    </motion.span>
+                    </span>
                   );
                 })}
               </div>

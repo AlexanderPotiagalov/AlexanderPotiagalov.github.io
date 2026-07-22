@@ -208,10 +208,6 @@ function PortfolioPicture() {
         </motion.div>
       </div>
 
-      <div className="hero-index">
-        <span>PORTFOLIO / 2026</span>
-        <span>SCROLL TO INSPECT</span>
-      </div>
     </section>
   );
 }

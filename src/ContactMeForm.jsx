@@ -242,7 +242,7 @@ function ContactMeForm() {
           viewport={{ once: false, amount: 0.2 }}
           transition={{ duration: 0.7, ease: EASE }}
         >
-          <span className="micro-label">07 / Open channel</span>
+          <span className="micro-label">08 / Open channel</span>
           <h2>
             GOT A PROBLEM
             <em>WORTH BUILDING?</em>

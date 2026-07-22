@@ -1,5 +1,4 @@
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { FiArrowUpRight } from "react-icons/fi";
 
 const EASE = [0.22, 1, 0.36, 1];
@@ -48,14 +47,10 @@ const experiences = [
 ];
 
 function Experience() {
-  const sectionRef = useRef(null);
-  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "end start"] });
-  const headingY = useTransform(scrollYProgress, [0, 1], [-40, 40]);
-
   return (
-    <section ref={sectionRef} id="experience" className="experience-section ink-section">
+    <section id="experience" className="experience-section ink-section">
       <div className="page-shell">
-        <motion.div className="section-title light" style={{ y: headingY }}>
+        <motion.div className="section-title light">
           <div>
             <span className="micro-label">04 / Field history</span>
             <h2>PLACES I&apos;VE<br />MADE THINGS.</h2>
