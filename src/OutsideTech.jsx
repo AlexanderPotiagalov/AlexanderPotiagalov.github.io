@@ -257,8 +257,6 @@ function OutsideTech() {
                 src={featuredMoment.src}
                 alt={featuredMoment.alt}
                 decoding="async"
-                fetchPriority="high"
-                loading="lazy"
                 style={{ "--focus": featuredMoment.focus }}
               />
             </motion.span>
@@ -338,7 +336,6 @@ function OutsideTech() {
                   src={activeMoment.src}
                   alt={activeMoment.alt}
                   decoding="async"
-                  fetchPriority="high"
                 />
               </div>
 
