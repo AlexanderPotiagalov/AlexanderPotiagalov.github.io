@@ -308,6 +308,33 @@ svg {
   display: block;
 }
 
+.music-frame-wrap {
+  position: relative;
+  min-height: 152px;
+}
+
+.music-frame-wrap iframe {
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+
+.music-frame-wrap iframe.is-loaded {
+  opacity: 1;
+}
+
+.music-loading {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: #b3b3b3;
+  background: #121212;
+  font-family: "DM Mono", monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 .brand {
   display: inline-flex;
   align-items: center;
