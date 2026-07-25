@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import { AnimatePresence, motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { FiArrowUpRight, FiBox, FiCheck, FiCommand, FiFileText, FiGitBranch, FiGithub, FiLinkedin, FiMail, FiSearch, FiSettings, FiX } from "react-icons/fi";
@@ -341,6 +341,18 @@ function App() {
   });
   const completeIntro = useCallback(() => setIntroComplete(true), []);
 
+  useLayoutEffect(() => {
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+    }
+
+    const resetScroll = () => window.scrollTo(0, 0);
+    resetScroll();
+    window.addEventListener("pageshow", resetScroll);
+
+    return () => window.removeEventListener("pageshow", resetScroll);
+  }, []);
+
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
     window.localStorage.setItem("portfolio-theme", theme);
@@ -375,13 +387,6 @@ function App() {
 
     document.querySelectorAll("[data-reveal]").forEach((element) => observer.observe(element));
     window.addEventListener("keydown", handleShortcut);
-
-    if (window.location.hash) {
-      const targetId = window.location.hash.slice(1);
-      window.requestAnimationFrame(() => {
-        document.getElementById(targetId)?.scrollIntoView();
-      });
-    }
 
     return () => {
       observer.disconnect();
