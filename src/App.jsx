@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import { AnimatePresence, motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { FiArrowUpRight, FiBox, FiCheck, FiCommand, FiFileText, FiGitBranch, FiGithub, FiLinkedin, FiMail, FiSearch, FiSettings, FiX } from "react-icons/fi";
@@ -137,23 +137,19 @@ function SectionReveal({ children }) {
 
 SectionReveal.propTypes = { children: PropTypes.node.isRequired };
 
-const INTRO_NAME = "Alexander Potiagalov";
-const INTRO_WORDS = INTRO_NAME.split(" ").map((word, wordIndex, words) => ({
-  word,
-  offset:
-    words.slice(0, wordIndex).reduce((count, currentWord) => count + currentWord.length, 0) +
-    wordIndex,
-}));
-
-function LoadingScreen() {
+function LoadingScreen({ onComplete }) {
   const [phase, setPhase] = useState("enter");
   const timerRef = useRef(null);
 
   useEffect(() => {
-    // Last char finishes at roughly 1120ms, line at 1350ms, then exit at 2000ms.
-    timerRef.current = setTimeout(() => setPhase("exit"), 2000);
+    timerRef.current = setTimeout(() => {
+      // Reveal the page while the curtain is moving away so it is already
+      // painted when the loading screen leaves the viewport.
+      setPhase("exit");
+      onComplete();
+    }, 2000);
     return () => clearTimeout(timerRef.current);
-  }, []);
+  }, [onComplete]);
 
   if (phase === "done") return null;
 
@@ -161,31 +157,67 @@ function LoadingScreen() {
     <div
       className={`intro-overlay intro-overlay--${phase}`}
       onAnimationEnd={(e) => {
-        if (e.animationName === "intro-curtain-up") setPhase("done");
+        if (e.animationName === "intro-curtain-up") {
+          setPhase("done");
+        }
       }}
     >
       <div className="intro-content">
-        <p className="intro-name" aria-label={INTRO_NAME}>
-          {INTRO_WORDS.map(({ word, offset }, wordIndex) => (
-            <Fragment key={word}>
-              {wordIndex > 0 && <span className="intro-name-divider" aria-hidden="true" />}
-              <span className="intro-word" aria-hidden="true">
-                {[...word].map((char, i) => (
-                  <span key={`${word}-${i}`} className="intro-char-wrap">
-                    <span className="intro-char" style={{ "--i": offset + i }}>
-                      {char}
-                    </span>
-                  </span>
-                ))}
-              </span>
-            </Fragment>
-          ))}
-        </p>
-        <span className="intro-line" />
+        <motion.svg
+          className="intro-mark"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 140 130"
+          role="img"
+          aria-label="AP"
+          initial="hidden"
+          animate="visible"
+          variants={{
+            hidden: { scale: 0.92, opacity: 0 },
+            visible: {
+              scale: 1,
+              opacity: 1,
+              transition: {
+                scale: { duration: 1.1, ease: EASE },
+                opacity: { duration: 0.2 },
+              },
+            },
+          }}
+          fill="none"
+          stroke="url(#intro-ap-stroke)"
+        >
+          <defs>
+            <linearGradient id="intro-ap-stroke" x1="0" y1="1" x2="1" y2="0">
+              <stop offset="0%" stopColor="var(--intro-mark)" />
+              <stop offset="58%" stopColor="var(--intro-mark)" />
+              <stop offset="100%" stopColor="var(--accent)" />
+            </linearGradient>
+          </defs>
+          <motion.path
+            d="M7.5 112.5 42.8 18.8c1.8-5 4.9-7.8 9.5-7.8 4.7 0 7.8 2.8 9.7 7.8l19.7 52.8V14.5c0-2.3 1.4-3.7 3.7-3.7h22.2c16.7 0 27.2 9.8 27.2 25.4 0 16.2-10.8 26.3-27.8 26.3h-8.8v48.2c0 2.3-1.4 3.7-3.7 3.7h-9.1c-2.3 0-3.7-1.4-3.7-3.7V96.8H64.2l-5.4-15.2H29.7l-10.5 30.9c-.5 1.4-1.8 2.2-3.4 2.2h-5.7c-2.5 0-3.5-1-2.6-2.2ZM34.9 66.8h18.8l-9-27.4-9.8 27.4Zm63.3-41.2v22.1h8.2c7.9 0 12.1-3.8 12.1-11.2 0-7.1-4.2-10.9-12.1-10.9h-8.2Z"
+            strokeWidth="4"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            variants={{
+              hidden: { pathLength: 0, opacity: 0 },
+              visible: {
+                pathLength: 1,
+                opacity: 1,
+                transition: {
+                  pathLength: { duration: 1.65, ease: [0.65, 0, 0.35, 1] },
+                  opacity: { duration: 0.15 },
+                },
+              },
+            }}
+          />
+        </motion.svg>
       </div>
     </div>
   );
 }
+
+LoadingScreen.propTypes = {
+  onComplete: PropTypes.func.isRequired,
+};
 
 function CommandDeck({ open, onClose }) {
   useEffect(() => {
@@ -300,12 +332,14 @@ CommandDeck.propTypes = {
 
 function App() {
   const [commandOpen, setCommandOpen] = useState(false);
+  const [introComplete, setIntroComplete] = useState(false);
   const [palette, setPalette] = useState(0);
   const [theme, setTheme] = useState(() => {
     const savedTheme = window.localStorage.getItem("portfolio-theme");
     if (savedTheme === "light" || savedTheme === "dark") return savedTheme;
     return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
   });
+  const completeIntro = useCallback(() => setIntroComplete(true), []);
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
@@ -359,8 +393,9 @@ function App() {
     <div className={`site theme-${theme} palette-${palette}`}>
       <EditorChrome />
       <ScrollProgressBar />
-      <LoadingScreen />
+      <LoadingScreen onComplete={completeIntro} />
       <Header
+        isReady={introComplete}
         onOpenCommand={() => setCommandOpen(true)}
         onCyclePalette={() => setPalette((current) => (current + 1) % 3)}
         theme={theme}
@@ -368,7 +403,7 @@ function App() {
       />
 
       <main>
-        <Hero />
+        <Hero isReady={introComplete} />
 
         <SectionReveal>
           <section id="about" className="about-section ink-section">
@@ -460,7 +495,7 @@ function App() {
         onClick={() => setCommandOpen(true)}
         aria-label="Open command deck"
         initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
+        animate={introComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
         whileHover={{ scale: 1.06, y: -2 }}
         whileTap={{ scale: 0.95 }}
         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 1 }}

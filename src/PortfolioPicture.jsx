@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import PropTypes from "prop-types";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import {
   FiArrowDownRight,
   FiArrowUpRight,
@@ -52,17 +53,17 @@ const photos = [
   },
 ];
 
-function PortfolioPicture() {
+function PortfolioPicture({ isReady }) {
   const [activePhoto, setActivePhoto] = useState(0);
   const heroRef = useRef(null);
+  const heroInView = useInView(heroRef, { amount: 0.04 });
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
 
   // copy drifts up as hero scrolls out (-160px)
   const copyY = useTransform(scrollYProgress, [0, 1], [0, -160]);
   // portrait drifts up more slowly — parallax depth difference
   const portraitY = useTransform(scrollYProgress, [0, 1], [0, -80]);
-  // both fade out as user scrolls past
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.75], [1, 0]);
+  const heroVisible = isReady && heroInView;
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -85,13 +86,18 @@ function PortfolioPicture() {
       <div className="hero-ticker" aria-hidden="true">
       </div>
 
-      <div className="page-shell hero-layout">
+      <motion.div
+        className="page-shell hero-layout"
+        initial={{ opacity: 0, y: 70 }}
+        animate={heroVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 70 }}
+        transition={{ duration: 0.85, ease: EASE }}
+      >
         <motion.div
           className="hero-copy"
           variants={heroCopyVariants}
           initial="hidden"
-          animate="visible"
-          style={{ y: copyY, opacity: heroOpacity }}
+          animate={isReady ? "visible" : "hidden"}
+          style={{ y: copyY }}
         >
           <motion.p className="hero-overline" variants={heroItemVariants}>
             <span />
@@ -137,7 +143,7 @@ function PortfolioPicture() {
         <motion.div
           className="hero-portrait-wrap"
           initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
+          animate={isReady ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
           transition={{ duration: 0.9, ease: EASE, delay: 0.35 }}
           style={{ y: portraitY }}
         >
@@ -156,7 +162,13 @@ function PortfolioPicture() {
                     <span>{photo.location}</span>
                   </div>
                   <div className="portrait-window">
-                    <img src={photo.src} alt={position === 0 ? photo.alt : ""} />
+                    <img
+                      src={photo.src}
+                      alt={position === 0 ? photo.alt : ""}
+                      loading={index === 0 ? "eager" : "lazy"}
+                      fetchPriority={index === 0 ? "high" : "low"}
+                      decoding="async"
+                    />
                   </div>
                   <div className="portrait-footer">
                     <strong>ALEXANDER POTIAGALOV</strong>
@@ -206,10 +218,13 @@ function PortfolioPicture() {
           </div>
 
         </motion.div>
-      </div>
-
+      </motion.div>
     </section>
   );
 }
+
+PortfolioPicture.propTypes = {
+  isReady: PropTypes.bool.isRequired,
+};
 
 export default PortfolioPicture;

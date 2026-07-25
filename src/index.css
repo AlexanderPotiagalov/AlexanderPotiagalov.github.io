@@ -3766,31 +3766,6 @@ svg {
 }
 
 /* ── Intro loading screen ────────────────────────────────── */
-@keyframes intro-char-in {
-  from {
-    transform: translateY(110%);
-    opacity: 0;
-  }
-  55% {
-    opacity: 1;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-@keyframes intro-line-draw {
-  from {
-    transform: scaleX(0);
-    opacity: 0;
-  }
-  to {
-    transform: scaleX(1);
-    opacity: 1;
-  }
-}
-
 @keyframes intro-curtain-up {
   from {
     transform: translateY(0);
@@ -3801,6 +3776,7 @@ svg {
 }
 
 .intro-overlay {
+  --intro-mark: #f1ede3;
   position: fixed;
   inset: 0;
   z-index: 9999;
@@ -3817,110 +3793,15 @@ svg {
 }
 
 .intro-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: clamp(8px, 1.8vw, 14px);
-  width: fit-content;
-  max-width: calc(100vw - 32px);
+  display: grid;
+  place-items: center;
 }
 
-.intro-name {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  max-width: 100%;
-  margin: 0;
-  gap: clamp(10px, 1.6vw, 22px);
-  line-height: 0.98;
-  text-align: center;
-}
-
-.intro-name-divider {
-  flex: 0 0 auto;
-  width: clamp(3px, 0.35vw, 6px);
-  height: clamp(2.8rem, 6.4vw, 5.4rem);
-  background: var(--accent);
-  transform: skewX(-10deg) scaleY(0);
-  transform-origin: center;
-  animation: intro-divider-in 450ms cubic-bezier(0.22, 1, 0.36, 1) 500ms forwards;
-}
-
-@keyframes intro-divider-in {
-  to {
-    transform: skewX(-10deg) scaleY(1);
-  }
-}
-
-.intro-word {
-  display: inline-flex;
-  white-space: nowrap;
-}
-
-.intro-char-wrap {
-  display: inline-block;
-  overflow: hidden;
-  line-height: 1.18;
-}
-
-.intro-char {
-  display: inline-block;
-  font-family: "Archivo Black", sans-serif;
-  font-size: clamp(1.9rem, 5.8vw, 4.8rem);
-  color: #f1ede3;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-  opacity: 0;
-  animation: intro-char-in 550ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  animation-delay: calc(var(--i) * 30ms);
-  will-change: transform, opacity;
-}
-
-.intro-line {
+.intro-mark {
   display: block;
-  height: 3px;
-  width: 100%;
-  background: var(--accent);
-  transform-origin: left center;
-  transform: scaleX(0);
-  opacity: 0;
-  animation: intro-line-draw 500ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  animation-delay: 900ms;
-}
-
-@media (max-width: 620px) {
-  .intro-content {
-    max-width: calc(100vw - 28px);
-    gap: 8px;
-  }
-
-  .intro-name {
-    flex-direction: column;
-    gap: 7px;
-  }
-
-  .intro-name-divider {
-    width: min(42vw, 9rem);
-    height: 3px;
-    transform: skewX(-10deg) scaleX(0);
-    animation-name: intro-divider-in-mobile;
-  }
-
-  .intro-char {
-    font-size: clamp(1.55rem, 8.5vw, 2.35rem);
-    letter-spacing: 0.01em;
-  }
-
-  .intro-line {
-    height: 2px;
-    width: min(100%, 19rem);
-  }
-}
-
-@keyframes intro-divider-in-mobile {
-  to {
-    transform: skewX(-10deg) scaleX(1);
-  }
+  width: clamp(7rem, 18vw, 9rem);
+  height: auto;
+  overflow: visible;
 }
 
 @media (max-width: 900px) {

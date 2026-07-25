@@ -14,14 +14,14 @@ const navItems = [
   ["Contact", "#contact"],
 ];
 
-function Header({ onOpenCommand, onCyclePalette, theme, onToggleTheme }) {
+function Header({ isReady, onOpenCommand, onCyclePalette, theme, onToggleTheme }) {
   const [open, setOpen] = useState(false);
 
   return (
     <motion.header
       className="site-header"
       initial={{ y: -80, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
+      animate={isReady ? { y: 0, opacity: 1 } : { y: -80, opacity: 0 }}
       transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
     >
       <a className="brand" href="#top" aria-label="Alexander Potiagalov home">
@@ -39,7 +39,7 @@ function Header({ onOpenCommand, onCyclePalette, theme, onToggleTheme }) {
             href={href}
             onClick={() => setOpen(false)}
             initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
+            animate={isReady ? { opacity: 1, y: 0 } : { opacity: 0, y: -8 }}
             whileHover={{ y: -2 }}
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1], delay: 0.3 + i * 0.06 }}
           >
@@ -82,6 +82,7 @@ function Header({ onOpenCommand, onCyclePalette, theme, onToggleTheme }) {
 }
 
 Header.propTypes = {
+  isReady: PropTypes.bool.isRequired,
   onOpenCommand: PropTypes.func.isRequired,
   onCyclePalette: PropTypes.func.isRequired,
   theme: PropTypes.oneOf(["light", "dark"]).isRequired,
