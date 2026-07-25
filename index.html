@@ -1,7 +1,11 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
+    <script>
+      const savedTheme = localStorage.getItem("portfolio-theme");
+      if (savedTheme === "light") document.documentElement.dataset.theme = "light";
+    </script>
     <link rel="preload" as="image" href="/trip3.jpg" fetchpriority="high" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,7 +13,7 @@
       name="description"
       content="Alexander Potiagalov is a Computing Science student at Simon Fraser University building software across AI, full-stack development, cybersecurity, and data systems."
     />
-    <meta name="theme-color" content="#f4f0e6" />
+    <meta name="theme-color" content="#11110f" />
     <meta property="og:title" content="Alexander Potiagalov - Software Developer" />
     <meta
       property="og:description"
