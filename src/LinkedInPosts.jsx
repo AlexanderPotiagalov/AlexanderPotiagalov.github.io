@@ -31,7 +31,7 @@ function LinkedInPosts() {
             <h2><span className="linkedin-heading-dark">NOTES FROM</span><br /><em>THE BUILD.</em></h2>
           </div>
           <p>
-            A few updates on my work, projects, and experience.
+            A few updates on my work, achievements, and experience.
           </p>
         </div>
 
