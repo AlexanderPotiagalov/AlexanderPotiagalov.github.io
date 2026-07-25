@@ -256,6 +256,7 @@ function OutsideTech() {
               <img
                 src={featuredMoment.src}
                 alt={featuredMoment.alt}
+                loading="lazy"
                 decoding="async"
                 style={{ "--focus": featuredMoment.focus }}
               />

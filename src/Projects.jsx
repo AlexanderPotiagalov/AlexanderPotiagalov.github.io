@@ -175,7 +175,7 @@ function ProjectArtifact({ type }) {
   if (type === "listings") {
     return (
       <div className="artifact screenshot-artifact subtura-artifact">
-        <img src="./Subtura.png" alt="Subtura student subletting marketplace homepage" />
+        <img src="./Subtura.png" alt="Subtura student subletting marketplace homepage" loading="lazy" decoding="async" />
         <span>LIVE MARKETPLACE / SEARCH / LISTINGS</span>
       </div>
     );
@@ -218,7 +218,7 @@ function ProjectArtifact({ type }) {
   if (type === "technotes") {
     return (
       <div className="artifact screenshot-artifact technotes-artifact">
-        <img src="./TechNotes.png" alt="TechNotes application dashboard" />
+        <img src="./TechNotes.png" alt="TechNotes application dashboard" loading="lazy" decoding="async" />
         <span>JWT AUTH / TASKS / NOTES</span>
       </div>
     );
@@ -227,7 +227,7 @@ function ProjectArtifact({ type }) {
   if (type === "sketch") {
     return (
       <div className="artifact screenshot-artifact sketch-artifact">
-        <img src="./Sketch3dConverter.png" alt="Sketch3D Converter interface" />
+        <img src="./Sketch3dConverter.png" alt="Sketch3D Converter interface" loading="lazy" decoding="async" />
         <span>STROKES / SVG / THREE.JS</span>
       </div>
     );
@@ -236,7 +236,7 @@ function ProjectArtifact({ type }) {
   if (type === "deepscan") {
     return (
       <div className="artifact screenshot-artifact deepscan-artifact">
-        <img src="./DeepScanImage.jpeg" alt="DeepScan AI facial analysis visualization" />
+        <img src="./DeepScanImage.jpeg" alt="DeepScan AI facial analysis visualization" loading="lazy" decoding="async" />
         <span>VIDEO / FRAME ANALYSIS / CV</span>
       </div>
     );
@@ -245,7 +245,7 @@ function ProjectArtifact({ type }) {
   if (type === "oceanintel") {
     return (
       <div className="artifact screenshot-artifact oceanintel-artifact">
-        <img src="./OceanIntel.png" alt="OceanIntel fisheries intelligence project cover" />
+        <img src="./OceanIntel.png" alt="OceanIntel fisheries intelligence project cover" loading="lazy" decoding="async" />
         <span>PDFS / POLICY / DATA</span>
       </div>
     );
@@ -254,7 +254,7 @@ function ProjectArtifact({ type }) {
   if (type === "vacuum") {
     return (
       <div className="artifact screenshot-artifact vacuum-artifact">
-        <img src="./VacuumCleanerAIWide.png" alt="Vacuum Cleaner AI pathfinding visualizer" />
+        <img src="./VacuumCleanerAIWide.png" alt="Vacuum Cleaner AI pathfinding visualizer" loading="lazy" decoding="async" />
         <span>A* / BFS / DFS / UCS</span>
       </div>
     );
@@ -262,7 +262,7 @@ function ProjectArtifact({ type }) {
 
   return (
     <div className="artifact screenshot-artifact cleanweb-artifact">
-      <img src="./CleanTheWeb.png" alt="Clean the Web extension trust score states" />
+      <img src="./CleanTheWeb.png" alt="Clean the Web extension trust score states" loading="lazy" decoding="async" />
       <span>TRUST SCORE / THREAT CHECKS</span>
     </div>
   );
