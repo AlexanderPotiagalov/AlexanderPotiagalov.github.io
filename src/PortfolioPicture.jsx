@@ -100,8 +100,8 @@ function PortfolioPicture({ isReady }) {
           style={{ y: copyY }}
         >
           <motion.p className="hero-overline" variants={heroItemVariants}>
-            <span />
             Computing Science @ Simon Fraser University
+            <span className="hero-sfu-logo" role="img" aria-label="SFU">SFU</span>
           </motion.p>
 
           <h1>

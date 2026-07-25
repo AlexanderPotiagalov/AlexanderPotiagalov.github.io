@@ -10,6 +10,8 @@ const experiences = [
     role: "AI Software Engineer Co-op",
     period: "INCOMING",
     color: "acid",
+    logo: "./solidigm-logo.png",
+    logoAlt: "Solidigm",
     summary:
       "Joining Data Center Engineering to apply machine learning and software engineering to firmware workflows.",
     signals: ["ML SYSTEMS", "MODEL EVALUATION", "PYTHON", "PRODUCTION AI"],
@@ -20,6 +22,8 @@ const experiences = [
     role: "ML & Cybersecurity Research Assistant",
     period: "RESEARCH",
     color: "blue",
+    logoType: "sfu",
+    logoAlt: "Simon Fraser University",
     summary:
       "Researching AI-assisted SOC alert triage, RAG, threat intelligence, and analyst decision support.",
     signals: ["AI AGENTS", "RAG PIPELINES", "THREAT INTEL", "SOC TOOLING"],
@@ -30,6 +34,8 @@ const experiences = [
     role: "Junior Data Analyst / SDE Intern",
     period: "2025 - 2026",
     color: "orange",
+    logoType: "dfo",
+    logoAlt: "Fisheries and Oceans Canada",
     summary:
       "Built internal AI tools, an ML model repository, RAG prototypes, and workflow automation for public-sector teams.",
     signals: ["AI APPLICATIONS", "RAG SYSTEMS", "ML INFRA", "FULL-STACK SWE"],
@@ -40,6 +46,8 @@ const experiences = [
     role: "Founding Engineer",
     period: "BUILDING NOW",
     color: "pink",
+    logo: "./subtura-logo.png",
+    logoAlt: "Subtura",
     summary:
       "Co-building a student-first subletting platform around the realities of university co-op cycles.",
     signals: ["PRODUCT ENGINEERING", "AI DOC PARSING", "SYSTEM DESIGN", "NEXT.JS"],
@@ -72,9 +80,26 @@ function Experience() {
               whileHover={{ y: -4, transition: { duration: 0.2 } }}
               transition={{ duration: 0.6, ease: EASE, delay: index * 0.07 }}
             >
-              <div className="experience-number">{item.number}</div>
+              {item.logo ? (
+                <span className={`experience-logo experience-primary-logo ${item.color}`}>
+                  <img src={item.logo} alt={item.logoAlt} loading="lazy" decoding="async" />
+                </span>
+              ) : item.logoType === "sfu" ? (
+                <span className="experience-logo experience-primary-logo sfu-logo" role="img" aria-label={item.logoAlt}>SFU</span>
+              ) : item.logoType === "dfo" ? (
+                <span className="experience-logo experience-primary-logo dfo-logo" role="img" aria-label={item.logoAlt}>
+                  <i><b>🍁</b></i>
+                  <small>FISHERIES<br />&amp; OCEANS</small>
+                </span>
+              ) : (
+                <span className="experience-logo experience-primary-logo canada-logo" role="img" aria-label={item.logoAlt}>
+                  <i>🍁</i>
+                </span>
+              )}
               <div className="experience-name">
-                <span>{item.company}</span>
+                <div className="experience-company">
+                  <span>{item.company}</span>
+                </div>
                 <h3>{item.role}</h3>
               </div>
               <p>{item.summary}</p>

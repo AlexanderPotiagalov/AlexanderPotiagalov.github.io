@@ -559,13 +559,18 @@ svg {
   text-transform: uppercase;
 }
 
-.hero-overline span {
-  width: 9px;
-  height: 9px;
-  border: 2px solid var(--ink);
-  border-radius: 50%;
-  background: var(--accent-two);
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent-two) 24%, transparent);
+.hero-sfu-logo {
+  width: 31px;
+  height: 22px;
+  margin-left: 2px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  background: #a6192e;
+  font-family: Arial, sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;
 }
 
 .hero h1 {
@@ -1911,8 +1916,15 @@ svg {
   display: grid;
   place-items: center;
   background: var(--accent-card);
+  color: #10100f;
+  border-color: #f1ede3;
   font-family: "Archivo Black", Impact, sans-serif;
   font-size: 0.85rem;
+}
+
+.experience-company {
+  display: flex;
+  align-items: center;
 }
 
 .experience-name span {
@@ -1930,6 +1942,7 @@ svg {
 
 .experience-file > p {
   margin: 0;
+  align-self: center;
   color: #bbb7ad;
   font-size: 0.84rem;
   line-height: 1.65;
@@ -1940,6 +1953,7 @@ svg {
 }
 
 .signal-list {
+  align-self: center;
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
@@ -2055,6 +2069,120 @@ svg {
   height: 500px;
   overflow: hidden;
   background: #fff;
+}
+
+.experience-logo {
+  position: relative;
+  width: 48px;
+  height: 32px;
+  flex: 0 0 48px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid rgba(241, 237, 227, 0.42);
+  border-radius: 3px;
+  background: #fff;
+}
+
+.experience-primary-logo {
+  width: 54px;
+  height: 54px;
+  align-self: center;
+}
+
+.experience-logo img {
+  width: 100%;
+  height: 100%;
+  padding: 3px;
+  object-fit: contain;
+}
+
+.experience-logo.acid {
+  background: #4f00b8;
+}
+
+.experience-logo.acid img {
+  width: 28px;
+  height: 22px;
+  padding: 0;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+
+.experience-logo.pink {
+  background: #000;
+}
+
+.sfu-logo {
+  color: #fff;
+  background: #a6192e;
+  font-family: Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+}
+
+.canada-logo {
+  position: relative;
+  grid-template-columns: 12px 1fr 12px;
+  background: #fff;
+}
+
+.canada-logo::before,
+.canada-logo::after {
+  width: 100%;
+  height: 100%;
+  background: #e21f2f;
+  content: "";
+}
+
+.canada-logo i {
+  display: grid;
+  place-items: center;
+  font-size: 1.05rem;
+  font-style: normal;
+  line-height: 1;
+}
+
+.dfo-logo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+  padding: 3px;
+  color: #111;
+  background: #fff;
+}
+
+.dfo-logo > i {
+  width: 30px;
+  height: 18px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(90deg, #e21f2f 0 24%, #fff 24% 76%, #e21f2f 76%);
+  font-size: 0.62rem;
+  font-style: normal;
+  line-height: 1;
+}
+
+.dfo-logo small {
+  font-family: Arial, sans-serif;
+  font-size: 0.28rem;
+  font-weight: 700;
+  line-height: 1.05;
+  text-align: center;
+}
+
+.experience-logo.pink img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  margin: auto;
+  padding: 3px;
+  object-fit: contain;
+  object-position: center;
 }
 
 .linkedin-embed iframe {
@@ -4241,7 +4369,7 @@ svg {
     gap: 14px;
   }
 
-  .experience-number {
+  .experience-primary-logo {
     width: 40px;
     height: 40px;
   }
@@ -4483,6 +4611,10 @@ svg {
 .theme-light .experience-stack,
 .theme-light .experience-file {
   border-color: color-mix(in srgb, var(--ink) 35%, transparent);
+}
+
+.theme-light .experience-primary-logo {
+  border-color: #10100f;
 }
 
 .theme-dark :is(
