@@ -847,7 +847,7 @@ svg {
 .incoming-ticket {
   position: absolute;
   z-index: 3;
-  right: -100px;
+  right: -60px;
   bottom: 8%;
   width: 210px;
   padding: 13px 15px;
@@ -4034,6 +4034,10 @@ svg {
     gap: 28px;
   }
 
+  .contact-layout {
+    gap: 60px;
+  }
+
   .section-title > p {
     max-width: 620px;
   }
@@ -4131,6 +4135,14 @@ svg {
 
   .floating-command {
     display: flex;
+  }
+}
+
+@media (max-width: 1050px) {
+  .contact-layout {
+    grid-template-columns: 1fr;
+    gap: 60px;
+    max-width: 720px;
   }
 }
 
@@ -4885,6 +4897,71 @@ svg {
   bottom: 39px;
 }
 
+@media (min-width: 621px) {
+  .site > main,
+  .site > .footer {
+    margin-left: 64px;
+    margin-right: 64px;
+  }
+
+  .site-header {
+    right: 0;
+    left: 64px;
+    width: auto;
+    padding-right: calc(var(--gutter) + 64px);
+  }
+}
+
+@media (min-width: 621px) and (max-width: 1400px) {
+  .hero-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 60px;
+  }
+
+  .hero-portrait-wrap {
+    width: min(82%, 500px);
+    justify-self: center;
+  }
+
+  .project-dossier {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .project-index {
+    border-right: 0;
+    border-bottom: 3px solid var(--ink);
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+  }
+
+  .project-index button {
+    min-height: 68px;
+    padding: 8px;
+    border: 2px solid var(--ink);
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .project-index button:hover,
+  .project-index button.active {
+    padding-left: 8px;
+  }
+
+  .project-index button > span,
+  .project-index button svg {
+    display: none;
+  }
+
+  .all-projects {
+    grid-column: 1 / -1;
+    padding: 9px 5px 2px;
+  }
+
+  .project-stage {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
 @media (max-width: 620px) {
   .editor-rail {
     display: none;
@@ -4978,7 +5055,7 @@ svg {
 @media (min-width: 621px) {
   .about-layout {
     grid-template-columns: minmax(300px, 0.52fr) minmax(0, 1fr);
-    gap: clamp(92px, 8vw, 150px);
+    gap: clamp(28px, 8vw, 150px);
   }
 
   .about-copy {
@@ -4990,7 +5067,7 @@ svg {
 
   .about-headline {
     position: relative;
-    left: clamp(40px, 7vw, 130px);
+    left: clamp(0px, calc(10vw - 64px), 130px);
     grid-column: 2;
     grid-row: 1;
   }
