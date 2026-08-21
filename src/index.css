@@ -4906,8 +4906,9 @@ svg {
 
   .site-header {
     right: 0;
-    left: 64px;
+    left: 0;
     width: auto;
+    padding-left: calc(var(--gutter) + 64px);
     padding-right: calc(var(--gutter) + 64px);
   }
 }
