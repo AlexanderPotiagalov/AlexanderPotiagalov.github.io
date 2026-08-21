@@ -4790,6 +4790,15 @@ svg {
   --terminal-rule: rgba(16, 16, 15, 0.14);
 }
 
+.site.theme-light .site-header {
+  background: color-mix(in srgb, #ffffff 96%, transparent);
+}
+
+.site.theme-light .editor-gutter {
+  background: color-mix(in srgb, #f8f8f8 92%, transparent);
+  color: color-mix(in srgb, var(--terminal-ink) 80%, transparent);
+}
+
 .site.theme-dark {
   background-color: #090c0a;
   background-image:
